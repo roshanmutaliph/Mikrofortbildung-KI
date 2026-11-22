@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KI-Werkstatt JDBK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE work for colleagues, friendly and clear
+   IDEA a school timetable board: the 45 minutes as coloured lessons, then a reference binder with tabs
+   PICTURE the session agenda drawn as a full-width time bar with blocks sized by minutes
+   COLOUR JDBK blue #113954 ground band, white panels, pale #e8eff5 fields, coral #ff6b4a accent
+   TYPE Figtree 800 display + Source Sans 3 text
+   LAYOUT laptop: blue band with title left, facts right, agenda bar full width; sticky tab row + search; sections in two columns. Phone: stacked */
+:root{color-scheme:light dark;--blue:#113954;--bg:light-dark(#f2f5f8,#0b1621);--panel:light-dark(#ffffff,#13212e);--field:light-dark(#e8eff5,#1a2c3c);--ink:light-dark(#1f2d3a,#e6edf3);--soft:light-dark(#55677a,#9fb1c2);--line:light-dark(#d3dde6,#24394c);--acc:#ff6b4a;--link:light-dark(#1d5f8c,#8cc4ec)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Source Sans 3",Arial,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Figtree,Arial,sans-serif;line-height:1.08;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1{font-size:clamp(32px,5vw,50px);font-weight:800}
+h2{font-size:clamp(26px,3.2vw,34px);font-weight:800;margin-bottom:6px}
+h3{font-size:20px;font-weight:600;margin-bottom:6px}
+p{margin:0 0 10px}
+a{color:var(--link)}
+.band{padding-block:clamp(28px,4vw,56px);padding-inline:max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+.top{background:var(--blue);color:#fff}
+.top .wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;align-items:end}
+.top p{color:#cfdbe6;font-size:18px;max-width:60ch;margin-top:12px}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.fact{background:rgba(255,255,255,.09);border-radius:10px;padding:10px 14px}
+.fact b{display:block;font-size:14px;color:#9fc0da;font-weight:600}
+.fact span{font-size:17px;font-weight:600}
+.agenda{grid-column:1/-1;margin-top:18px}
+.bar{display:flex;gap:4px;height:118px}
+.blk{border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;text-decoration:none;transition:transform .2s}
+.blk:hover{transform:translateY(-3px)}
+.blk b{font-family:Figtree,sans-serif;font-size:17px;line-height:1.15}
+.blk span{font-size:14px;opacity:.9;white-space:nowrap}
+.ticks{display:flex;justify-content:space-between;color:#9fc0da;font-size:14px;margin-top:6px}
+.note{font-size:14px;color:var(--soft)}
+.top .note{color:#9fc0da}
+nav{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--line);padding:8px max(5vw,16px)}
+nav .wrap{display:flex;gap:12px;align-items:center}
+.tabs{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:thin}
+.tabs a{flex:none;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--ink);font-weight:600;font-size:15px}
+.tabs a:hover,.tabs a:focus-visible{background:var(--field)}
+#q{width:min(260px,40vw);font:16px inherit;font-family:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+#q:focus{outline:2px solid var(--acc);outline-offset:1px}
+#hits{font-size:14px;color:var(--soft);white-space:nowrap}
+section{border-bottom:1px solid var(--line)}
+.head{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap;margin-bottom:20px}
+.head p{color:var(--soft);max-width:62ch;margin:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.card ul,.card ol{margin:4px 0 0;padding-left:20px}
+.card li{margin-bottom:4px}
+.card.warn{background:var(--field);border-color:transparent}
+.tag{display:inline-block;font-size:14px;font-weight:600;padding:2px 10px;border-radius:99px;background:var(--field);margin-right:6px}
+.hidden{display:none!important}
+mark{background:color-mix(in srgb,var(--acc) 35%,transparent);color:inherit;border-radius:3px}
+button{font:600 15px "Source Sans 3",sans-serif;min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#1b1b1b}
+pre{background:var(--field);border-radius:10px;padding:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;max-height:320px;overflow:auto;margin:10px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:16px}
+th{font-family:Figtree,sans-serif;font-size:16px;background:var(--field)}
+td:first-child{font-weight:600;width:22%}
+.dim{opacity:.32}
+.steps{counter-reset:s;list-style:none;padding:0!important}
+.steps li{counter-increment:s;position:relative;padding-left:40px;margin-bottom:10px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;font:700 15px Figtree,sans-serif;display:grid;place-items:center}
+.file{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.file:last-child{border:0}
+.file small{display:block;color:var(--soft);font-size:14px}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:150px;border:2px dashed var(--line);border-radius:12px;background:var(--field);text-align:center;padding:16px;cursor:pointer;transition:border-color .2s}
+.drop.over,.drop:hover{border-color:var(--acc)}
+.drop span{font-size:14px;color:var(--soft)}
+.fld{display:flex;flex-direction:column;font-size:14px;font-weight:600;gap:4px}
+.fld input{font:16px "Source Sans 3",sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.queue{list-style:none;padding:0;margin:10px 0}
+.queue li{font-size:15px;padding:4px 0}
+.ok{color:light-dark(#1d7a46,#6fd39a)}.err{color:light-dark(#b3261e,#ff8a80)}
+.file button{min-height:40px;padding:6px 14px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.on{opacity:1}
+footer{padding:28px max(5vw,16px);color:var(--soft);font-size:14px}
+@media(max-width:900px){.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.top .wrap{grid-template-columns:minmax(0,1fr)}.bar{height:auto;flex-direction:column}.blk{flex:none!important;flex-direction:row;align-items:center;gap:10px;padding:10px 12px}.ticks{display:none}.grid,.grid.three{grid-template-columns:minmax(0,1fr)}nav .wrap{flex-wrap:wrap}#q{width:100%}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 10px;padding-inline-start:8.5em;width:auto!important}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;font-weight:600;color:var(--soft)}}
+@media(prefers-reduced-motion:reduce){.blk,.toast{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top band">
+  <div class="wrap">
+    <div>
+      <h1>KI-Werkstatt: Plugins, Skills und der Lernspaziergang</h1>
+      <p>Alles aus der Mikrofortbildung am Joseph-DuMont-Berufskolleg zum Mitmachen und Nachschlagen. Mit Prompts zum Kopieren, einem KI-Vergleich und Anleitungen.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>Wann</b><span>Mo, 14.12.2026</span></div>
+      <div class="fact"><b>Uhrzeit</b><span>14:15–15:00</span></div>
+      <div class="fact"><b>Wo</b><span>Raum lt. Schulmanager</span></div>
+      <div class="fact"><b>Mitbringen</b><span>Kann-Liste + Material</span></div>
+    </div>
+    <div class="agenda">
+      <div class="bar" id="bar"></div>
+      <div class="ticks"><span>14:15</span><span>14:30</span><span>14:45</span><span>15:00</span></div>
+      <p class="note">Ablauf der 45 Minuten, Zeiten ungefähr. Klick auf einen Block springt zum Thema. Online-Teilnahme ist möglich.</p>
+    </div>
+  </div>
+</header>
+
+<nav aria-label="Themen">
+  <div class="wrap">
+    <div class="tabs scroll">
+      <a href="#plugins">Plugins</a><a href="#skills">Skills &amp; Projekte</a><a href="#kahoot">Kahoot</a><a href="#lernspaziergang">Lernspaziergang</a><a href="#vergleich">KI-Vergleich</a><a href="#pruefen">Prüfen &amp; Bewerten</a><a href="#prompting">Prompting</a><a href="#nrw">NRW-Angebote</a><a href="#ablage">Ablage</a>
+    </div>
+    <input id="q" type="search" placeholder="Suchen, z. B. Datenschutz" aria-label="Inhalte durchsuchen">
+    <span id="hits" aria-live="polite"></span>
+  </div>
+</nav>
+
+<main>
+<section id="plugins" class="band"><div class="wrap">
+  <div class="head"><div><h2>Office-Plugins</h2><p>Die KI arbeitet direkt in Word, Excel und PowerPoint. Kein Kopieren mehr zwischen Fenstern.</p></div></div>
+  <div class="grid three">
+    <div class="card"><span class="tag">Claude</span><h3>Claude for Microsoft 365</h3><ol class="steps"><li>Word, Excel oder PowerPoint öffnen</li><li>Start → Add-Ins (älter: Einfügen → Add-Ins abrufen)</li><li>„Claude for Microsoft 365“ von Anthropic suchen, Hinzufügen</li><li>Seitenleiste öffnen, mit Claude-Konto anmelden</li><li>In jedem der drei Programme einmal starten</li></ol><p class="note">Nur mit bezahltem Abo. Merkt sich den Zusammenhang über alle drei Programme, eigene Skills gelten auch hier. Word: Änderungen als Nachverfolgung.</p></div>
+    <div class="card"><span class="tag">ChatGPT</span><h3>ChatGPT-Add-in</h3><ol class="steps"><li>Office-Programm öffnen</li><li>Start → Add-Ins</li><li>„ChatGPT“ vom Anbieter OpenAI, LLC wählen, Hinzufügen</li><li>Mit ChatGPT-Konto anmelden</li></ol><p class="note">Auch kostenlos nutzbar. Chats getrennt von chatgpt.com, kein Gedächtnis, keine Skills. Vorsicht vor Fremd-Add-ins mit ähnlichem Namen.</p></div>
+    <div class="card"><span class="tag">Gemini</span><h3>Kein Office-Plugin</h3><ol class="steps"><li>Datei in Google Docs, Tabellen oder Präsentationen öffnen</li><li>Oben rechts „Frag Gemini“ ✦ klicken</li><li>Fertige Datei als Word/Excel/PowerPoint herunterladen</li></ol><p class="note">Braucht Google AI Pro oder Workspace mit Gemini. Alternative: Im Gemini-Chat „als Word-Datei“ erstellen lassen.</p></div>
+  </div>
+  <div class="card warn" style="margin-top:16px"><h3>Datenschutz bei Plugins</h3><p>Sobald die Seitenleiste offen ist, liest das Plugin die geöffnete Datei und schickt sie an den Anbieter. Also nie in Notenlisten, Gutachten oder anderen Dateien mit Schülerdaten öffnen. Wenn nötig: Kopie mit erfundenen Namen. Die Schul-IT kann Add-ins im Schulkonto sperren.</p></div>
+</div></section>
+
+<section id="skills" class="band"><div class="wrap">
+  <div class="head"><div><h2>Skills und Projekte</h2><p>Einmal sauber erklären, dauerhaft nutzen. Der Skill legt fest, wie gearbeitet wird. Das Projekt legt fest, wo und womit.</p></div></div>
+  <div class="grid">
+    <div class="card"><h3>Skill: gespeicherte Arbeitsweise</h3><p>Ein Prompt gilt nur im aktuellen Chat. Ein Skill ist gespeichert und funktioniert in jedem Chat.</p><ul><li><b>PowerPoint-JDBK:</b> Präsentationen im Schuldesign</li><li><b>Kann-Liste:</b> im JDBK-Format als Word-Datei</li><li><b>Kahoot-Vorlage:</b> Quiz in der offiziellen Excel-Vorlage</li><li><b>Lernspaziergang:</b> TXT-Tutor aus Material + Kann-Liste</li></ul></div>
+    <div class="card"><h3>Projekt: Arbeitsbereich zu einem Thema</h3><p>Material, Anweisungen und alle Chats an einem Ort. Jeder neue Chat kennt den Hintergrund.</p><ul><li><b>Vorteile:</b> nichts neu erklären, Material griffbereit, z. B. ein Projekt pro Klasse</li><li><b>Nachteile:</b> gilt nur im Projekt, bei viel Material gehen Details verloren, Material liegt beim Anbieter (keine Schülerdaten), Umzug zu anderer KI schwer</li></ul></div>
+    <div class="card"><h3>Gemini Notebook (früher NotebookLM)</h3><p>Stark bei genauen Quellenangaben und Audio- oder Video-Zusammenfassungen. Eng mit Gemini verbunden, keine offizielle Verbindung zu Claude.</p></div>
+    <div class="card"><h3>Ohne Claude</h3><p>Prompts lassen sich auch anderswo dauerhaft speichern: in Gemini als <b>Gem</b>, in ChatGPT als <b>eigenes GPT</b> oder in einem <b>Projekt</b>.</p></div>
+  </div>
+</div></section>
+
+<section id="kahoot" class="band"><div class="wrap">
+  <div class="head"><div><h2>Kahoot aus dem eigenen Material</h2><p>Aus Arbeitsblatt, Lernsituation oder Kann-Liste wird ein spielbares Quiz.</p></div></div>
+  <div class="grid">
+    <div class="card"><h3>Mit Kahoot-Anbindung</h3><p>Claude erstellt das Quiz und legt es direkt im eigenen Kahoot-Konto an. Kein Abtippen, kein Import. Im Kahoot-Editor lässt es sich noch anpassen.</p></div>
+    <div class="card"><h3>Ohne Anbindung</h3><p>Ein Skill füllt die offizielle Kahoot-Excel-Vorlage. Die Datei lädst du bei Kahoot hoch.</p></div>
+  </div>
+</div></section>
+
+<section id="lernspaziergang" class="band"><div class="wrap">
+  <div class="head"><div><h2>Lernspaziergang: der Praxisteil</h2><p>Aus Kann-Liste und Material entsteht eine Textdatei. Damit lernen die Schüler*innen im Sprachmodus jeder KI. Die KI fragt, statt zu erzählen.</p></div></div>
+  <div class="grid">
+    <div class="card">
+      <h3>Starter-Prompt</h3>
+      <p>In eine KI einfügen, dann Kann-Liste und Material anhängen. Die KI baut daraus die TXT-Datei für die Klasse.</p>
+      <pre id="prompt">Du hilfst mir als Lehrkraft, einen „Lernspaziergang“ vorzubereiten.
+
+Ich gebe dir eine Kann-Liste und das Unterrichtsmaterial. Erstelle daraus EINE Textdatei, die meine Schüler*innen in jede KI einfügen können. Die Datei enthält das gesamte Material in Textform und eine Anweisung an die KI:
+
+1. Rolle: Du bist ein geduldiger Lern-Tutor. Du erarbeitest die Inhalte FRAGEND mit den Schüler*innen und erzählst nicht einfach.
+2. Start: Fordere die Schüler*innen auf, sich für den Spaziergang bereit zu machen und in den Sprachmodus zu wechseln.
+3. Selbsteinschätzung zu jedem Oberpunkt der Kann-Liste.
+4. Erarbeitung: Fragen zum Material, Lernsituationen kurz auffrischen.
+5. Gezielte Fragen zu jedem Kann-Listen-Punkt.
+6. Transferaufgabe mit einer neuen Situation.
+7. Abschluss: Lernnachweis mit der Kann-Liste, farbig markiert (Grün = kann ich bis Rot = noch gar nicht).
+
+Regeln: Bei Hängern gestufte Hinweise, Lösung erst ganz zum Schluss. Nur Inhalte aus dem Material, nichts erfinden. Keine persönlichen Daten erfragen.
+
+Fehlt dir Material oder die Kann-Liste, frage nach, bevor du anfängst.</pre>
+      <div class="row"><button id="copyPrompt">Prompt kopieren</button><button class="ghost hidden" id="dlPrompt">Als TXT herunterladen</button></div>
+    </div>
+    <div class="card">
+      <h3>Warum das funktioniert</h3>
+      <ul><li><b>Bei der Sache:</b> Die KI bleibt beim Material und der Kann-Liste</li><li><b>Echtes Lernen:</b> Fragen statt Antworten zum Abschreiben</li><li><b>Niedrige Hürde:</b> Sprechen statt Schreiben, gut bei Schreibschwierigkeiten oder Deutsch als Zweitsprache</li><li><b>Bewegung:</b> Lernen beim Gehen, z. B. im Blücherpark</li></ul>
+      <h3 style="margin-top:14px">Grenzen</h3>
+      <ul><li>Die KI kann Fehler machen</li><li>Funktioniert nur, wenn Schüler*innen aktiv mitmachen</li><li>Gratis-Versionen: Sprachmodus begrenzt, besser 10–15 Minuten pro Runde planen</li></ul>
+      <h3 style="margin-top:14px">Vorher testen</h3>
+      <p>Dieselbe TXT-Datei in ChatGPT, Gemini und Claude ausprobieren: Bleibt die KI in der Tutor-Rolle und stellt sie Fragen?</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="vergleich" class="band"><div class="wrap">
+  <div class="head"><div><h2>Claude, ChatGPT und Gemini im Vergleich</h2><p>Gleiche Idee, andere Namen. Wähle eine KI, um ihre Spalte hervorzuheben.</p></div></div>
+  <div class="seg" role="group" aria-label="KI auswählen">
+    <button class="ghost" data-k="all" aria-pressed="true">Alle</button><button class="ghost" data-k="1" aria-pressed="false">Claude</button><button class="ghost" data-k="2" aria-pressed="false">ChatGPT</button><button class="ghost" data-k="3" aria-pressed="false">Gemini</button>
+  </div>
+  <div class="scroll"><table class="stack" id="cmp"><thead><tr><th>Thema</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th></tr></thead><tbody></tbody></table></div>
+  <p class="note" style="margin-top:8px">Stand November 2026. Funktionen und Grenzen ändern sich häufig.</p>
+</div></section>
+
+<section id="pruefen" class="band"><div class="wrap">
+  <div class="head"><div><h2>Prüfen, bewerten und den Ergebnissen nicht blind trauen</h2><p>Die Fragen, die im Kollegium fast immer kommen.</p></div></div>
+  <div class="grid">
+    <div class="card"><h3>Wenn Schüler*innen KI nutzen</h3><ul><li>KI-Detektoren sind unzuverlässig, darauf lässt sich kein Täuschungsvorwurf stützen</li><li>Besser: Prozess bewerten, mündlich nachfragen, Bezug zum eigenen Betrieb oder Unterricht</li><li><b>KI-Ampel</b> pro Aufgabe: Grün erlaubt, Gelb erlaubt mit Kennzeichnung, Rot nicht erlaubt</li></ul></div>
+    <div class="card"><h3>KI-Ergebnisse prüfen</h3><ul><li>KI erfindet manchmal Quellen, Zahlen oder Paragraphen und klingt dabei überzeugt</li><li>Verzerrungen möglich, z. B. bei Rollenbildern in Beispielaufgaben</li><li>Was ins Schülermaterial kommt, prüft die Lehrkraft. KI liefert Entwürfe.</li></ul></div>
+    <div class="card"><h3>Differenzieren und Barrierefreiheit</h3><ul><li>Texte in Einfache oder Leichte Sprache übertragen</li><li>Glossare und Wortlisten erstellen</li><li>Dieselbe Aufgabe auf drei Niveaus</li><li>Elternbriefe in Herkunftssprachen</li></ul></div>
+    <div class="card"><h3>KI als Unterrichtsthema</h3><ul><li>Wie verändert KI den Ausbildungsberuf, z. B. im Autohaus oder im Büro?</li><li>Klasse sucht die Fehler in einer KI-Erklärung</li><li>Gesprächsstoff: Urheberrecht bei KI-Bildern, Energieverbrauch, echte Zeitersparnis</li></ul></div>
+  </div>
+</div></section>
+
+<section id="prompting" class="band"><div class="wrap">
+  <div class="head"><div><h2>Spickzettel: besser prompten</h2><p>Vier Bausteine, die fast jede Antwort verbessern.</p></div></div>
+  <div class="grid">
+    <div class="card"><h3>Die Bausteine</h3><ul><li><b>Rolle:</b> „Du bist Lehrkraft für Wirtschaft am Berufskolleg.“</li><li><b>Zielgruppe:</b> „für eine 11. Klasse Automobilkaufleute“</li><li><b>Ziel:</b> „damit sie Kaufvertragsstörungen unterscheiden können“</li><li><b>Format:</b> „als Arbeitsblatt mit drei Aufgaben und Lösung“</li></ul><p class="note" style="margin-top:8px">Danach im Gespräch nachschärfen, statt neu anzufangen.</p></div>
+    <div class="card"><h3>Beispiel zum Kopieren</h3><pre id="ex">Du bist Lehrkraft für Wirtschaft an einem Berufskolleg. Erstelle für eine 11. Klasse Automobilkaufleute ein Arbeitsblatt zu Kaufvertragsstörungen (mangelhafte Lieferung, Lieferverzug). Ziel: Die Schüler*innen können die Fälle unterscheiden und Rechte des Käufers nennen. Format: kurzer Fall aus dem Autohaus, drei Aufgaben, Lösung getrennt. Stell mir zuerst Rückfragen, bevor du loslegst.</pre><button id="copyEx">Beispiel kopieren</button></div>
+  </div>
+</div></section>
+
+<section id="nrw" class="band"><div class="wrap">
+  <div class="head"><div><h2>Auch ohne eigenes Abo: Angebote in NRW</h2><p>Für alle, die nicht privat mit Claude oder ChatGPT arbeiten.</p></div></div>
+  <div class="grid three">
+    <div class="card"><h3>AIS.chat</h3><p>Ehemals telli. Datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos und dienstlich nutzbar.</p></div>
+    <div class="card"><h3>Selbstlernkurs KI</h3><p>Kurs des Schulministeriums: Wie KI im Unterricht hilft und wo die Grenzen liegen.</p></div>
+    <div class="card"><h3>Handlungsleitfaden</h3><p>„Umgang mit textgenerierenden KI-Systemen“ des MSB NRW, dazu Prompting-Karten auf <a href="https://www.lernen-digital.nrw">lernen-digital.nrw</a>.</p></div>
+  </div>
+</div></section>
+
+<section id="ablage" class="band"><div class="wrap">
+  <div class="head"><div><h2>Ablage: der gemeinsame Ordner</h2><p>Material teilen und herunterladen, ohne Login. Alles landet im selben Ordner.</p></div><button class="ghost" id="reload">Liste aktualisieren</button></div>
+  <div class="grid">
+    <div class="card">
+      <h3>Hochladen</h3>
+      <label class="drop" id="drop" for="file"><b>Dateien hierher ziehen</b><span>oder klicken zum Auswählen · bis 20 MB pro Datei</span><input id="file" type="file" multiple hidden></label>
+      <label class="fld" style="margin-top:12px">Dein Name (optional)<input id="from" type="text" autocomplete="name" placeholder="z. B. R. Mutaliph"></label>
+      <ul id="queue" class="queue"></ul>
+      <p class="note">Bitte nur Unterrichtsmaterial hochladen, keine Dateien mit Schülerdaten.</p>
+    </div>
+    <div class="card">
+      <h3>Im Ordner</h3>
+      <div id="files"><p class="note">Lade Dateien …</p></div>
+    </div>
+  </div>
+  <p class="note" style="margin-top:12px">Außerdem: <a href="https://claude.ai/artifact/F9R4j6z3u3yrweqMKyTZ8V">Anleitung Office-Plugins</a> (bei Claude, braucht Login).</p>
+</div></section>
+</main>
+
+<footer><div class="wrap">Mikrofortbildung „KI in der Schule“ · Joseph-DuMont-Berufskolleg Köln · Stand November 2026</div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+{
+const agenda=[["Ankommen & Überblick",5,"#ablage","#3d6a8c"],["Office-Plugins",10,"#plugins","#1d5f8c"],["Skills & Projekte",10,"#skills","#2b7aa8"],["Lernspaziergang ausprobieren",15,"#lernspaziergang","#ff6b4a"],["Austausch",5,"#vergleich","#4f6b82"]];
+document.getElementById("bar").innerHTML=agenda.map(a=>`<a class="blk" href="${a[2]}" style="flex:${a[1]};background:${a[3]}${a[3]==="#ff6b4a"?";color:#1b1b1b":""}"><b>${a[0]}</b><span>${a[1]} Min.</span></a>`).join("");
+
+const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","Nur bezahltes Abo","Auch kostenlos, mit Grenzen","Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills","Eigene GPTs","Gems"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","Voice, am natürlichsten, unterbrechbar","Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","Google-Konto, in Deutschland ab 16"],["Besonderheit","Zusammenhang über alle Office-Programme","Weit verbreitet, viele kennen es","Gemini Notebook mit genauen Quellen"]];
+const tb=document.querySelector("#cmp tbody");
+tb.innerHTML=rows.map(r=>`<tr>${r.map((c,i)=>`<td data-l="${["Thema","Claude","ChatGPT","Gemini"][i]}">${c}</td>`).join("")}</tr>`).join("");
+const segs=document.querySelectorAll(".seg button");
+segs.forEach(b=>b.addEventListener("click",()=>{segs.forEach(x=>x.setAttribute("aria-pressed",x===b));const k=b.dataset.k;document.querySelectorAll("#cmp td,#cmp th").forEach(c=>{const i=c.cellIndex;c.classList.toggle("dim",k!=="all"&&i>0&&String(i)!==k)})}));
+
+const toast=document.getElementById("toast");
+const say=t=>{toast.textContent=t;toast.classList.add("on");setTimeout(()=>toast.classList.remove("on"),1800)};
+const copy=id=>async()=>{try{await navigator.clipboard.writeText(document.getElementById(id).textContent);say("Kopiert")}catch(e){const r=document.createRange();r.selectNodeContents(document.getElementById(id));const s=getSelection();s.removeAllRanges();s.addRange(r);say("Text markiert, jetzt kopieren")}};
+document.getElementById("copyPrompt").addEventListener("click",copy("prompt"));
+document.getElementById("copyEx").addEventListener("click",copy("ex"));
+
+const dl=document.getElementById("dlPrompt");
+const saveFile=(name,blob)=>{const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)};
+dl.classList.remove("hidden");
+dl.addEventListener("click",()=>saveFile("Lernspaziergang-Starter-Prompt.txt",new Blob([document.getElementById("prompt").textContent],{type:"text/plain;charset=utf-8"})));
+
+/* Hier die Web-App-URL aus Google Apps Script eintragen */
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbyKl0t_aTvI1PCOZ3sAg1d6nO1MOcld0fgtEi5V9Amc59v8dl2MQ2PMP1Y76BAX7qFJ/exec";
+const fl=document.getElementById("files"),queue=document.getElementById("queue");
+const fmt=n=>n>1048576?(n/1048576).toFixed(1).replace(".",",")+" MB":Math.max(1,Math.round(n/1024))+" KB";
+const h=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+async function list(){
+  if(!SCRIPT_URL){fl.innerHTML='<p class="note">Der Ordner ist noch nicht verbunden. Trage die Web-App-URL bei SCRIPT_URL ein.</p>';return}
+  fl.innerHTML='<p class="note">Lade Dateien …</p>';
+  try{const r=await (await fetch(SCRIPT_URL+"?action=list")).json();if(!r.ok)throw new Error(r.error);
+    fl.innerHTML=r.files.length?r.files.map(f=>`<div class="file"><div><b>${h(f.name)}</b><small>${fmt(f.size)} · ${new Date(f.updated).toLocaleDateString("de-DE")}${f.note?" · "+h(f.note):""}</small></div><button class="ghost" data-id="${h(f.id)}">Herunterladen</button></div>`).join(""):'<p class="note">Noch keine Dateien. Zieh links die erste hinein.</p>'
+  }catch(e){fl.innerHTML='<p class="err">Liste konnte nicht geladen werden. Bitte später erneut versuchen.</p>'}
+}
+fl.addEventListener("click",async e=>{const b=e.target.closest("button[data-id]");if(!b)return;const t=b.textContent;b.textContent="Lädt …";b.disabled=true;
+  try{const r=await (await fetch(SCRIPT_URL+"?action=download&id="+encodeURIComponent(b.dataset.id))).json();if(!r.ok)throw new Error(r.error);
+    const bin=atob(r.data),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);saveFile(r.name,new Blob([u8],{type:r.mimeType}))
+  }catch(err){say("Download fehlgeschlagen")}b.textContent=t;b.disabled=false});
+const fromEl=document.getElementById("from");
+try{fromEl.value=localStorage.getItem("kiw-from")||""}catch(e){}
+const b64=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]);r.onerror=rej;r.readAsDataURL(f)});
+async function upload(files){
+  if(!SCRIPT_URL){say("Ordner noch nicht verbunden");return}
+  try{localStorage.setItem("kiw-from",fromEl.value.trim())}catch(e){}
+  for(const f of files){const li=document.createElement("li");li.textContent=f.name+" … lädt hoch";queue.prepend(li);
+    if(f.size>20*1048576){li.className="err";li.textContent=f.name+": größer als 20 MB";continue}
+    try{const r=await (await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({from:fromEl.value.trim(),name:f.name,mimeType:f.type,data:await b64(f)})})).json();
+      if(!r.ok)throw new Error(r.error);li.className="ok";li.textContent=f.name+": hochgeladen"}
+    catch(err){li.className="err";li.textContent=f.name+": "+(err.message||"Fehler beim Hochladen")}}
+  list();
+}
+const drop=document.getElementById("drop"),fileEl=document.getElementById("file");
+fileEl.addEventListener("change",()=>{upload([...fileEl.files]);fileEl.value=""});
+["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
+["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
+drop.addEventListener("drop",e=>upload([...e.dataTransfer.files]));
+document.getElementById("reload").addEventListener("click",list);
+list();
+
+const q=document.getElementById("q"),hits=document.getElementById("hits");
+const cards=[...document.querySelectorAll("main .card, #cmp tbody tr")];
+const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+const clear=()=>{document.querySelectorAll("main mark").forEach(m=>m.replaceWith(m.textContent));cards.forEach(c=>c.normalize())};
+const mark=(c,t)=>{const re=new RegExp(esc(t),"gi");const w=document.createTreeWalker(c,NodeFilter.SHOW_TEXT);const ns=[];while(w.nextNode())ns.push(w.currentNode);
+  ns.forEach(x=>{if(x.parentElement.closest("pre,button"))return;const v=x.nodeValue;let m,last=0;const f=document.createDocumentFragment();re.lastIndex=0;
+    while((m=re.exec(v))){f.append(v.slice(last,m.index));const k=document.createElement("mark");k.textContent=m[0];f.append(k);last=m.index+m[0].length}
+    if(last){f.append(v.slice(last));x.replaceWith(f)}})};
+q.addEventListener("input",()=>{const t=q.value.trim();let n=0;clear();
+  cards.forEach(c=>{if(!t){c.classList.remove("hidden");return}
+    const ok=c.textContent.toLowerCase().includes(t.toLowerCase());c.classList.toggle("hidden",!ok);if(ok){n++;mark(c,t)}});
+  document.querySelectorAll("main section").forEach(s=>{const any=[...s.querySelectorAll(".card,#cmp tbody tr")].some(c=>!c.classList.contains("hidden"));s.classList.toggle("hidden",!!t&&!any)});
+  hits.textContent=t?(n===1?"1 Treffer":n+" Treffer"):"";
+});
+}
+</script>
+</body>
+</html>
