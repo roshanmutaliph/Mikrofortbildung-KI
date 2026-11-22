@@ -1,0 +1,158 @@
+MASTERPROMPT „JDBK-HTML-Mail“
+Joseph-DuMont-Berufskolleg Köln · KI-Werkstatt
+
+==================================================
+FÜR LEHRKRÄFTE – SO NUTZEN SIE DIESE DATEI
+==================================================
+Die KI gestaltet Rundmails und Einladungen im JDBK-Design: blauer Kopf, „Das Wichtigste in Kürze“, Faktenkacheln (Wann, Wo, Mitbringen, Frist), Info-Karten und ein Button. Die Mail funktioniert in Outlook und Gmail.
+
+1. Öffnen Sie einen neuen Chat in einer KI Ihrer Wahl (z. B. ChatGPT, Gemini, Claude oder Copilot).
+2. Ziehen Sie diese Datei in das Chatfenster. Alternativ kopieren Sie den gesamten Text hinein.
+3. Schreiben Sie dazu: „Bitte folge den Anweisungen in dieser Datei.“ und nennen Sie Anlass, Zielgruppe, Termin, Ort und was die Empfänger tun sollen.
+4. Speichern Sie das Ergebnis als .html-Datei (oder laden Sie es herunter).
+5. Versand: Datei im Browser öffnen → alles markieren und kopieren (Cmd/Strg + A, Cmd/Strg + C) → in eine neue Mail in Outlook oder Gmail einfügen. Erst eine Testmail an sich selbst schicken.
+
+Tipp: Mit Claude können Sie diese Anleitung auch dauerhaft als Skill speichern (Skill „jdbk-html-email“). Dann entfällt das Hochladen.
+
+==================================================
+AN DIE KI
+==================================================
+Alles ab der nächsten Trennlinie sind deine Arbeitsanweisungen für dieses Gespräch. Befolge sie vollständig.
+
+--------------------------------------------------
+
+# JDBK-HTML-E-Mail
+
+Erstellt eine HTML-E-Mail im Corporate Design des Joseph-DuMont-Berufskollegs (JDBK) Köln. Ziel: Wer die Mail öffnet, weiß in 5 Sekunden, worum es geht, was zu tun ist und bis wann.
+
+## 1. Infos einsammeln
+
+Diese Angaben werden gebraucht. Was im Auftrag schon steht, nicht noch einmal abfragen. Fehlt Wichtiges (vor allem Datum/Frist oder Button-Ziel), in EINER kurzen Rückfrage nachfragen.
+
+- Anlass (z. B. Volleyballturnier, SV-Info, Mikrofortbildung)
+- Zielgruppe (Kollegium, Klassensprecher*innen, Schüler*innen)
+- Anrede: Du oder Sie (Kollegium meist Du, Schüler*innen Du, Eltern/Externe Sie)
+- Kerninfos: Datum, Uhrzeit, Ort, Mitbringliste, Frist, Hinweise
+- Handlungsaufforderung: was sollen die Empfänger tun, bis wann?
+- Button: Beschriftung + URL oder mailto:-Link (Leerzeichen im Betreff als %20)
+- Absender für den Footer
+
+Keinen Button erfinden: Gibt es keinen Link, den Button weglassen. Keine Fakten erfinden, keine Adressen raten.
+
+## 2. Aufbau (immer diese Reihenfolge)
+
+1. **Header:** dunkelblauer Banner #113954, Titel in Weiß (26–28px, fett), darunter eine Unterzeile (15px, #cfdbe6). KEINE Bilder, KEIN Logo.
+2. **Das Wichtigste in Kürze:** genau ein Satz, 17px, der den Kern sagt.
+3. **Faktenleiste:** 2–4 Kacheln nebeneinander (2 pro Zeile), je Emoji + Label in Großbuchstaben (12px, #113954, fett) + Wert (16px, fett). Z. B. 📅 WANN · 📍 WO · 🎒 MITBRINGEN · ⏰ FRIST. Nur Kacheln, für die es Infos gibt.
+4. **Info-Karten (2–3):** Überschrift mit einem Emoji, darunter max. 3–4 kurze Stichpunkte, Schlüsselbegriffe fett.
+5. **Button:** #113954, weiße Schrift, mittig, als bulletproof button.
+6. **Footer:** Absender + „Joseph-DuMont-Berufskolleg Köln“, 13px, #6b7c8c.
+
+## 3. Stil
+
+- Seitenhintergrund #f0f4f8, Inhaltskarte #ffffff mit border-radius:14px.
+- Kacheln und Info-Karten: Hintergrund #e8eff5, border-radius:10px, Akzentlinie links 4px #113954 bei Info-Karten.
+- Text #1f2d3a, Schrift Arial, Helvetica, sans-serif, Fließtext 15–16px, line-height 1.5.
+- Kurze Sätze, keine Textwände, höchstens ca. 150 Wörter Fließtext.
+- Emojis sparsam: eins pro Überschrift bzw. Kachel, nie im Fließtext.
+- Bei Schüler*innen einfache Sprache.
+- Gendern mit Sternchen (Schüler*innen).
+
+## 4. Technik
+
+- Tabellen-Layout mit role="presentation", Inhaltstabelle width="600" + style="width:100%;max-width:600px".
+- Sämtliches CSS inline. Einzige Ausnahme: der kleine <style>-Block aus dem Gerüst (Media-Query, damit Kacheln auf dem Handy untereinander stehen).
+- Unsichtbarer Preheader direkt nach <body>.
+- Keine Web-Fonts, keine Bilder, kein JavaScript, keine Formulare.
+- Unter 100 KB bleiben (sonst kürzt Gmail).
+
+## 5. Gerüst
+
+Dieses Gerüst als Grundlage nehmen und mit Inhalt füllen; Kacheln und Karten nach Bedarf vervielfältigen oder weglassen.
+
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TITEL</title>
+<style>
+@media only screen and (max-width:620px){
+  .stack{display:block !important;width:100% !important;max-width:100% !important;}
+  .px{padding-left:20px !important;padding-right:20px !important;}
+}
+</style>
+</head>
+<body style="margin:0;padding:0;background:#f0f4f8;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">PREHEADER</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f4f8;">
+<tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:14px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;color:#1f2d3a;">
+
+<!-- HEADER -->
+<tr><td class="px" style="background:#113954;padding:28px 32px;">
+  <div style="font-size:27px;line-height:1.25;font-weight:bold;color:#ffffff;">TITEL</div>
+  <div style="font-size:15px;line-height:1.4;color:#cfdbe6;padding-top:6px;">UNTERZEILE</div>
+</td></tr>
+
+<!-- KURZ -->
+<tr><td class="px" style="padding:24px 32px 8px;font-size:17px;line-height:1.5;">KERNSATZ</td></tr>
+
+<!-- FAKTEN (2 pro Zeile) -->
+<tr><td class="px" style="padding:8px 26px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+  <td class="stack" width="50%" valign="top" style="padding:6px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8eff5;border-radius:10px;">
+    <tr><td style="padding:14px 16px;">
+      <div style="font-size:12px;font-weight:bold;letter-spacing:0.5px;color:#113954;">📅 WANN</div>
+      <div style="font-size:16px;font-weight:bold;padding-top:4px;">WERT</div>
+    </td></tr></table>
+  </td>
+  <!-- zweite Kachel gleich aufbauen -->
+</tr>
+</table>
+</td></tr>
+
+<!-- INFO-KARTE (wiederholen) -->
+<tr><td class="px" style="padding:10px 32px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8eff5;border-radius:10px;border-left:4px solid #113954;">
+<tr><td style="padding:16px 20px;font-size:15px;line-height:1.5;">
+  <div style="font-size:17px;font-weight:bold;color:#113954;padding-bottom:6px;">🏐 ÜBERSCHRIFT</div>
+  • Stichpunkt mit <strong>Schlüsselbegriff</strong><br>
+  • Stichpunkt
+</td></tr></table>
+</td></tr>
+
+<!-- BUTTON -->
+<tr><td align="center" style="padding:20px 32px 28px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+  <td align="center" bgcolor="#113954" style="border-radius:10px;">
+    <a href="LINK" style="display:inline-block;padding:14px 28px;font-size:16px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:10px;">BUTTONTEXT</a>
+  </td>
+</tr></table>
+</td></tr>
+
+<!-- FOOTER -->
+<tr><td class="px" style="padding:18px 32px 24px;border-top:1px solid #e3e9ef;font-size:13px;line-height:1.5;color:#6b7c8c;">
+  ABSENDER<br>Joseph-DuMont-Berufskolleg Köln
+</td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
+```
+
+## 6. Prüfen und ausliefern
+
+1. Kannst du Dateien erstellen: Datei schreiben, Name nach Anlass, z. B. `sv-schuelerrat-dezember.html`. Sonst den vollständigen HTML-Code in einem einzigen Codeblock ausgeben, damit die Lehrkraft ihn als .html-Datei speichern kann.
+2. Prüfen: Alle Daten, Zeiten, Orte und Links stimmen wörtlich mit den Angaben überein; keine Platzhalter (GROSSBUCHSTABEN-Wörter aus dem Gerüst) mehr übrig; Dateigröße unter 100 KB.
+3. Die Datei bzw. den Code bereitstellen.
+4. In der Antwort kurz liefern:
+   - **Betreff** (mit einem Emoji am Anfang) und **Preheader**
+   - Versand in 3 Schritten: Datei im Browser öffnen → alles markieren und kopieren (Cmd/Strg+A, Cmd/Strg+C) → in eine neue Mail in Outlook oder Gmail einfügen. Erst eine Testmail an sich selbst schicken.
+
+Änderungswünsche ("Termin größer", "weniger Emojis") direkt in derselben Datei umsetzen und neu schicken.
