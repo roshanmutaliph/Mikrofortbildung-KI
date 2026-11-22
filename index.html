@@ -90,6 +90,13 @@ td:first-child{font-weight:600;width:22%}
 .queue li{font-size:15px;padding:4px 0}
 .ok{color:light-dark(#1d7a46,#6fd39a)}.err{color:light-dark(#b3261e,#ff8a80)}
 .file button{min-height:40px;padding:6px 14px}
+.banner{grid-column:1/-1;width:100%;height:auto;border-radius:12px;display:block;margin-top:8px}
+.logo{display:inline-flex;align-items:center;background:#fff;border-radius:8px;padding:6px 10px;margin-bottom:10px}
+.logo img{height:26px;width:auto;display:block}
+th .logo{margin:0;padding:4px 8px}th .logo img{height:22px}
+.pic.wide{max-height:360px;object-fit:cover;margin-bottom:16px}
+.logo.kh{padding:0;background:none}.logo.kh img{height:40px;border-radius:9px}
+.pic{width:100%;height:auto;border-radius:10px;display:block;margin-bottom:14px}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.on{opacity:1}
 footer{padding:28px max(5vw,16px);color:var(--soft);font-size:14px}
@@ -113,6 +120,7 @@ footer{padding:28px max(5vw,16px);color:var(--soft);font-size:14px}
       <div class="fact"><b>Wo</b><span>Raum lt. Schulmanager</span></div>
       <div class="fact"><b>Mitbringen</b><span>Kann-Liste + Material</span></div>
     </div>
+    <img class="banner" src="bilder/banner.jpg" width="1600" height="450" alt="Illustration: KI-Lernassistent, Plugins in Office, Prompts speichern">
     <div class="agenda">
       <div class="bar" id="bar"></div>
       <div class="ticks"><span>14:15</span><span>14:30</span><span>14:45</span><span>15:00</span></div>
@@ -135,9 +143,9 @@ footer{padding:28px max(5vw,16px);color:var(--soft);font-size:14px}
 <section id="plugins" class="band"><div class="wrap">
   <div class="head"><div><h2>Office-Plugins</h2><p>Die KI arbeitet direkt in Word, Excel und PowerPoint. Kein Kopieren mehr zwischen Fenstern.</p></div></div>
   <div class="grid three">
-    <div class="card"><span class="tag">Claude</span><h3>Claude for Microsoft 365</h3><ol class="steps"><li>Word, Excel oder PowerPoint öffnen</li><li>Start → Add-Ins (älter: Einfügen → Add-Ins abrufen)</li><li>„Claude for Microsoft 365“ von Anthropic suchen, Hinzufügen</li><li>Seitenleiste öffnen, mit Claude-Konto anmelden</li><li>In jedem der drei Programme einmal starten</li></ol><p class="note">Nur mit bezahltem Abo. Merkt sich den Zusammenhang über alle drei Programme, eigene Skills gelten auch hier. Word: Änderungen als Nachverfolgung.</p></div>
-    <div class="card"><span class="tag">ChatGPT</span><h3>ChatGPT-Add-in</h3><ol class="steps"><li>Office-Programm öffnen</li><li>Start → Add-Ins</li><li>„ChatGPT“ vom Anbieter OpenAI, LLC wählen, Hinzufügen</li><li>Mit ChatGPT-Konto anmelden</li></ol><p class="note">Auch kostenlos nutzbar. Chats getrennt von chatgpt.com, kein Gedächtnis, keine Skills. Vorsicht vor Fremd-Add-ins mit ähnlichem Namen.</p></div>
-    <div class="card"><span class="tag">Gemini</span><h3>Kein Office-Plugin</h3><ol class="steps"><li>Datei in Google Docs, Tabellen oder Präsentationen öffnen</li><li>Oben rechts „Frag Gemini“ ✦ klicken</li><li>Fertige Datei als Word/Excel/PowerPoint herunterladen</li></ol><p class="note">Braucht Google AI Pro oder Workspace mit Gemini. Alternative: Im Gemini-Chat „als Word-Datei“ erstellen lassen.</p></div>
+    <div class="card"><span class="logo"><img src="bilder/logo-claude.png" alt="Claude"></span><h3>Claude for Microsoft 365</h3><ol class="steps"><li>Word, Excel oder PowerPoint öffnen</li><li>Start → Add-Ins (älter: Einfügen → Add-Ins abrufen)</li><li>„Claude for Microsoft 365“ von Anthropic suchen, Hinzufügen</li><li>Seitenleiste öffnen, mit Claude-Konto anmelden</li><li>In jedem der drei Programme einmal starten</li></ol><p class="note">Nur mit bezahltem Abo. Merkt sich den Zusammenhang über alle drei Programme, eigene Skills gelten auch hier. Word: Änderungen als Nachverfolgung.</p></div>
+    <div class="card"><span class="logo"><img src="bilder/logo-chatgpt.png" alt="ChatGPT"></span><h3>ChatGPT-Add-in</h3><ol class="steps"><li>Office-Programm öffnen</li><li>Start → Add-Ins</li><li>„ChatGPT“ vom Anbieter OpenAI, LLC wählen, Hinzufügen</li><li>Mit ChatGPT-Konto anmelden</li></ol><p class="note">Auch kostenlos nutzbar. Chats getrennt von chatgpt.com, kein Gedächtnis, keine Skills. Vorsicht vor Fremd-Add-ins mit ähnlichem Namen.</p></div>
+    <div class="card"><span class="logo"><img src="bilder/logo-gemini.png" alt="Gemini"></span><h3>Kein Office-Plugin</h3><ol class="steps"><li>Datei in Google Docs, Tabellen oder Präsentationen öffnen</li><li>Oben rechts „Frag Gemini“ ✦ klicken</li><li>Fertige Datei als Word/Excel/PowerPoint herunterladen</li></ol><p class="note">Braucht Google AI Pro oder Workspace mit Gemini. Alternative: Im Gemini-Chat „als Word-Datei“ erstellen lassen.</p></div>
   </div>
   <div class="card warn" style="margin-top:16px"><h3>Datenschutz bei Plugins</h3><p>Sobald die Seitenleiste offen ist, liest das Plugin die geöffnete Datei und schickt sie an den Anbieter. Also nie in Notenlisten, Gutachten oder anderen Dateien mit Schülerdaten öffnen. Wenn nötig: Kopie mit erfundenen Namen. Die Schul-IT kann Add-ins im Schulkonto sperren.</p></div>
 </div></section>
@@ -145,7 +153,7 @@ footer{padding:28px max(5vw,16px);color:var(--soft);font-size:14px}
 <section id="skills" class="band"><div class="wrap">
   <div class="head"><div><h2>Skills und Projekte</h2><p>Einmal sauber erklären, dauerhaft nutzen. Der Skill legt fest, wie gearbeitet wird. Das Projekt legt fest, wo und womit.</p></div></div>
   <div class="grid">
-    <div class="card"><h3>Skill: gespeicherte Arbeitsweise</h3><p>Ein Prompt gilt nur im aktuellen Chat. Ein Skill ist gespeichert und funktioniert in jedem Chat.</p><ul><li><b>PowerPoint-JDBK:</b> Präsentationen im Schuldesign</li><li><b>Kann-Liste:</b> im JDBK-Format als Word-Datei</li><li><b>Kahoot-Vorlage:</b> Quiz in der offiziellen Excel-Vorlage</li><li><b>Lernspaziergang:</b> TXT-Tutor aus Material + Kann-Liste</li></ul></div>
+    <div class="card"><img class="pic" src="bilder/skills.jpg" width="632" height="316" alt="Illustration: Skill als Ordner mit SKILL.md"><h3>Skill: gespeicherte Arbeitsweise</h3><p>Ein Prompt gilt nur im aktuellen Chat. Ein Skill ist gespeichert und funktioniert in jedem Chat.</p><ul><li><b>PowerPoint-JDBK:</b> Präsentationen im Schuldesign</li><li><b>Kann-Liste:</b> im JDBK-Format als Word-Datei</li><li><b>Kahoot-Vorlage:</b> Quiz in der offiziellen Excel-Vorlage</li><li><b>Lernspaziergang:</b> TXT-Tutor aus Material + Kann-Liste</li></ul></div>
     <div class="card"><h3>Projekt: Arbeitsbereich zu einem Thema</h3><p>Material, Anweisungen und alle Chats an einem Ort. Jeder neue Chat kennt den Hintergrund.</p><ul><li><b>Vorteile:</b> nichts neu erklären, Material griffbereit, z. B. ein Projekt pro Klasse</li><li><b>Nachteile:</b> gilt nur im Projekt, bei viel Material gehen Details verloren, Material liegt beim Anbieter (keine Schülerdaten), Umzug zu anderer KI schwer</li></ul></div>
     <div class="card"><h3>Gemini Notebook (früher NotebookLM)</h3><p>Stark bei genauen Quellenangaben und Audio- oder Video-Zusammenfassungen. Eng mit Gemini verbunden, keine offizielle Verbindung zu Claude.</p></div>
     <div class="card"><h3>Ohne Claude</h3><p>Prompts lassen sich auch anderswo dauerhaft speichern: in Gemini als <b>Gem</b>, in ChatGPT als <b>eigenes GPT</b> oder in einem <b>Projekt</b>.</p></div>
@@ -154,8 +162,9 @@ footer{padding:28px max(5vw,16px);color:var(--soft);font-size:14px}
 
 <section id="kahoot" class="band"><div class="wrap">
   <div class="head"><div><h2>Kahoot aus dem eigenen Material</h2><p>Aus Arbeitsblatt, Lernsituation oder Kann-Liste wird ein spielbares Quiz.</p></div></div>
+  <img class="pic wide" src="bilder/kahoot.jpg" width="1000" height="667" alt="Kahoot-Illustration: Menschen spielen ein Quiz auf Tablets und Handys">
   <div class="grid">
-    <div class="card"><h3>Mit Kahoot-Anbindung</h3><p>Claude erstellt das Quiz und legt es direkt im eigenen Kahoot-Konto an. Kein Abtippen, kein Import. Im Kahoot-Editor lässt es sich noch anpassen.</p></div>
+    <div class="card"><span class="logo kh"><img src="bilder/kahoot-icon.png" alt="Kahoot"></span><h3>Mit Kahoot-Anbindung</h3><p>Claude erstellt das Quiz und legt es direkt im eigenen Kahoot-Konto an. Kein Abtippen, kein Import. Im Kahoot-Editor lässt es sich noch anpassen.</p></div>
     <div class="card"><h3>Ohne Anbindung</h3><p>Ein Skill füllt die offizielle Kahoot-Excel-Vorlage. Die Datei lädst du bei Kahoot hoch.</p></div>
   </div>
 </div></section>
@@ -199,7 +208,7 @@ Fehlt dir Material oder die Kann-Liste, frage nach, bevor du anfängst.</pre>
   <div class="seg" role="group" aria-label="KI auswählen">
     <button class="ghost" data-k="all" aria-pressed="true">Alle</button><button class="ghost" data-k="1" aria-pressed="false">Claude</button><button class="ghost" data-k="2" aria-pressed="false">ChatGPT</button><button class="ghost" data-k="3" aria-pressed="false">Gemini</button>
   </div>
-  <div class="scroll"><table class="stack" id="cmp"><thead><tr><th>Thema</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th></tr></thead><tbody></tbody></table></div>
+  <div class="scroll"><table class="stack" id="cmp"><thead><tr><th>Thema</th><th><span class="logo"><img src="bilder/logo-claude.png" alt="Claude"></span></th><th><span class="logo"><img src="bilder/logo-chatgpt.png" alt="ChatGPT"></span></th><th><span class="logo"><img src="bilder/logo-gemini.png" alt="Gemini"></span></th></tr></thead><tbody></tbody></table></div>
   <p class="note" style="margin-top:8px">Stand November 2026. Funktionen und Grenzen ändern sich häufig.</p>
 </div></section>
 
