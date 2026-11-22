@@ -3,179 +3,358 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="KI-Werkstatt des Joseph-DuMont-Berufskollegs: Office-Plugins, Skills, Kahoot, Lernspaziergang und gemeinsame Ablage zur Mikrofortbildung KI in der Schule.">
+<meta name="theme-color" content="#113954">
 <title>KI-Werkstatt JDBK</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23113954'/%3E%3Cpath d='M16 6l2.6 7.4L26 16l-7.4 2.6L16 26l-2.6-7.4L6 16l7.4-2.6z' fill='%23ff6b4a'/%3E%3C/svg%3E">
 <style>
-/* VOICE work for colleagues, friendly and clear
-   IDEA a school timetable board: the 45 minutes as coloured lessons, then a reference binder with tabs
-   PICTURE the session agenda drawn as a full-width time bar with blocks sized by minutes
-   COLOUR JDBK blue #113954 ground band, white panels, pale #e8eff5 fields, coral #ff6b4a accent
-   TYPE Figtree 800 display + Source Sans 3 text
-   LAYOUT laptop: blue band with title left, facts right, agenda bar full width; sticky tab row + search; sections in two columns. Phone: stacked */
-:root{color-scheme:light dark;--blue:#113954;--bg:light-dark(#f2f5f8,#0b1621);--panel:light-dark(#ffffff,#13212e);--field:light-dark(#e8eff5,#1a2c3c);--ink:light-dark(#1f2d3a,#e6edf3);--soft:light-dark(#55677a,#9fb1c2);--line:light-dark(#d3dde6,#24394c);--acc:#ff6b4a;--link:light-dark(#1d5f8c,#8cc4ec)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+/* VOICE  freundlich, klar, kollegial – Arbeitsmaterial, kein Werbeplakat
+   IDEA   ein Werkstatt-Ordner der Schule: Stundenplan-Leiste oben, darunter Register mit Karten
+   PICTURE Banner + Zeitleiste der 45 Minuten als farbige Unterrichtsblöcke
+   COLOUR JDBK-Blau #113954 als Fläche, weiße Karten, helles Blaugrau als Feld, Koralle #ff6b4a als Akzent
+   TYPE   System-Schriften (keine externen Fonts, datenschutzfreundlich), kräftige Überschriften
+   LAYOUT Laptop: Kopf zweispaltig, Leiste volle Breite, Register mit aktiver Markierung; Handy: alles gestapelt */
+:root{
+  --blue:#113954;--blue-2:#1d5f8c;--blue-3:#2b7aa8;--acc:#ff6b4a;--acc-ink:#1b1b1b;
+  --bg:#f2f5f8;--panel:#ffffff;--field:#e8eff5;--ink:#1f2d3a;--soft:#52647a;--line:#d6e0e8;
+  --link:#1d5f8c;--ok:#1d7a46;--ok-bg:#e3f4ea;--err:#b3261e;--err-bg:#fbe7e5;--warn-bg:#fff4e0;
+  --shadow:0 1px 2px rgba(17,57,84,.06),0 4px 16px rgba(17,57,84,.06);
+  --shadow-h:0 2px 4px rgba(17,57,84,.08),0 10px 28px rgba(17,57,84,.12);
+  --r:14px;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#0b1621;--panel:#13212e;--field:#1a2c3c;--ink:#e6edf3;--soft:#a3b4c4;--line:#26394b;--link:#8cc4ec;
+  --ok:#6fd39a;--ok-bg:#12301f;--err:#ff8a80;--err-bg:#3a1714;--warn-bg:#33270f;
+  --shadow:0 1px 2px rgba(0,0,0,.3);--shadow-h:0 8px 24px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme=dark]{
+  --bg:#0b1621;--panel:#13212e;--field:#1a2c3c;--ink:#e6edf3;--soft:#a3b4c4;--line:#26394b;--link:#8cc4ec;
+  --ok:#6fd39a;--ok-bg:#12301f;--err:#ff8a80;--err-bg:#3a1714;--warn-bg:#33270f;
+  --shadow:0 1px 2px rgba(0,0,0,.3);--shadow-h:0 8px 24px rgba(0,0,0,.4);color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
-html{scroll-padding-top:120px}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Source Sans 3",Arial,sans-serif;overflow-x:clip}
-h1,h2,h3{font-family:Figtree,Arial,sans-serif;line-height:1.08;letter-spacing:-.02em;margin:0;text-wrap:balance}
-h1{font-size:clamp(32px,5vw,50px);font-weight:800}
-h2{font-size:clamp(26px,3.2vw,34px);font-weight:800;margin-bottom:6px}
-h3{font-size:20px;font-weight:600;margin-bottom:6px}
+html{scroll-padding-top:84px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);overflow-x:clip;-webkit-font-smoothing:antialiased}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1{font-size:clamp(32px,4.6vw,50px);font-weight:800}
+h2{font-size:clamp(25px,3vw,32px);font-weight:800}
+h3{font-size:19px;font-weight:700;margin-bottom:8px}
 p{margin:0 0 10px}
-a{color:var(--link)}
-.band{padding-block:clamp(28px,4vw,56px);padding-inline:max(5vw,16px)}
-.wrap{max-width:1240px;margin:0 auto}
-.top{background:var(--blue);color:#fff}
-.top .wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;align-items:end}
-.top p{color:#cfdbe6;font-size:18px;max-width:60ch;margin-top:12px}
+a{color:var(--link);text-underline-offset:2px}
+img{max-width:100%;display:block}
+.icon{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wrap{max-width:1200px;margin:0 auto}
+.band{padding:clamp(36px,5vw,72px) max(5vw,16px)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--acc);color:var(--acc-ink);padding:10px 14px;border-radius:8px;z-index:20;font-weight:700}
+.skip:focus{top:12px}
+
+/* Kopf */
+.top{background:var(--blue);color:#fff;padding-bottom:clamp(28px,4vw,48px)}
+.top .wrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px 48px;align-items:end}
+.kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border-radius:99px;padding:6px 14px;font-size:14px;font-weight:600;color:#d7e5f0;margin-bottom:16px}
+.kicker i{width:8px;height:8px;border-radius:50%;background:var(--acc)}
+.lead{color:#cfdbe6;font-size:18px;max-width:58ch;margin-top:14px}
 .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.fact{background:rgba(255,255,255,.09);border-radius:10px;padding:10px 14px}
-.fact b{display:block;font-size:14px;color:#9fc0da;font-weight:600}
-.fact span{font-size:17px;font-weight:600}
-.agenda{grid-column:1/-1;margin-top:18px}
-.bar{display:flex;gap:4px;height:118px}
-.blk{border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;text-decoration:none;transition:transform .2s}
-.blk:hover{transform:translateY(-3px)}
-.blk b{font-family:Figtree,sans-serif;font-size:17px;line-height:1.15}
-.blk span{font-size:14px;opacity:.9;white-space:nowrap}
-.ticks{display:flex;justify-content:space-between;color:#9fc0da;font-size:14px;margin-top:6px}
-.note{font-size:14px;color:var(--soft)}
-.top .note{color:#9fc0da}
-nav{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--line);padding:8px max(5vw,16px)}
+.fact{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 14px}
+.fact .icon{color:#ffb3a1;margin-top:3px}
+.fact b{display:block;font-size:13px;color:#a9c6dc;font-weight:600}
+.fact span{font-size:16px;font-weight:600;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.banner{grid-column:1/-1;width:100%;height:auto;border-radius:var(--r);margin-top:8px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.agenda{grid-column:1/-1;margin-top:10px}
+.agenda h2{font-size:18px;font-weight:700;color:#d7e5f0;margin-bottom:10px;letter-spacing:0}
+.bar{display:flex;gap:6px;height:112px}
+.blk{border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;text-decoration:none;transition:transform .2s,box-shadow .2s;outline-offset:3px}
+.blk:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.blk:focus-visible{outline:3px solid var(--acc)}
+.blk b{font-size:16px;line-height:1.2}
+.blk span{font-size:14px;opacity:.92;white-space:nowrap}
+.blk.hot{color:var(--acc-ink)}
+.ticks{display:flex;justify-content:space-between;color:#a9c6dc;font-size:13px;margin-top:6px;font-variant-numeric:tabular-nums}
+.top .note{color:#a9c6dc;margin-top:8px}
+
+/* Navigation */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--panel) 92%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);padding:8px max(5vw,16px)}
 nav .wrap{display:flex;gap:12px;align-items:center}
-.tabs{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:thin}
-.tabs a{flex:none;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--ink);font-weight:600;font-size:15px}
-.tabs a:hover,.tabs a:focus-visible{background:var(--field)}
-#q{width:min(260px,40vw);font:16px inherit;font-family:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
-#q:focus{outline:2px solid var(--acc);outline-offset:1px}
-#hits{font-size:14px;color:var(--soft);white-space:nowrap}
+.tabs{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;display:flex;align-items:center;gap:6px;padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--soft);font-weight:600;font-size:15px;transition:background .15s,color .15s}
+.tabs a:hover{background:var(--field);color:var(--ink)}
+.tabs a[aria-current=true]{background:var(--blue);color:#fff}
+.tabs a:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.search{position:relative;flex:none;width:min(280px,36vw)}
+.search .icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--soft);pointer-events:none}
+#q{width:100%;font-size:16px;font-family:var(--sans);padding:10px 12px 10px 38px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);min-height:44px}
+#q:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:transparent}
+kbd{font:600 12px var(--sans);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--soft);position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--panel)}
+#q:focus+kbd,#q:not(:placeholder-shown)+kbd{display:none}
+.hitbar{display:none;max-width:1200px;margin:10px auto 0;align-items:center;gap:12px;flex-wrap:wrap;font-size:15px;color:var(--soft)}
+.hitbar.on{display:flex}
+.empty-search{display:none;text-align:center;padding:64px 16px;color:var(--soft)}
+.empty-search.on{display:block}
+.empty-search .icon{width:40px;height:40px;margin:0 auto 12px}
+
+/* Abschnitte */
 section{border-bottom:1px solid var(--line)}
-.head{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap;margin-bottom:20px}
-.head p{color:var(--soft);max-width:62ch;margin:0}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+section:nth-of-type(even){background:color-mix(in srgb,var(--field) 45%,var(--bg))}
+.head{display:flex;gap:16px;align-items:flex-start;margin-bottom:24px}
+.badge{flex:none;width:52px;height:52px;border-radius:14px;background:var(--blue);color:#fff;display:grid;place-items:center}
+.badge .icon{width:26px;height:26px}
+.head p{color:var(--soft);max-width:64ch;margin:6px 0 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
-.card ul,.card ol{margin:4px 0 0;padding-left:20px}
-.card li{margin-bottom:4px}
-.card.warn{background:var(--field);border-color:transparent}
-.tag{display:inline-block;font-size:14px;font-weight:600;padding:2px 10px;border-radius:99px;background:var(--field);margin-right:6px}
-.hidden{display:none!important}
-mark{background:color-mix(in srgb,var(--acc) 35%,transparent);color:inherit;border-radius:3px}
-button{font:600 15px "Source Sans 3",sans-serif;min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer}
-button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#1b1b1b}
-pre{background:var(--field);border-radius:10px;padding:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;max-height:320px;overflow:auto;margin:10px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:var(--shadow-h)}
+.card ul,.card ol{margin:6px 0 0;padding-left:20px}
+.card li{margin-bottom:6px}
+.card.tint{background:var(--warn-bg);border-color:transparent;box-shadow:none}
+.card.tint h3{display:flex;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--field);color:var(--ink);margin:0 6px 10px 0}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.card li .pill{margin:0 4px 0 0;vertical-align:1px}
+.pill.acc{background:color-mix(in srgb,var(--acc) 18%,var(--panel));color:var(--ink)}
+.note{font-size:14px;color:var(--soft)}
+.logo{display:inline-flex;align-items:center;background:#fff;border:1px solid #e3e9ee;border-radius:10px;padding:7px 12px;margin-bottom:12px}
+.logo img{height:26px;width:auto}
+.pic{width:100%;height:auto;border-radius:10px;margin-bottom:16px}
+.pic.wide{max-height:340px;object-fit:cover;border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:20px}
+.kh-icon{width:44px;height:44px;border-radius:10px;margin-bottom:12px}
+.steps{counter-reset:s;list-style:none;padding:0!important;margin:10px 0 14px!important}
+.steps li{counter-increment:s;position:relative;padding-left:40px;margin-bottom:10px;min-height:28px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;font:700 14px var(--sans);display:grid;place-items:center}
+.checks{list-style:none;padding:0!important}
+.checks li{display:flex;gap:10px;align-items:flex-start}
+.checks .icon{color:var(--ok);margin-top:4px}
+.checks.minus .icon{color:var(--err)}
+
+/* Buttons */
+button,.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px var(--sans);min-height:44px;padding:9px 16px;border-radius:10px;border:1px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;text-decoration:none;transition:background .15s,transform .1s,box-shadow .15s}
+button:hover,.btn:hover{background:var(--blue-2);border-color:var(--blue-2)}
+button:active{transform:scale(.98)}
+button:focus-visible,.btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+button.ghost,.btn.ghost{background:var(--panel);color:var(--ink);border-color:var(--line)}
+button.ghost:hover,.btn.ghost:hover{background:var(--field)}
+button.done{background:var(--ok);border-color:var(--ok);color:#fff}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.seg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+
+/* Code-Blöcke */
+.codebox{position:relative;margin:12px 0}
+pre{background:var(--field);border:1px solid var(--line);border-radius:12px;padding:16px;font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-height:340px;overflow:auto;margin:0}
+
+/* Vergleich */
+.seg{display:inline-flex;gap:4px;padding:4px;background:var(--field);border-radius:12px;margin-bottom:16px;flex-wrap:wrap}
+.seg button{background:transparent;border-color:transparent;color:var(--ink);min-height:40px}
+.seg button:hover{background:var(--panel)}
+.seg button[aria-pressed=true]{background:var(--panel);box-shadow:var(--shadow);color:var(--ink)}
 .scroll{overflow-x:auto}
-table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:12px;overflow:hidden}
-th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:16px}
-th{font-family:Figtree,sans-serif;font-size:16px;background:var(--field)}
-td:first-child{font-weight:600;width:22%}
-.dim{opacity:.32}
-.steps{counter-reset:s;list-style:none;padding:0!important}
-.steps li{counter-increment:s;position:relative;padding-left:40px;margin-bottom:10px}
-.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;font:700 15px Figtree,sans-serif;display:grid;place-items:center}
-.file{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
-.file:last-child{border:0}
-.file small{display:block;color:var(--soft);font-size:14px}
-.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:150px;border:2px dashed var(--line);border-radius:12px;background:var(--field);text-align:center;padding:16px;cursor:pointer;transition:border-color .2s}
-.drop.over,.drop:hover{border-color:var(--acc)}
+table{width:100%;border-collapse:separate;border-spacing:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top;font-size:16px;transition:opacity .2s,background .2s}
+tr:last-child td{border-bottom:0}
+th{background:var(--field);font-size:15px}
+td:first-child{font-weight:700;width:22%}
+th .logo{margin:0;padding:5px 9px}th .logo img{height:22px}
+.dim{opacity:.3}
+.hl{background:color-mix(in srgb,var(--acc) 9%,var(--panel))}
+
+/* Ablage */
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:170px;border:2px dashed color-mix(in srgb,var(--blue-3) 45%,var(--line));border-radius:var(--r);background:var(--field);text-align:center;padding:20px;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+.drop .icon{width:36px;height:36px;color:var(--blue-3)}
+.drop b{font-size:17px}
 .drop span{font-size:14px;color:var(--soft)}
-.fld{display:flex;flex-direction:column;font-size:14px;font-weight:600;gap:4px}
-.fld input{font:16px "Source Sans 3",sans-serif;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
-.queue{list-style:none;padding:0;margin:10px 0}
-.queue li{font-size:15px;padding:4px 0}
-.ok{color:light-dark(#1d7a46,#6fd39a)}.err{color:light-dark(#b3261e,#ff8a80)}
-.file button{min-height:40px;padding:6px 14px}
-.banner{grid-column:1/-1;width:100%;height:auto;border-radius:12px;display:block;margin-top:8px}
-.logo{display:inline-flex;align-items:center;background:#fff;border-radius:8px;padding:6px 10px;margin-bottom:10px}
-.logo img{height:26px;width:auto;display:block}
-th .logo{margin:0;padding:4px 8px}th .logo img{height:22px}
-.pic.wide{max-height:360px;object-fit:cover;margin-bottom:16px}
-.logo.kh{padding:0;background:none}.logo.kh img{height:40px;border-radius:9px}
-.pic{width:100%;height:auto;border-radius:10px;display:block;margin-bottom:14px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none}
-.toast.on{opacity:1}
-footer{padding:28px max(5vw,16px);color:var(--soft);font-size:14px}
-@media(max-width:900px){.grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:720px){.top .wrap{grid-template-columns:minmax(0,1fr)}.bar{height:auto;flex-direction:column}.blk{flex:none!important;flex-direction:row;align-items:center;gap:10px;padding:10px 12px}.ticks{display:none}.grid,.grid.three{grid-template-columns:minmax(0,1fr)}nav .wrap{flex-wrap:wrap}#q{width:100%}}
-@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 10px;padding-inline-start:8.5em;width:auto!important}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;font-weight:600;color:var(--soft)}}
-@media(prefers-reduced-motion:reduce){.blk,.toast{transition:none}}
+.drop:hover,.drop:focus-visible{border-color:var(--acc);outline:none}
+.drop.over{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,var(--field));transform:scale(1.01)}
+.drop[aria-disabled=true]{opacity:.6;cursor:progress}
+.fld{display:flex;flex-direction:column;font-size:14px;font-weight:600;gap:6px;margin-top:14px}
+.fld input{font:16px var(--sans);padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);min-height:44px}
+.fld input:focus{outline:2px solid var(--acc);outline-offset:1px}
+.queue{list-style:none;padding:0;margin:12px 0}
+.queue li{display:flex;gap:10px;align-items:center;font-size:15px;padding:8px 12px;border-radius:10px;margin-bottom:6px;background:var(--field)}
+.queue li.ok{background:var(--ok-bg);color:var(--ok)}
+.queue li.err{background:var(--err-bg);color:var(--err)}
+.queue li span{overflow-wrap:anywhere}
+.spin{width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;flex:none;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.fhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.fhead h3{margin:0}
+.file{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.file:last-child{border:0}
+.file>div{flex:1}
+.file b{display:block;overflow-wrap:anywhere;line-height:1.3}
+.file small{display:block;color:var(--soft);font-size:14px;margin-top:2px}
+.ext{flex:none;width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font:800 11px var(--sans);color:#fff;letter-spacing:.02em}
+.file button{min-height:40px;padding:6px 12px}
+.skel{height:56px;border-radius:10px;background:linear-gradient(90deg,var(--field),color-mix(in srgb,var(--field) 50%,var(--panel)),var(--field));background-size:200% 100%;animation:sh 1.2s ease-in-out infinite;margin-bottom:10px}
+@keyframes sh{to{background-position:-200% 0}}
+.state{text-align:center;padding:28px 12px;color:var(--soft)}
+.state .icon{width:34px;height:34px;margin:0 auto 8px}
+.state.err{color:var(--err)}
+
+/* Technik-Tabelle */
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:18px}
+.flow .card{position:relative}
+.flow .num{width:36px;height:36px;border-radius:10px;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font-weight:800;margin-bottom:10px}
+
+/* Rest */
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:600;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;z-index:30;display:flex;gap:8px;align-items:center;box-shadow:var(--shadow-h)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.totop{position:fixed;right:18px;bottom:18px;z-index:15;width:48px;height:48px;padding:0;border-radius:50%;opacity:0;pointer-events:none;transition:opacity .2s;box-shadow:var(--shadow-h)}
+.totop.on{opacity:1;pointer-events:auto}
+footer{padding:32px max(5vw,16px);color:var(--soft);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+.hidden{display:none!important}
+
+@media (max-width:960px){.grid.three,.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.top .wrap{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){
+  .top .wrap{grid-template-columns:minmax(0,1fr)}
+  .bar{height:auto;flex-direction:column}
+  .blk{flex:none!important;flex-direction:row;align-items:center;gap:10px}
+  .ticks{display:none}
+  .grid,.grid.three,.flow{grid-template-columns:minmax(0,1fr)}
+  nav .wrap{flex-wrap:wrap}
+  .search{width:100%;order:-1}
+  kbd{display:none}
+  .head{flex-direction:column;gap:12px}
+  .badge{width:44px;height:44px}
+}
+@media (max-width:600px){
+  .stack thead{display:none}
+  .stack table,.stack tbody,.stack tr,.stack td{display:block;width:auto!important}
+  .stack tr{padding:10px 0;border-bottom:1px solid var(--line)}
+  .stack tr:last-child{border:0}
+  .stack td{border:0;padding:4px 16px;font-size:15px}
+  .stack td:first-child{font-size:16px;padding-top:8px}
+  .stack td:not(:first-child)::before{content:attr(data-l);display:block;font-size:13px;font-weight:700;color:var(--soft)}
+  .facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.3 7-12a7 7 0 1 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 7h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0z"/><path d="M12 17v5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="i-quiz" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></symbol>
+  <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M10 22l2-7 3 3v6M9 12l2-4 4 2 2 3M7 13l2-5"/></symbol>
+  <symbol id="i-compare" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M9 21v-5h6v5M9 12h.01M15 12h.01"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M6 11l6 6 6-6M4 21h16"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V8M6 13l6-6 6 6M4 3h16"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17.5v.01"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3 13h5l2 3h4l2-3h5"/><path d="M5 5h14l2 8v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6z"/></symbol>
+</svg>
+<a class="skip" href="#main">Zum Inhalt springen</a>
 
-<header class="top band">
+<header class="top band" id="top">
   <div class="wrap">
     <div>
+      <div class="kicker"><i aria-hidden="true"></i>Mikrofortbildung · Joseph-DuMont-Berufskolleg</div>
       <h1>KI-Werkstatt: Plugins, Skills und der Lernspaziergang</h1>
-      <p>Alles aus der Mikrofortbildung am Joseph-DuMont-Berufskolleg zum Mitmachen und Nachschlagen. Mit Prompts zum Kopieren, einem KI-Vergleich und Anleitungen.</p>
+      <p class="lead">Alles aus der Fortbildung zum Mitmachen und Nachschlagen: Anleitungen, Prompts zum Kopieren, ein KI-Vergleich und eine gemeinsame Ablage ohne Login.</p>
     </div>
-    <div class="facts">
-      <div class="fact"><b>Wann</b><span>Mo, 14.12.2026</span></div>
-      <div class="fact"><b>Uhrzeit</b><span>14:15–15:00</span></div>
-      <div class="fact"><b>Wo</b><span>Raum lt. Schulmanager</span></div>
-      <div class="fact"><b>Mitbringen</b><span>Kann-Liste + Material</span></div>
-    </div>
-    <img class="banner" src="banner.jpg" width="1600" height="450" alt="Illustration: KI-Lernassistent, Plugins in Office, Prompts speichern">
+    <ul class="facts" role="list" style="list-style:none;margin:0;padding:0">
+      <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg><div><b>Wann</b><span>Mo, 14.12.2026</span></div></li>
+      <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>Uhrzeit</b><span>14:15–15:00 Uhr</span></div></li>
+      <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><b>Wo</b><span>Raum laut Schulmanager, auch online</span></div></li>
+      <li class="fact"><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg><div><b>Mitbringen</b><span>Kann-Liste und Unterrichtsmaterial</span></div></li>
+    </ul>
+    <img class="banner" src="banner.jpg" width="1600" height="450" alt="Illustration: KI-Lernassistent, Plugins in Office, Prompts speichern" fetchpriority="high">
     <div class="agenda">
+      <h2>Ablauf der 45 Minuten</h2>
       <div class="bar" id="bar"></div>
-      <div class="ticks"><span>14:15</span><span>14:30</span><span>14:45</span><span>15:00</span></div>
-      <p class="note">Ablauf der 45 Minuten, Zeiten ungefähr. Klick auf einen Block springt zum Thema. Online-Teilnahme ist möglich.</p>
+      <div class="ticks" aria-hidden="true"><span>14:15</span><span>14:30</span><span>14:45</span><span>15:00</span></div>
+      <p class="note">Zeiten ungefähr. Ein Klick auf einen Block springt zum Thema.</p>
     </div>
   </div>
 </header>
 
 <nav aria-label="Themen">
   <div class="wrap">
-    <div class="tabs scroll">
-      <a href="#plugins">Plugins</a><a href="#skills">Skills &amp; Projekte</a><a href="#kahoot">Kahoot</a><a href="#lernspaziergang">Lernspaziergang</a><a href="#vergleich">KI-Vergleich</a><a href="#pruefen">Prüfen &amp; Bewerten</a><a href="#prompting">Prompting</a><a href="#nrw">NRW-Angebote</a><a href="#ablage">Ablage</a>
+    <div class="tabs" id="tabs">
+      <a href="#plugins"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg>Plugins</a>
+      <a href="#skills"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>Skills &amp; Projekte</a>
+      <a href="#kahoot"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg>Kahoot</a>
+      <a href="#lernspaziergang"><svg class="icon" aria-hidden="true"><use href="#i-walk"/></svg>Lernspaziergang</a>
+      <a href="#vergleich"><svg class="icon" aria-hidden="true"><use href="#i-compare"/></svg>KI-Vergleich</a>
+      <a href="#pruefen"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Prüfen &amp; Bewerten</a>
+      <a href="#prompting"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg>Prompting</a>
+      <a href="#nrw"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg>NRW</a>
+      <a href="#ablage"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>Ablage</a>
+      <a href="#technik"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Technik</a>
     </div>
-    <input id="q" type="search" placeholder="Suchen, z. B. Datenschutz" aria-label="Inhalte durchsuchen">
-    <span id="hits" aria-live="polite"></span>
+    <div class="search" role="search">
+      <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+      <label for="q" class="sr">Inhalte durchsuchen</label>
+      <input id="q" type="search" placeholder="Suchen, z. B. Datenschutz" autocomplete="off">
+      <kbd aria-hidden="true">/</kbd>
+    </div>
   </div>
+  <div class="hitbar" id="hitbar"><span id="hits" aria-live="polite"></span><button class="ghost" id="clearq" type="button"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Suche zurücksetzen</button></div>
 </nav>
 
-<main>
-<section id="plugins" class="band"><div class="wrap">
-  <div class="head"><div><h2>Office-Plugins</h2><p>Die KI arbeitet direkt in Word, Excel und PowerPoint. Kein Kopieren mehr zwischen Fenstern.</p></div></div>
+<main id="main">
+<div class="empty-search" id="nohits"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><p><b>Keine Treffer.</b> Versuch es mit einem anderen Wort, z. B. „Plugin“, „Prompt“ oder „Datenschutz“.</p></div>
+
+<section id="plugins" class="band" aria-labelledby="h-plugins"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg></div><div><h2 id="h-plugins">Office-Plugins</h2><p>Die KI arbeitet direkt in Word, Excel und PowerPoint. Kein Kopieren mehr zwischen Fenstern.</p></div></div>
   <div class="grid three">
-    <div class="card"><span class="logo"><img src="logo-claude.png" alt="Claude"></span><h3>Claude for Microsoft 365</h3><ol class="steps"><li>Word, Excel oder PowerPoint öffnen</li><li>Start → Add-Ins (älter: Einfügen → Add-Ins abrufen)</li><li>„Claude for Microsoft 365“ von Anthropic suchen, Hinzufügen</li><li>Seitenleiste öffnen, mit Claude-Konto anmelden</li><li>In jedem der drei Programme einmal starten</li></ol><p class="note">Nur mit bezahltem Abo. Merkt sich den Zusammenhang über alle drei Programme, eigene Skills gelten auch hier. Word: Änderungen als Nachverfolgung.</p></div>
-    <div class="card"><span class="logo"><img src="logo-chatgpt.png" alt="ChatGPT"></span><h3>ChatGPT-Add-in</h3><ol class="steps"><li>Office-Programm öffnen</li><li>Start → Add-Ins</li><li>„ChatGPT“ vom Anbieter OpenAI, LLC wählen, Hinzufügen</li><li>Mit ChatGPT-Konto anmelden</li></ol><p class="note">Auch kostenlos nutzbar. Chats getrennt von chatgpt.com, kein Gedächtnis, keine Skills. Vorsicht vor Fremd-Add-ins mit ähnlichem Namen.</p></div>
-    <div class="card"><span class="logo"><img src="logo-gemini.png" alt="Gemini"></span><h3>Kein Office-Plugin</h3><ol class="steps"><li>Datei in Google Docs, Tabellen oder Präsentationen öffnen</li><li>Oben rechts „Frag Gemini“ ✦ klicken</li><li>Fertige Datei als Word/Excel/PowerPoint herunterladen</li></ol><p class="note">Braucht Google AI Pro oder Workspace mit Gemini. Alternative: Im Gemini-Chat „als Word-Datei“ erstellen lassen.</p></div>
+    <article class="card"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span><h3>Claude for Microsoft 365</h3><span class="pill">Bezahltes Abo</span>
+      <ol class="steps"><li>Word, Excel oder PowerPoint öffnen</li><li>Start → Add-Ins (älter: Einfügen → Add-Ins abrufen)</li><li>„Claude for Microsoft 365“ von Anthropic suchen, Hinzufügen</li><li>Seitenleiste öffnen, mit Claude-Konto anmelden</li><li>In jedem der drei Programme einmal starten</li></ol>
+      <p class="note">Merkt sich den Zusammenhang über alle drei Programme, eigene Skills gelten auch hier. In Word erscheinen Änderungen als Nachverfolgung.</p></article>
+    <article class="card"><span class="logo"><img src="logo-chatgpt.png" width="311" height="96" alt="ChatGPT"></span><h3>ChatGPT-Add-in</h3><span class="pill ok">Auch kostenlos</span>
+      <ol class="steps"><li>Office-Programm öffnen</li><li>Start → Add-Ins</li><li>„ChatGPT“ vom Anbieter OpenAI, LLC wählen, Hinzufügen</li><li>Mit ChatGPT-Konto anmelden</li></ol>
+      <p class="note">Chats getrennt von chatgpt.com, kein Gedächtnis, keine Skills. Vorsicht vor Fremd-Add-ins mit ähnlichem Namen.</p></article>
+    <article class="card"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span><h3>Kein Office-Plugin</h3><span class="pill">Google AI Pro / Workspace</span>
+      <ol class="steps"><li>Datei in Google Docs, Tabellen oder Präsentationen öffnen</li><li>Oben rechts auf „Frag Gemini“ ✦ klicken</li><li>Fertige Datei als Word, Excel oder PowerPoint herunterladen</li></ol>
+      <p class="note">Alternative: im Gemini-Chat ein Ergebnis „als Word-Datei“ erstellen lassen.</p></article>
   </div>
-  <div class="card warn" style="margin-top:16px"><h3>Datenschutz bei Plugins</h3><p>Sobald die Seitenleiste offen ist, liest das Plugin die geöffnete Datei und schickt sie an den Anbieter. Also nie in Notenlisten, Gutachten oder anderen Dateien mit Schülerdaten öffnen. Wenn nötig: Kopie mit erfundenen Namen. Die Schul-IT kann Add-ins im Schulkonto sperren.</p></div>
+  <div class="card tint" style="margin-top:18px"><h3><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Datenschutz bei Plugins</h3><p>Sobald die Seitenleiste offen ist, liest das Plugin die geöffnete Datei und schickt sie an den Anbieter. Also nie in Notenlisten, Gutachten oder anderen Dateien mit Schülerdaten öffnen. Wenn nötig: Kopie mit erfundenen Namen. Die Schul-IT kann Add-ins im Schulkonto sperren.</p></div>
 </div></section>
 
-<section id="skills" class="band"><div class="wrap">
-  <div class="head"><div><h2>Skills und Projekte</h2><p>Einmal sauber erklären, dauerhaft nutzen. Der Skill legt fest, wie gearbeitet wird. Das Projekt legt fest, wo und womit.</p></div></div>
+<section id="skills" class="band" aria-labelledby="h-skills"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></div><div><h2 id="h-skills">Skills und Projekte</h2><p>Einmal sauber erklären, dauerhaft nutzen. Der Skill legt fest, <b>wie</b> gearbeitet wird. Das Projekt legt fest, <b>wo und womit</b>.</p></div></div>
   <div class="grid">
-    <div class="card"><img class="pic" src="skills.jpg" width="632" height="316" alt="Illustration: Skill als Ordner mit SKILL.md"><h3>Skill: gespeicherte Arbeitsweise</h3><p>Ein Prompt gilt nur im aktuellen Chat. Ein Skill ist gespeichert und funktioniert in jedem Chat.</p><ul><li><b>PowerPoint-JDBK:</b> Präsentationen im Schuldesign</li><li><b>Kann-Liste:</b> im JDBK-Format als Word-Datei</li><li><b>Kahoot-Vorlage:</b> Quiz in der offiziellen Excel-Vorlage</li><li><b>Lernspaziergang:</b> TXT-Tutor aus Material + Kann-Liste</li></ul></div>
-    <div class="card"><h3>Projekt: Arbeitsbereich zu einem Thema</h3><p>Material, Anweisungen und alle Chats an einem Ort. Jeder neue Chat kennt den Hintergrund.</p><ul><li><b>Vorteile:</b> nichts neu erklären, Material griffbereit, z. B. ein Projekt pro Klasse</li><li><b>Nachteile:</b> gilt nur im Projekt, bei viel Material gehen Details verloren, Material liegt beim Anbieter (keine Schülerdaten), Umzug zu anderer KI schwer</li></ul></div>
-    <div class="card"><h3>Gemini Notebook (früher NotebookLM)</h3><p>Stark bei genauen Quellenangaben und Audio- oder Video-Zusammenfassungen. Eng mit Gemini verbunden, keine offizielle Verbindung zu Claude.</p></div>
-    <div class="card"><h3>Ohne Claude</h3><p>Prompts lassen sich auch anderswo dauerhaft speichern: in Gemini als <b>Gem</b>, in ChatGPT als <b>eigenes GPT</b> oder in einem <b>Projekt</b>.</p></div>
+    <article class="card"><img class="pic" src="skills.jpg" width="632" height="316" alt="Illustration: Skill als Ordner mit SKILL.md" loading="lazy"><h3>Skill: gespeicherte Arbeitsweise</h3><p>Ein Prompt gilt nur im aktuellen Chat. Ein Skill ist gespeichert und funktioniert in jedem Chat.</p><ul><li><b>PowerPoint-JDBK:</b> Präsentationen im Schuldesign</li><li><b>Kann-Liste:</b> im JDBK-Format als Word-Datei</li><li><b>Kahoot-Vorlage:</b> Quiz in der offiziellen Excel-Vorlage</li><li><b>Lernspaziergang:</b> TXT-Tutor aus Material und Kann-Liste</li></ul></article>
+    <article class="card"><h3>Projekt: Arbeitsbereich zu einem Thema</h3><p>Material, Anweisungen und alle Chats an einem Ort. Jeder neue Chat kennt den Hintergrund, z. B. ein Projekt pro Klasse.</p>
+      <p style="margin-top:14px"><span class="pill ok"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Vorteile</span></p>
+      <ul class="checks"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Nichts neu erklären</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Material griffbereit</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Ordnung, je nach Konto teilbar</li></ul>
+      <p style="margin-top:10px"><span class="pill acc"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Nachteile</span></p>
+      <ul class="checks minus"><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Gilt nur im Projekt</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Bei viel Material gehen Details verloren</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Material liegt beim Anbieter: keine Schülerdaten</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Umzug zu einer anderen KI ist schwer</li></ul></article>
+    <article class="card"><h3>Gemini Notebook (früher NotebookLM)</h3><p>Stark bei genauen Quellenangaben und Audio- oder Video-Zusammenfassungen. Eng mit Gemini verbunden, keine offizielle Verbindung zu Claude.</p></article>
+    <article class="card"><h3>Ohne Claude</h3><p>Prompts lassen sich auch anderswo dauerhaft speichern: in Gemini als <b>Gem</b>, in ChatGPT als <b>eigenes GPT</b> oder in einem <b>Projekt</b>.</p></article>
   </div>
 </div></section>
 
-<section id="kahoot" class="band"><div class="wrap">
-  <div class="head"><div><h2>Kahoot aus dem eigenen Material</h2><p>Aus Arbeitsblatt, Lernsituation oder Kann-Liste wird ein spielbares Quiz.</p></div></div>
-  <img class="pic wide" src="kahoot.jpg" width="1000" height="667" alt="Kahoot-Illustration: Menschen spielen ein Quiz auf Tablets und Handys">
+<section id="kahoot" class="band" aria-labelledby="h-kahoot"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg></div><div><h2 id="h-kahoot">Kahoot aus dem eigenen Material</h2><p>Aus Arbeitsblatt, Lernsituation oder Kann-Liste wird ein spielbares Quiz.</p></div></div>
+  <img class="pic wide" src="kahoot.jpg" width="1000" height="667" alt="Kahoot-Illustration: Menschen spielen ein Quiz auf Tablets und Handys" loading="lazy">
   <div class="grid">
-    <div class="card"><span class="logo kh"><img src="kahoot-icon.png" alt="Kahoot"></span><h3>Mit Kahoot-Anbindung</h3><p>Claude erstellt das Quiz und legt es direkt im eigenen Kahoot-Konto an. Kein Abtippen, kein Import. Im Kahoot-Editor lässt es sich noch anpassen.</p></div>
-    <div class="card"><h3>Ohne Anbindung</h3><p>Ein Skill füllt die offizielle Kahoot-Excel-Vorlage. Die Datei lädst du bei Kahoot hoch.</p></div>
+    <article class="card"><img class="kh-icon" src="kahoot-icon.png" width="96" height="96" alt="" loading="lazy"><h3>Mit Kahoot-Anbindung</h3><p>Claude erstellt das Quiz und legt es direkt im eigenen Kahoot-Konto an. Kein Abtippen, kein Import. Im Kahoot-Editor lässt es sich noch anpassen.</p></article>
+    <article class="card"><img class="kh-icon" src="kahoot-icon.png" width="96" height="96" alt="" loading="lazy"><h3>Ohne Anbindung</h3><p>Ein Skill füllt die offizielle Kahoot-Excel-Vorlage. Die Datei lädst du bei Kahoot hoch.</p></article>
   </div>
 </div></section>
 
-<section id="lernspaziergang" class="band"><div class="wrap">
-  <div class="head"><div><h2>Lernspaziergang: der Praxisteil</h2><p>Aus Kann-Liste und Material entsteht eine Textdatei. Damit lernen die Schüler*innen im Sprachmodus jeder KI. Die KI fragt, statt zu erzählen.</p></div></div>
+<section id="lernspaziergang" class="band" aria-labelledby="h-walk"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-walk"/></svg></div><div><h2 id="h-walk">Lernspaziergang: der Praxisteil</h2><p>Aus Kann-Liste und Material entsteht eine Textdatei. Damit lernen die Schüler*innen im Sprachmodus jeder KI. Die KI fragt, statt zu erzählen.</p></div></div>
   <div class="grid">
-    <div class="card">
+    <article class="card">
       <h3>Starter-Prompt</h3>
       <p>In eine KI einfügen, dann Kann-Liste und Material anhängen. Die KI baut daraus die TXT-Datei für die Klasse.</p>
-      <pre id="prompt">Du hilfst mir als Lehrkraft, einen „Lernspaziergang“ vorzubereiten.
+      <div class="codebox"><pre id="prompt" tabindex="0" aria-label="Starter-Prompt Lernspaziergang">Du hilfst mir als Lehrkraft, einen „Lernspaziergang“ vorzubereiten.
 
 Ich gebe dir eine Kann-Liste und das Unterrichtsmaterial. Erstelle daraus EINE Textdatei, die meine Schüler*innen in jede KI einfügen können. Die Datei enthält das gesamte Material in Textform und eine Anweisung an die KI:
 
@@ -189,151 +368,256 @@ Ich gebe dir eine Kann-Liste und das Unterrichtsmaterial. Erstelle daraus EINE T
 
 Regeln: Bei Hängern gestufte Hinweise, Lösung erst ganz zum Schluss. Nur Inhalte aus dem Material, nichts erfinden. Keine persönlichen Daten erfragen.
 
-Fehlt dir Material oder die Kann-Liste, frage nach, bevor du anfängst.</pre>
-      <div class="row"><button id="copyPrompt">Prompt kopieren</button><button class="ghost hidden" id="dlPrompt">Als TXT herunterladen</button></div>
-    </div>
-    <div class="card">
+Fehlt dir Material oder die Kann-Liste, frage nach, bevor du anfängst.</pre></div>
+      <div class="row"><button type="button" data-copy="prompt"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Prompt kopieren</span></button><button type="button" class="ghost" id="dlPrompt"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Als TXT herunterladen</button></div>
+    </article>
+    <article class="card">
       <h3>Warum das funktioniert</h3>
-      <ul><li><b>Bei der Sache:</b> Die KI bleibt beim Material und der Kann-Liste</li><li><b>Echtes Lernen:</b> Fragen statt Antworten zum Abschreiben</li><li><b>Niedrige Hürde:</b> Sprechen statt Schreiben, gut bei Schreibschwierigkeiten oder Deutsch als Zweitsprache</li><li><b>Bewegung:</b> Lernen beim Gehen, z. B. im Blücherpark</li></ul>
-      <h3 style="margin-top:14px">Grenzen</h3>
-      <ul><li>Die KI kann Fehler machen</li><li>Funktioniert nur, wenn Schüler*innen aktiv mitmachen</li><li>Gratis-Versionen: Sprachmodus begrenzt, besser 10–15 Minuten pro Runde planen</li></ul>
-      <h3 style="margin-top:14px">Vorher testen</h3>
-      <p>Dieselbe TXT-Datei in ChatGPT, Gemini und Claude ausprobieren: Bleibt die KI in der Tutor-Rolle und stellt sie Fragen?</p>
-    </div>
+      <ul class="checks"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bei der Sache:</b> Die KI bleibt beim Material und der Kann-Liste</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Echtes Lernen:</b> Fragen statt Antworten zum Abschreiben</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Niedrige Hürde:</b> Sprechen statt Schreiben, gut bei Schreibschwierigkeiten oder Deutsch als Zweitsprache</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bewegung:</b> Lernen beim Gehen, z. B. im Blücherpark</span></li></ul>
+      <h3 style="margin-top:18px">Grenzen</h3>
+      <ul class="checks minus"><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Die KI kann Fehler machen</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Funktioniert nur, wenn Schüler*innen aktiv mitmachen</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Gratis-Versionen: Sprachmodus begrenzt, besser 10–15 Minuten pro Runde planen</li></ul>
+      <div class="card tint" style="margin-top:16px;padding:14px 16px"><h3 style="margin-bottom:4px"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Vorher testen</h3><p style="margin:0">Dieselbe TXT-Datei in ChatGPT, Gemini und Claude ausprobieren: Bleibt die KI in der Tutor-Rolle und stellt sie Fragen?</p></div>
+    </article>
   </div>
 </div></section>
 
-<section id="vergleich" class="band"><div class="wrap">
-  <div class="head"><div><h2>Claude, ChatGPT und Gemini im Vergleich</h2><p>Gleiche Idee, andere Namen. Wähle eine KI, um ihre Spalte hervorzuheben.</p></div></div>
-  <div class="seg" role="group" aria-label="KI auswählen">
-    <button class="ghost" data-k="all" aria-pressed="true">Alle</button><button class="ghost" data-k="1" aria-pressed="false">Claude</button><button class="ghost" data-k="2" aria-pressed="false">ChatGPT</button><button class="ghost" data-k="3" aria-pressed="false">Gemini</button>
+<section id="vergleich" class="band" aria-labelledby="h-cmp"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-compare"/></svg></div><div><h2 id="h-cmp">Claude, ChatGPT und Gemini im Vergleich</h2><p>Gleiche Idee, andere Namen. Wähle eine KI, um ihre Spalte hervorzuheben.</p></div></div>
+  <div class="seg" role="group" aria-label="KI hervorheben">
+    <button type="button" data-k="0" aria-pressed="true">Alle</button><button type="button" data-k="1" aria-pressed="false">Claude</button><button type="button" data-k="2" aria-pressed="false">ChatGPT</button><button type="button" data-k="3" aria-pressed="false">Gemini</button>
   </div>
-  <div class="scroll"><table class="stack" id="cmp"><thead><tr><th>Thema</th><th><span class="logo"><img src="logo-claude.png" alt="Claude"></span></th><th><span class="logo"><img src="logo-chatgpt.png" alt="ChatGPT"></span></th><th><span class="logo"><img src="logo-gemini.png" alt="Gemini"></span></th></tr></thead><tbody></tbody></table></div>
-  <p class="note" style="margin-top:8px">Stand November 2026. Funktionen und Grenzen ändern sich häufig.</p>
+  <div class="scroll stack"><table id="cmp"><caption class="sr">Vergleich von Claude, ChatGPT und Gemini</caption><thead><tr><th scope="col">Thema</th><th scope="col"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span></th><th scope="col"><span class="logo"><img src="logo-chatgpt.png" width="311" height="96" alt="ChatGPT"></span></th><th scope="col"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span></th></tr></thead><tbody></tbody></table></div>
+  <p class="note" style="margin-top:10px">Stand November 2026. Funktionen und Grenzen ändern sich häufig.</p>
 </div></section>
 
-<section id="pruefen" class="band"><div class="wrap">
-  <div class="head"><div><h2>Prüfen, bewerten und den Ergebnissen nicht blind trauen</h2><p>Die Fragen, die im Kollegium fast immer kommen.</p></div></div>
+<section id="pruefen" class="band" aria-labelledby="h-check"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></div><div><h2 id="h-check">Prüfen, bewerten und Ergebnissen nicht blind trauen</h2><p>Die Fragen, die im Kollegium fast immer kommen.</p></div></div>
   <div class="grid">
-    <div class="card"><h3>Wenn Schüler*innen KI nutzen</h3><ul><li>KI-Detektoren sind unzuverlässig, darauf lässt sich kein Täuschungsvorwurf stützen</li><li>Besser: Prozess bewerten, mündlich nachfragen, Bezug zum eigenen Betrieb oder Unterricht</li><li><b>KI-Ampel</b> pro Aufgabe: Grün erlaubt, Gelb erlaubt mit Kennzeichnung, Rot nicht erlaubt</li></ul></div>
-    <div class="card"><h3>KI-Ergebnisse prüfen</h3><ul><li>KI erfindet manchmal Quellen, Zahlen oder Paragraphen und klingt dabei überzeugt</li><li>Verzerrungen möglich, z. B. bei Rollenbildern in Beispielaufgaben</li><li>Was ins Schülermaterial kommt, prüft die Lehrkraft. KI liefert Entwürfe.</li></ul></div>
-    <div class="card"><h3>Differenzieren und Barrierefreiheit</h3><ul><li>Texte in Einfache oder Leichte Sprache übertragen</li><li>Glossare und Wortlisten erstellen</li><li>Dieselbe Aufgabe auf drei Niveaus</li><li>Elternbriefe in Herkunftssprachen</li></ul></div>
-    <div class="card"><h3>KI als Unterrichtsthema</h3><ul><li>Wie verändert KI den Ausbildungsberuf, z. B. im Autohaus oder im Büro?</li><li>Klasse sucht die Fehler in einer KI-Erklärung</li><li>Gesprächsstoff: Urheberrecht bei KI-Bildern, Energieverbrauch, echte Zeitersparnis</li></ul></div>
+    <article class="card"><h3>Wenn Schüler*innen KI nutzen</h3><ul><li>KI-Detektoren sind unzuverlässig, darauf lässt sich kein Täuschungsvorwurf stützen</li><li>Besser: Prozess bewerten, mündlich nachfragen, Bezug zum eigenen Betrieb oder Unterricht</li><li><b>KI-Ampel</b> pro Aufgabe: <span class="pill ok">Grün</span>erlaubt, <span class="pill" style="background:#fff1c2;color:#5a4300">Gelb</span>mit Kennzeichnung, <span class="pill" style="background:var(--err-bg);color:var(--err)">Rot</span>nicht erlaubt</li></ul></article>
+    <article class="card"><h3>KI-Ergebnisse prüfen</h3><ul><li>KI erfindet manchmal Quellen, Zahlen oder Paragraphen und klingt dabei überzeugt</li><li>Verzerrungen sind möglich, z. B. bei Rollenbildern in Beispielaufgaben</li><li>Was ins Schülermaterial kommt, prüft die Lehrkraft. KI liefert Entwürfe.</li></ul></article>
+    <article class="card"><h3>Differenzieren und Barrierefreiheit</h3><ul><li>Texte in Einfache oder Leichte Sprache übertragen</li><li>Glossare und Wortlisten erstellen</li><li>Dieselbe Aufgabe auf drei Niveaus</li><li>Elternbriefe in Herkunftssprachen</li></ul></article>
+    <article class="card"><h3>KI als Unterrichtsthema</h3><ul><li>Wie verändert KI den Ausbildungsberuf, z. B. im Autohaus oder im Büro?</li><li>Klasse sucht die Fehler in einer KI-Erklärung</li><li>Gesprächsstoff: Urheberrecht bei KI-Bildern, Energieverbrauch, echte Zeitersparnis</li></ul></article>
   </div>
 </div></section>
 
-<section id="prompting" class="band"><div class="wrap">
-  <div class="head"><div><h2>Spickzettel: besser prompten</h2><p>Vier Bausteine, die fast jede Antwort verbessern.</p></div></div>
+<section id="prompting" class="band" aria-labelledby="h-prompt"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg></div><div><h2 id="h-prompt">Spickzettel: besser prompten</h2><p>Vier Bausteine, die fast jede Antwort verbessern.</p></div></div>
   <div class="grid">
-    <div class="card"><h3>Die Bausteine</h3><ul><li><b>Rolle:</b> „Du bist Lehrkraft für Wirtschaft am Berufskolleg.“</li><li><b>Zielgruppe:</b> „für eine 11. Klasse Automobilkaufleute“</li><li><b>Ziel:</b> „damit sie Kaufvertragsstörungen unterscheiden können“</li><li><b>Format:</b> „als Arbeitsblatt mit drei Aufgaben und Lösung“</li></ul><p class="note" style="margin-top:8px">Danach im Gespräch nachschärfen, statt neu anzufangen.</p></div>
-    <div class="card"><h3>Beispiel zum Kopieren</h3><pre id="ex">Du bist Lehrkraft für Wirtschaft an einem Berufskolleg. Erstelle für eine 11. Klasse Automobilkaufleute ein Arbeitsblatt zu Kaufvertragsstörungen (mangelhafte Lieferung, Lieferverzug). Ziel: Die Schüler*innen können die Fälle unterscheiden und Rechte des Käufers nennen. Format: kurzer Fall aus dem Autohaus, drei Aufgaben, Lösung getrennt. Stell mir zuerst Rückfragen, bevor du loslegst.</pre><button id="copyEx">Beispiel kopieren</button></div>
+    <article class="card"><h3>Die Bausteine</h3><ol class="steps"><li><b>Rolle:</b> „Du bist Lehrkraft für Wirtschaft am Berufskolleg.“</li><li><b>Zielgruppe:</b> „für eine 11. Klasse Automobilkaufleute“</li><li><b>Ziel:</b> „damit sie Kaufvertragsstörungen unterscheiden können“</li><li><b>Format:</b> „als Arbeitsblatt mit drei Aufgaben und Lösung“</li></ol><p class="note">Danach im Gespräch nachschärfen, statt neu anzufangen. Tipp: „Stell mir zuerst Rückfragen.“</p></article>
+    <article class="card"><h3>Beispiel zum Kopieren</h3><div class="codebox"><pre id="ex" tabindex="0" aria-label="Beispiel-Prompt">Du bist Lehrkraft für Wirtschaft an einem Berufskolleg. Erstelle für eine 11. Klasse Automobilkaufleute ein Arbeitsblatt zu Kaufvertragsstörungen (mangelhafte Lieferung, Lieferverzug). Ziel: Die Schüler*innen können die Fälle unterscheiden und Rechte des Käufers nennen. Format: kurzer Fall aus dem Autohaus, drei Aufgaben, Lösung getrennt. Stell mir zuerst Rückfragen, bevor du loslegst.</pre></div><button type="button" data-copy="ex"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Beispiel kopieren</span></button></article>
   </div>
 </div></section>
 
-<section id="nrw" class="band"><div class="wrap">
-  <div class="head"><div><h2>Auch ohne eigenes Abo: Angebote in NRW</h2><p>Für alle, die nicht privat mit Claude oder ChatGPT arbeiten.</p></div></div>
+<section id="nrw" class="band" aria-labelledby="h-nrw"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg></div><div><h2 id="h-nrw">Auch ohne eigenes Abo: Angebote in NRW</h2><p>Für alle, die nicht privat mit Claude oder ChatGPT arbeiten.</p></div></div>
   <div class="grid three">
-    <div class="card"><h3>AIS.chat</h3><p>Ehemals telli. Datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos und dienstlich nutzbar.</p></div>
-    <div class="card"><h3>Selbstlernkurs KI</h3><p>Kurs des Schulministeriums: Wie KI im Unterricht hilft und wo die Grenzen liegen.</p></div>
-    <div class="card"><h3>Handlungsleitfaden</h3><p>„Umgang mit textgenerierenden KI-Systemen“ des MSB NRW, dazu Prompting-Karten auf <a href="https://www.lernen-digital.nrw">lernen-digital.nrw</a>.</p></div>
+    <article class="card"><span class="pill ok">Kostenlos</span><h3>AIS.chat</h3><p>Ehemals telli. Datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos und dienstlich nutzbar.</p></article>
+    <article class="card"><span class="pill">Selbstlernkurs</span><h3>Selbstlernkurs KI</h3><p>Kurs des Schulministeriums: wie KI im Unterricht hilft und wo die Grenzen liegen.</p></article>
+    <article class="card"><span class="pill">Leitfaden</span><h3>Handlungsleitfaden</h3><p>„Umgang mit textgenerierenden KI-Systemen“ des MSB NRW, dazu Prompting-Karten auf <a href="https://www.lernen-digital.nrw" rel="noopener">lernen-digital.nrw</a>.</p></article>
   </div>
 </div></section>
 
-<section id="ablage" class="band"><div class="wrap">
-  <div class="head"><div><h2>Ablage: der gemeinsame Ordner</h2><p>Material teilen und herunterladen, ohne Login. Alles landet im selben Ordner.</p></div><button class="ghost" id="reload">Liste aktualisieren</button></div>
+<section id="ablage" class="band" aria-labelledby="h-ablage"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg></div><div><h2 id="h-ablage">Ablage: der gemeinsame Ordner</h2><p>Material teilen und herunterladen, ohne Login. Alles landet im selben Ordner.</p></div></div>
   <div class="grid">
-    <div class="card">
+    <article class="card">
       <h3>Hochladen</h3>
-      <label class="drop" id="drop" for="file"><b>Dateien hierher ziehen</b><span>oder klicken zum Auswählen · bis 20 MB pro Datei</span><input id="file" type="file" multiple hidden></label>
-      <label class="fld" style="margin-top:12px">Dein Name (optional)<input id="from" type="text" autocomplete="name" placeholder="z. B. R. Mutaliph"></label>
-      <ul id="queue" class="queue"></ul>
-      <p class="note">Bitte nur Unterrichtsmaterial hochladen, keine Dateien mit Schülerdaten.</p>
-    </div>
-    <div class="card">
-      <h3>Im Ordner</h3>
-      <div id="files"><p class="note">Lade Dateien …</p></div>
-    </div>
+      <div class="drop" id="drop" role="button" tabindex="0" aria-describedby="drophelp">
+        <svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>
+        <b>Dateien hierher ziehen</b>
+        <span id="drophelp">oder klicken bzw. Enter drücken · bis 20 MB pro Datei · PDF, Office, Bilder, Text, Audio, Video</span>
+      </div>
+      <input id="file" type="file" multiple class="sr" tabindex="-1" aria-hidden="true">
+      <label class="fld" for="from">Dein Name (optional)<input id="from" type="text" autocomplete="name" maxlength="80" placeholder="z. B. R. Mutaliph"></label>
+      <ul id="queue" class="queue" aria-live="polite"></ul>
+      <p class="note" style="display:flex;gap:6px;align-items:flex-start"><svg class="icon" aria-hidden="true" style="margin-top:3px"><use href="#i-alert"/></svg>Bitte nur Unterrichtsmaterial hochladen, keine Dateien mit Schülerdaten.</p>
+    </article>
+    <article class="card">
+      <div class="fhead"><h3>Im Ordner <span class="note" id="fcount"></span></h3><button class="ghost" id="reload" type="button" aria-label="Liste aktualisieren"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg><span>Aktualisieren</span></button></div>
+      <div id="files" aria-live="polite" aria-busy="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+    </article>
   </div>
-  <p class="note" style="margin-top:12px">Außerdem: <a href="https://claude.ai/artifact/F9R4j6z3u3yrweqMKyTZ8V">Anleitung Office-Plugins</a> (bei Claude, braucht Login).</p>
+  <p class="note" style="margin-top:14px">Außerdem: <a href="https://claude.ai/artifact/F9R4j6z3u3yrweqMKyTZ8V" rel="noopener">Anleitung Office-Plugins</a> (bei Claude, mit Login).</p>
+</div></section>
+
+<section id="technik" class="band" aria-labelledby="h-tech"><div class="wrap">
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></div><div><span class="pill acc">Für Fortgeschrittene</span><h2 id="h-tech">So ist diese Seite gebaut</h2><p>Für alle, die selbst so eine Webanwendung mit KI bauen möchten. Drei Bausteine, kein eigener Server.</p></div></div>
+  <div class="flow">
+    <article class="card"><div class="num">1</div><h3>Die Webseite liegt bei GitHub</h3><p>Kostenlos über GitHub Pages. Dort sind die Seite und die Bilder: das „Schaufenster“, das alle im Browser sehen.</p></article>
+    <article class="card"><div class="num">2</div><h3>Der Austauschordner ist Google Drive</h3><p>Ein kleines Google-Apps-Script verbindet den Ordner mit der Seite. Hochladen und Herunterladen klappen ohne Login.</p></article>
+    <article class="card"><div class="num">3</div><h3>Die KI schreibt den Code</h3><p>Wünsche und Bilder gehen im Chat an die KI, fertige Dateien kommen zurück. Hochladen bei GitHub macht man selbst.</p></article>
+  </div>
+  <div class="scroll stack"><table><caption class="sr">Was liegt wo</caption><thead><tr><th scope="col">Ort</th><th scope="col">Was liegt dort?</th><th scope="col">Wer hat Zugriff?</th></tr></thead><tbody>
+    <tr><td>GitHub</td><td data-l="Was liegt dort?">Die Webseite: Seite und Bilder</td><td data-l="Wer hat Zugriff?">Ersteller lädt hoch, alle sehen die Seite</td></tr>
+    <tr><td>Google-Drive-Ordner</td><td data-l="Was liegt dort?">Material zum Austausch</td><td data-l="Wer hat Zugriff?">Ersteller direkt in Drive, Kollegium über die Webseite</td></tr>
+    <tr><td>KI-Chat</td><td data-l="Was liegt dort?">Arbeitsweg: Wünsche hin, fertige Dateien zurück</td><td data-l="Wer hat Zugriff?">Ersteller und KI</td></tr>
+  </tbody></table></div>
 </div></section>
 </main>
 
-<footer><div class="wrap">Mikrofortbildung „KI in der Schule“ · Joseph-DuMont-Berufskolleg Köln · Stand November 2026</div></footer>
-<div class="toast" id="toast" role="status"></div>
+<footer><div class="wrap"><span>Mikrofortbildung „KI in der Schule“ · Joseph-DuMont-Berufskolleg Köln</span><span>Stand November 2026</span></div></footer>
+<button class="totop" id="totop" type="button" aria-label="Nach oben"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 {
-const agenda=[["Ankommen & Überblick",5,"#ablage","#3d6a8c"],["Office-Plugins",10,"#plugins","#1d5f8c"],["Skills & Projekte",10,"#skills","#2b7aa8"],["Lernspaziergang ausprobieren",15,"#lernspaziergang","#ff6b4a"],["Austausch",5,"#vergleich","#4f6b82"]];
-document.getElementById("bar").innerHTML=agenda.map(a=>`<a class="blk" href="${a[2]}" style="flex:${a[1]};background:${a[3]}${a[3]==="#ff6b4a"?";color:#1b1b1b":""}"><b>${a[0]}</b><span>${a[1]} Min.</span></a>`).join("");
-
-const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","Nur bezahltes Abo","Auch kostenlos, mit Grenzen","Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills","Eigene GPTs","Gems"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","Voice, am natürlichsten, unterbrechbar","Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","Google-Konto, in Deutschland ab 16"],["Besonderheit","Zusammenhang über alle Office-Programme","Weit verbreitet, viele kennen es","Gemini Notebook mit genauen Quellen"]];
-const tb=document.querySelector("#cmp tbody");
-tb.innerHTML=rows.map(r=>`<tr>${r.map((c,i)=>`<td data-l="${["Thema","Claude","ChatGPT","Gemini"][i]}">${c}</td>`).join("")}</tr>`).join("");
-const segs=document.querySelectorAll(".seg button");
-segs.forEach(b=>b.addEventListener("click",()=>{segs.forEach(x=>x.setAttribute("aria-pressed",x===b));const k=b.dataset.k;document.querySelectorAll("#cmp td,#cmp th").forEach(c=>{const i=c.cellIndex;c.classList.toggle("dim",k!=="all"&&i>0&&String(i)!==k)})}));
-
-const toast=document.getElementById("toast");
-const say=t=>{toast.textContent=t;toast.classList.add("on");setTimeout(()=>toast.classList.remove("on"),1800)};
-const copy=id=>async()=>{try{await navigator.clipboard.writeText(document.getElementById(id).textContent);say("Kopiert")}catch(e){const r=document.createRange();r.selectNodeContents(document.getElementById(id));const s=getSelection();s.removeAllRanges();s.addRange(r);say("Text markiert, jetzt kopieren")}};
-document.getElementById("copyPrompt").addEventListener("click",copy("prompt"));
-document.getElementById("copyEx").addEventListener("click",copy("ex"));
-
-const dl=document.getElementById("dlPrompt");
-const saveFile=(name,blob)=>{const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)};
-dl.classList.remove("hidden");
-dl.addEventListener("click",()=>saveFile("Lernspaziergang-Starter-Prompt.txt",new Blob([document.getElementById("prompt").textContent],{type:"text/plain;charset=utf-8"})));
-
-/* Hier die Web-App-URL aus Google Apps Script eintragen */
+/* Web-App-URL aus Google Apps Script */
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbyKl0t_aTvI1PCOZ3sAg1d6nO1MOcld0fgtEi5V9Amc59v8dl2MQ2PMP1Y76BAX7qFJ/exec";
-const fl=document.getElementById("files"),queue=document.getElementById("queue");
-const fmt=n=>n>1048576?(n/1048576).toFixed(1).replace(".",",")+" MB":Math.max(1,Math.round(n/1024))+" KB";
-const h=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
-async function list(){
-  if(!SCRIPT_URL){fl.innerHTML='<p class="note">Der Ordner ist noch nicht verbunden. Trage die Web-App-URL bei SCRIPT_URL ein.</p>';return}
-  fl.innerHTML='<p class="note">Lade Dateien …</p>';
-  try{const r=await (await fetch(SCRIPT_URL+"?action=list")).json();if(!r.ok)throw new Error(r.error);
-    fl.innerHTML=r.files.length?r.files.map(f=>`<div class="file"><div><b>${h(f.name)}</b><small>${fmt(f.size)} · ${new Date(f.updated).toLocaleDateString("de-DE")}${f.note?" · "+h(f.note):""}</small></div><button class="ghost" data-id="${h(f.id)}">Herunterladen</button></div>`).join(""):'<p class="note">Noch keine Dateien. Zieh links die erste hinein.</p>'
-  }catch(e){fl.innerHTML='<p class="err">Liste konnte nicht geladen werden. Bitte später erneut versuchen.</p>'}
-}
-fl.addEventListener("click",async e=>{const b=e.target.closest("button[data-id]");if(!b)return;const t=b.textContent;b.textContent="Lädt …";b.disabled=true;
-  try{const r=await (await fetch(SCRIPT_URL+"?action=download&id="+encodeURIComponent(b.dataset.id))).json();if(!r.ok)throw new Error(r.error);
-    const bin=atob(r.data),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);saveFile(r.name,new Blob([u8],{type:r.mimeType}))
-  }catch(err){say("Download fehlgeschlagen")}b.textContent=t;b.disabled=false});
-const fromEl=document.getElementById("from");
-try{fromEl.value=localStorage.getItem("kiw-from")||""}catch(e){}
-const b64=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]);r.onerror=rej;r.readAsDataURL(f)});
-async function upload(files){
-  if(!SCRIPT_URL){say("Ordner noch nicht verbunden");return}
-  try{localStorage.setItem("kiw-from",fromEl.value.trim())}catch(e){}
-  for(const f of files){const li=document.createElement("li");li.textContent=f.name+" … lädt hoch";queue.prepend(li);
-    if(f.size>20*1048576){li.className="err";li.textContent=f.name+": größer als 20 MB";continue}
-    try{const r=await (await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({from:fromEl.value.trim(),name:f.name,mimeType:f.type,data:await b64(f)})})).json();
-      if(!r.ok)throw new Error(r.error);li.className="ok";li.textContent=f.name+": hochgeladen"}
-    catch(err){li.className="err";li.textContent=f.name+": "+(err.message||"Fehler beim Hochladen")}}
-  list();
-}
-const drop=document.getElementById("drop"),fileEl=document.getElementById("file");
-fileEl.addEventListener("change",()=>{upload([...fileEl.files]);fileEl.value=""});
-["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
-["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
-drop.addEventListener("drop",e=>upload([...e.dataTransfer.files]));
-document.getElementById("reload").addEventListener("click",list);
-list();
+const MAX=20*1048576;
+const ALLOWED=["pdf","doc","docx","ppt","pptx","xls","xlsx","odt","odp","ods","rtf","txt","md","csv","jpg","jpeg","png","gif","webp","heic","mp3","m4a","wav","mp4","mov"];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const ic=n=>`<svg class="icon" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 
-const q=document.getElementById("q"),hits=document.getElementById("hits");
-const cards=[...document.querySelectorAll("main .card, #cmp tbody tr")];
-const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-const clear=()=>{document.querySelectorAll("main mark").forEach(m=>m.replaceWith(m.textContent));cards.forEach(c=>c.normalize())};
-const mark=(c,t)=>{const re=new RegExp(esc(t),"gi");const w=document.createTreeWalker(c,NodeFilter.SHOW_TEXT);const ns=[];while(w.nextNode())ns.push(w.currentNode);
-  ns.forEach(x=>{if(x.parentElement.closest("pre,button"))return;const v=x.nodeValue;let m,last=0;const f=document.createDocumentFragment();re.lastIndex=0;
+/* Hinweis-Meldung */
+const toast=$("toast");let tt;
+const say=(t,icon="check")=>{toast.innerHTML=ic(icon)+esc(t);toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),2200)};
+
+/* Ablauf */
+const agenda=[["Ankommen & Überblick",5,"#top","#3d6a8c"],["Office-Plugins",10,"#plugins","#1d5f8c"],["Skills & Projekte",10,"#skills","#2b7aa8"],["Lernspaziergang ausprobieren",15,"#lernspaziergang","#ff6b4a"],["Austausch",5,"#vergleich","#4f6b82"]];
+$("bar").innerHTML=agenda.map(a=>`<a class="blk${a[3]==="#ff6b4a"?" hot":""}" href="${a[2]}" style="flex:${a[1]};background:${a[3]}"><b>${a[0]}</b><span>${a[1]} Min.</span></a>`).join("");
+
+/* Vergleichstabelle */
+const heads=["Thema","Claude","ChatGPT","Gemini"];
+const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","Nur bezahltes Abo","Auch kostenlos, mit Grenzen","Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills","Eigene GPTs","Gems"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","Voice, am natürlichsten, unterbrechbar","Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","Google-Konto, in Deutschland ab 16"],["Besonderheit","Zusammenhang über alle Office-Programme","Weit verbreitet, viele kennen es","Gemini Notebook mit genauen Quellen"]];
+document.querySelector("#cmp tbody").innerHTML=rows.map(r=>`<tr>${r.map((c,i)=>i?`<td data-l="${heads[i]}">${c}</td>`:`<td>${c}</td>`).join("")}</tr>`).join("");
+const segs=[...document.querySelectorAll(".seg button")];
+segs.forEach(b=>b.addEventListener("click",()=>{
+  segs.forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
+  const k=Number(b.dataset.k);
+  document.querySelectorAll("#cmp tr").forEach(tr=>[...tr.cells].forEach((c,i)=>{c.classList.toggle("dim",k>0&&i>0&&i!==k);c.classList.toggle("hl",k>0&&i===k)}));
+}));
+
+/* Kopieren */
+async function copyText(text){
+  try{await navigator.clipboard.writeText(text);return true}
+  catch(e){const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","");t.style.position="fixed";t.style.opacity="0";document.body.append(t);t.select();let ok=false;try{ok=document.execCommand("copy")}catch(_){}t.remove();return ok}
+}
+document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",async()=>{
+  const label=b.querySelector("span"),orig=label.textContent;
+  const ok=await copyText($(b.dataset.copy).textContent);
+  if(ok){b.classList.add("done");label.textContent="Kopiert";say("In die Zwischenablage kopiert")}
+  else{const r=document.createRange();r.selectNodeContents($(b.dataset.copy));const s=getSelection();s.removeAllRanges();s.addRange(r);say("Text markiert, bitte mit cmd/Strg + C kopieren","alert")}
+  setTimeout(()=>{b.classList.remove("done");label.textContent=orig},1800);
+}));
+
+/* Datei speichern */
+const saveFile=(name,blob)=>{const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)};
+$("dlPrompt").addEventListener("click",()=>{saveFile("Lernspaziergang-Starter-Prompt.txt",new Blob([$("prompt").textContent],{type:"text/plain;charset=utf-8"}));say("Download gestartet","down")});
+
+/* Ablage: Liste */
+const fl=$("files"),queue=$("queue"),fcount=$("fcount");
+const fmt=n=>!n?"":n>=1048576?(n/1048576).toFixed(1).replace(".",",")+" MB":Math.max(1,Math.round(n/1024))+" KB";
+const extOf=n=>{const m=/\.([a-z0-9]{1,5})$/i.exec(n||"");return m?m[1].toLowerCase():""};
+const extStyle=e=>{if(["pdf"].includes(e))return["PDF","#c62828"];if(["doc","docx","odt","rtf"].includes(e))return["DOC","#1e5bb8"];if(["ppt","pptx","odp"].includes(e))return["PPT","#c4501a"];if(["xls","xlsx","ods","csv"].includes(e))return["XLS","#1d7a46"];if(["jpg","jpeg","png","gif","webp","heic"].includes(e))return["BILD","#7b4bb7"];if(["mp3","m4a","wav","mp4","mov"].includes(e))return["MEDIA","#4f6b82"];if(["txt","md"].includes(e))return["TXT","#52647a"];return["DOC","#113954"]};
+const readJson=async r=>{if(!r.ok)throw new Error("Server antwortet nicht ("+r.status+")");try{return await r.json()}catch(e){throw new Error("Unerwartete Antwort vom Server")}};
+let loading=false;
+async function list(){
+  if(loading)return;loading=true;fl.setAttribute("aria-busy","true");$("reload").disabled=true;
+  if(!fl.querySelector(".file"))fl.innerHTML='<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
+  try{
+    const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),20000);
+    const r=await readJson(await fetch(SCRIPT_URL+"?action=list",{signal:ctl.signal}));clearTimeout(to);
+    if(!r.ok)throw new Error(r.error||"Fehler");
+    const files=Array.isArray(r.files)?r.files:[];
+    fcount.textContent=files.length?"("+files.length+")":"";
+    fl.innerHTML=files.length?files.map(f=>{const [lab,col]=extStyle(extOf(f.name)||"docx");const meta=[fmt(f.size),f.updated?new Date(f.updated).toLocaleDateString("de-DE"):"",f.note].filter(Boolean).map(esc).join(" · ");
+      return `<div class="file"><span class="ext" style="background:${col}" aria-hidden="true">${lab}</span><div><b>${esc(f.name)}</b><small>${meta}</small></div><button class="ghost" type="button" data-id="${esc(f.id)}" data-name="${esc(f.name)}" aria-label="${esc(f.name)} herunterladen">${ic("down")}<span>Laden</span></button></div>`}).join("")
+      :`<div class="state">${ic("inbox")}<p><b>Noch keine Dateien.</b><br>Zieh links die erste hinein.</p></div>`;
+  }catch(e){
+    fcount.textContent="";
+    fl.innerHTML=`<div class="state err">${ic("alert")}<p><b>Liste konnte nicht geladen werden.</b><br>${e.name==="AbortError"?"Zeitüberschreitung.":esc(e.message)} Bitte „Aktualisieren“ versuchen.</p></div>`;
+  }finally{loading=false;fl.setAttribute("aria-busy","false");$("reload").disabled=false}
+}
+$("reload").addEventListener("click",list);
+
+/* Ablage: Download */
+fl.addEventListener("click",async e=>{
+  const b=e.target.closest("button[data-id]");if(!b||b.disabled)return;
+  const span=b.querySelector("span");b.disabled=true;span.textContent="Lädt …";
+  try{
+    const r=await readJson(await fetch(SCRIPT_URL+"?action=download&id="+encodeURIComponent(b.dataset.id)));
+    if(!r.ok)throw new Error(r.error||"Fehler");
+    const bin=atob(r.data),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);
+    saveFile(r.name||b.dataset.name,new Blob([u8],{type:r.mimeType||"application/octet-stream"}));say("Download gestartet","down");
+  }catch(err){say("Download fehlgeschlagen: "+err.message,"alert")}
+  b.disabled=false;span.textContent="Laden";
+});
+
+/* Ablage: Upload */
+const fromEl=$("from"),drop=$("drop"),fileEl=$("file");
+try{fromEl.value=localStorage.getItem("kiw-from")||""}catch(e){}
+const b64=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]||"");r.onerror=()=>rej(new Error("Datei konnte nicht gelesen werden"));r.readAsDataURL(f)});
+const item=(name,cls,msg,busy)=>{const li=document.createElement("li");li.className=cls;li.innerHTML=(busy?'<span class="spin" aria-hidden="true"></span>':ic(cls==="ok"?"check":cls==="err"?"alert":"up"))+`<span><b>${esc(name)}</b> · ${esc(msg)}</span>`;return li};
+let busy=false;const pending=[];
+async function upload(files){
+  pending.push(...files);if(busy)return;busy=true;drop.setAttribute("aria-disabled","true");
+  try{localStorage.setItem("kiw-from",fromEl.value.trim())}catch(e){}
+  let okCount=0;
+  while(pending.length){
+    const f=pending.shift();let li=item(f.name,"",`wartet`,false);queue.prepend(li);
+    const ext=extOf(f.name);
+    if(!f.size){li.replaceWith(item(f.name,"err","leer oder ein Ordner – bitte einzelne Dateien wählen"));continue}
+    if(f.size>MAX){li.replaceWith(item(f.name,"err","größer als 20 MB"));continue}
+    if(!ALLOWED.includes(ext)){li.replaceWith(item(f.name,"err","Dateityp nicht erlaubt"));continue}
+    const nli=item(f.name,"","wird hochgeladen …",true);li.replaceWith(nli);li=nli;
+    try{
+      const data=await b64(f);
+      const r=await readJson(await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({from:fromEl.value.trim().slice(0,80),name:f.name,mimeType:f.type,data})}));
+      if(!r.ok)throw new Error(r.error||"Fehler beim Hochladen");
+      li.replaceWith(item(f.name,"ok","hochgeladen"));okCount++;
+    }catch(err){li.replaceWith(item(f.name,"err",err.message||"Fehler beim Hochladen"))}
+  }
+  while(queue.children.length>8)queue.lastElementChild.remove();
+  busy=false;drop.removeAttribute("aria-disabled");
+  if(okCount){say(okCount===1?"1 Datei hochgeladen":okCount+" Dateien hochgeladen");list()}
+}
+const pick=()=>{if(!busy)fileEl.click()};
+drop.addEventListener("click",pick);
+drop.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick()}});
+fileEl.addEventListener("change",()=>{if(fileEl.files.length)upload([...fileEl.files]);fileEl.value=""});
+let depth=0;
+drop.addEventListener("dragenter",e=>{e.preventDefault();depth++;drop.classList.add("over")});
+drop.addEventListener("dragover",e=>{e.preventDefault();e.dataTransfer.dropEffect="copy"});
+drop.addEventListener("dragleave",()=>{if(--depth<=0){depth=0;drop.classList.remove("over")}});
+drop.addEventListener("drop",e=>{e.preventDefault();depth=0;drop.classList.remove("over");const fs=[...(e.dataTransfer.files||[])];if(fs.length)upload(fs)});
+window.addEventListener("dragover",e=>e.preventDefault());
+window.addEventListener("drop",e=>{if(!drop.contains(e.target))e.preventDefault()});
+
+/* Suche */
+const q=$("q"),hits=$("hits"),hitbar=$("hitbar"),nohits=$("nohits");
+const cards=[...document.querySelectorAll("main .card:not(.card .card), #cmp tbody tr")];
+const sections=[...document.querySelectorAll("main section")];
+const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+const clearMarks=()=>{document.querySelectorAll("main mark").forEach(m=>m.replaceWith(m.textContent));cards.forEach(c=>c.normalize())};
+const markIn=(el,t)=>{const re=new RegExp(reEsc(t),"gi");const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const ns=[];while(w.nextNode())ns.push(w.currentNode);
+  ns.forEach(x=>{if(x.parentElement.closest("pre,button,svg"))return;const v=x.nodeValue;let m,last=0;const f=document.createDocumentFragment();re.lastIndex=0;
     while((m=re.exec(v))){f.append(v.slice(last,m.index));const k=document.createElement("mark");k.textContent=m[0];f.append(k);last=m.index+m[0].length}
     if(last){f.append(v.slice(last));x.replaceWith(f)}})};
-q.addEventListener("input",()=>{const t=q.value.trim();let n=0;clear();
-  cards.forEach(c=>{if(!t){c.classList.remove("hidden");return}
-    const ok=c.textContent.toLowerCase().includes(t.toLowerCase());c.classList.toggle("hidden",!ok);if(ok){n++;mark(c,t)}});
-  document.querySelectorAll("main section").forEach(s=>{const any=[...s.querySelectorAll(".card,#cmp tbody tr")].some(c=>!c.classList.contains("hidden"));s.classList.toggle("hidden",!!t&&!any)});
-  hits.textContent=t?(n===1?"1 Treffer":n+" Treffer"):"";
-});
+function runSearch(){
+  const t=q.value.trim();clearMarks();
+  if(t.length<2){cards.forEach(c=>c.classList.remove("hidden"));sections.forEach(s=>s.classList.remove("hidden"));hitbar.classList.remove("on");nohits.classList.remove("on");hits.textContent=t?"Bitte mindestens 2 Zeichen eingeben":"";if(t)hitbar.classList.add("on");return}
+  let n=0;const low=t.toLowerCase();
+  cards.forEach(c=>{const ok=c.textContent.toLowerCase().includes(low);c.classList.toggle("hidden",!ok);if(ok){n++;markIn(c,t)}});
+  sections.forEach(s=>{const head=s.querySelector(".head").textContent.toLowerCase().includes(low);if(head)s.querySelectorAll(".hidden").forEach(c=>{if(cards.includes(c))c.classList.remove("hidden")});
+    const any=cards.some(c=>s.contains(c)&&!c.classList.contains("hidden"));s.classList.toggle("hidden",!any)});
+  hits.textContent=n===1?"1 Treffer für „"+t+"“":n+" Treffer für „"+t+"“";hitbar.classList.add("on");nohits.classList.toggle("on",!sections.some(s=>!s.classList.contains("hidden")));
+}
+let st;q.addEventListener("input",()=>{clearTimeout(st);st=setTimeout(runSearch,150)});
+q.addEventListener("keydown",e=>{if(e.key==="Escape"){q.value="";runSearch();q.blur()}});
+$("clearq").addEventListener("click",()=>{q.value="";runSearch();q.focus()});
+document.addEventListener("keydown",e=>{if(e.key==="/"&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();q.focus()}});
+
+/* Aktiver Reiter + Nach-oben-Knopf */
+const tabLinks=[...document.querySelectorAll("#tabs a")];
+if("IntersectionObserver" in window){
+  const spy=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){tabLinks.forEach(a=>{const on=a.getAttribute("href")==="#"+en.target.id;a.setAttribute("aria-current",String(on));if(on){const tb=$("tabs");if(a.offsetLeft<tb.scrollLeft||a.offsetLeft+a.offsetWidth>tb.scrollLeft+tb.clientWidth)tb.scrollTo({left:a.offsetLeft-12})}})}})},{rootMargin:"-40% 0px -55% 0px"});
+  sections.forEach(s=>spy.observe(s));
+  const topObs=new IntersectionObserver(([en])=>$("totop").classList.toggle("on",!en.isIntersecting));topObs.observe($("top"));
+}
+$("totop").addEventListener("click",()=>{window.scrollTo({top:0});$("top").setAttribute("tabindex","-1");$("top").focus({preventScroll:true})});
+
+list();
 }
 </script>
 </body>
