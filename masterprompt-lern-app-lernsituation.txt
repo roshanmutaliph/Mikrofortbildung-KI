@@ -9,7 +9,7 @@ Aus Ihrer Lernsituation (Szenario), allen Übungsblättern und der Kann-Liste ba
 1. Öffnen Sie einen neuen Chat in einer KI Ihrer Wahl (z. B. ChatGPT, Gemini oder Claude). In ChatGPT und Gemini am besten den Canvas-Modus einschalten: Dann sehen Sie die App sofort und können sie herunterladen.
 2. Ziehen Sie diese Datei in das Chatfenster und hängen Sie Ihr Material an: Lernsituation, alle Übungsblätter, Kann-Liste (hilfreich: Infotexte, Lösungen, Belege).
 3. Schreiben Sie dazu: „Bitte folge den Anweisungen in dieser Datei.“
-4. Beantworten Sie die Rückfragen und prüfen Sie die Planung. Mit „passt“ startet der Bau.
+4. Beantworten Sie die Rückfragen und prüfen Sie die Planung: Für jede Aufgabe steht dort, ob sie beibehalten, angereichert oder ersetzt wird – und warum. Sie können jede Entscheidung ändern (z. B. „Aufgabe 4 beibehalten“). Mit „passt“ startet der Bau.
 5. Testen Sie die fertige App selbst, bevor Sie sie an die Klasse geben. Mit #lehrkraft am Ende der Adresse sehen Sie alle Lösungen.
 
 Gut zu wissen: Die App ist groß. Nicht jede KI schafft sie in einem Durchgang. Claude mit dem Skill „lern-app-lernsituation“ ist dafür am zuverlässigsten.
@@ -21,7 +21,7 @@ Alles ab der nächsten Trennlinie sind deine Arbeitsanweisungen für dieses Gesp
 
 --------------------------------------------------
 
-# Lern-App aus Lernsituation (kaufmännisch, JDBK) – Masterprompt v3
+# Lern-App aus Lernsituation (kaufmännisch, JDBK) – Masterprompt v3.1
 
 Aus dem Material eines Themenbereichs – Lernsituation/Szenario, Übungsblätter, Kann-Liste (ggf. Infotexte und Lösungen) – entsteht eine vollständig funktionsfähige, interaktive Lern-App als EINE autarke HTML-Datei. Zielgruppe: Auszubildende in kaufmännischen Berufen am Berufskolleg. Pro Themenbereich eine App; alle Apps einer Reihe sehen gleich aus und nutzen dieselben Kernformate.
 
@@ -29,6 +29,7 @@ Leitsätze:
 1. Berufliche Handlung statt Spielmechanik: Die Schüler tun, was Kaufleute tun – Belege prüfen, rechnen, Rechtslagen prüfen, entscheiden, kommunizieren.
 2. Die Rolle als Azubi im Ausbildungsbetrieb ist die Rahmengeschichte. Keine fremden Metaphern (Tresor, Zahnrad, Wasserrohr).
 3. Jede Interaktion bildet den fachlichen Denkschritt der Originalaufgabe ab und endet, wo sinnvoll, mit einer Warum-Frage.
+4. Jede Aufgabe wird genau analysiert: Bewährtes bleibt, Besseres wird begründet. Ein anderer Aufgabentyp wird nur gewählt, wenn er den Lerninhalt nachweislich besser lernen lässt – nie wegen Abwechslung.
 
 ---
 
@@ -38,6 +39,7 @@ Leitsätze:
 - Benötigt: Szenario/Lernsituation, alle Übungsblätter, Kann-Liste. Hilfreich: Infotexte, Lösungen, Belege. Fehlt etwas, auf das sich das Material bezieht (Infoblatt, Gesetzestext, Beleg, Abbildung, Lösung), oder ist etwas unlesbar: nachfragen und um Zusendung bitten, bevor geplant wird.
 - Lies alle Dateien vollständig: Absätze, Tabellen, Textfelder, Schaubilder, Belege und Abbildungen.
 - Kannst du eine Datei oder ein Schaubild nicht lesen, sage das und bitte die Lehrkraft, den Text einzufügen, die Datei als PDF zu senden oder ein Foto/Screenshot anzuhängen.
+- Die Form jeder Aufgabe genau erfassen (Lückentext, Tabelle, Zuordnung, Ankreuzen, Rechnung, Freitext …), nicht nur ihren Inhalt – sie ist Grundlage der Aufgabenanalyse (E.0).
 
 ### Schritt 2 – Steckbrief klären
 Leite so viel wie möglich aus dem Material ab. Fehlende Punkte in EINER Nachricht erfragen (höchstens 4 Fragen); sonst Standardwerte nehmen und in der Planung nennen.
@@ -50,6 +52,7 @@ Leite so viel wie möglich aus dem Material ab. Fehlende Punkte in EINER Nachric
 - Bearbeitungszeit: Standard 2 × 90 Minuten
 - Lösungen im Material: ja / nein / teilweise
 - Zusatzaufgaben über das Material hinaus: Standard nein (sonst max. 2 als „⭐ Plus“)
+- Lernhilfen ergänzen (Lösungsbeispiel, Lückenbeispiel, Fehlerbeispiel, zusätzliche Übungsfälle, Abruf-Check): Standard ja / nein (dann nur die Originalaufgaben digital – mit Feedback, Tipps und Warum-Fragen)
 - „Einfach lesen“-Fassung: Standard nein
 - Wiederholung aus vorherigem Themenbereich (optional): Kann-Punkte mit ID und Wortlaut
 - Ablauf: Standard „mit Planung“; sagt die Lehrkraft „direkt“, Planung nur als Kurzfassung und sofort bauen.
@@ -59,12 +62,16 @@ Sende der Lehrkraft eine kompakte Planung:
 a) Materialcheck (was liegt vor, was fehlt).
 b) Scope: Thema, Handlungssituation, Ausbildungsbetrieb und Personen, zentrale Problemfrage, Handlungsprodukt der Lernsituation.
 c) Aufgaben-Mapping als Tabelle:
-   Original-Nr. | Kurzinhalt | Operator | AFB | kaufmännische Tätigkeit | Format (K1–K7 oder Ergänzung + Grund) | Gerüst-Stufe (Beispiel / Lücke / frei) | im Mockup? | Kann-ID(s)
-d) Verwechslungspaare und typische Fehler (Grundlage für Feedback und Abruf-Check).
-e) Kann-Liste-Filter: übernommen (ID + exakter Wortlaut) und nicht übernommen (ID + Grund).
-f) Prüfliste: jede selbst erstellte oder fachlich unsichere Lösung als [PRÜFEN] mit Fundstelle.
-g) Annahmen zum Steckbrief.
-Dann STOPP und auf „passt“ oder Änderungswünsche warten.
+   Original-Nr. | Kurzinhalt | Operator / AFB | Kann-ID(s) | Originalform | Entscheidung (beibehalten / anreichern / ersetzen) | Format (K1–K7 / E1–E8) | ergänzte Lernhilfen | im Mockup?
+d) Aufgabenanalyse je Aufgabe (nach E.0), kompakt:
+   - bei „beibehalten“: 1 Zeile – warum die Originalform gut ist.
+   - bei „anreichern“: Schwäche der Originalform → was ergänzt wird → was unverändert bleibt.
+   - bei „ersetzen“: Schwäche der Originalform → gewähltes Format → welche Kriterien es klar besser erfüllt → was unverändert bleibt (Inhalt, Fall, Zahlen, Operator) → was die Schüler im Vergleich zum Blatt anders erleben.
+e) Verwechslungspaare und typische Fehler (Grundlage für Feedback und Abruf-Check).
+f) Kann-Liste-Filter: übernommen (ID + exakter Wortlaut) und nicht übernommen (ID + Grund).
+g) Prüfliste: jede selbst erstellte oder fachlich unsichere Lösung als [PRÜFEN] mit Fundstelle.
+h) Annahmen zum Steckbrief.
+Dann STOPP und auf „passt“ oder Änderungswünsche warten. Die Lehrkraft kann jede Entscheidung einzeln ändern (z. B. „Aufgabe 4 beibehalten“).
 
 ### Schritt 4 – Bauen (Phase 2)
 Baue die App vollständig nach den Abschnitten B bis H als EINE HTML-Datei.
@@ -82,7 +89,7 @@ Baue die App vollständig nach den Abschnitten B bis H als EINE HTML-Datei.
 ### Schritt 6 – Ausliefern
 - Datei bereitstellen. Dateiname: [Fach]_[LF]_[LS]_[Thema]_v1.html (ohne Leerzeichen und Umlaute).
 - Hinweis in einem Satz: Auf iPads läuft eine HTML-Datei aus Teams oder der Dateien-App oft nur als Vorschau ohne JavaScript – vorher auf einem Schülergerät testen oder als Link verteilen. Kann deine KI die App als Link teilen, biete das an.
-- Danach höchstens 5 Zeilen „Hinweise für die Lehrkraft“ ([PRÜFEN]-Stellen, Annahmen, Test-Tipp).
+- Danach höchstens 5 Zeilen „Hinweise für die Lehrkraft“ ([PRÜFEN]-Stellen, Annahmen, ersetzte Aufgaben, Test-Tipp).
 
 ---
 
@@ -104,10 +111,10 @@ Baue die App vollständig nach den Abschnitten B bis H als EINE HTML-Datei.
 ## C. TREUE ZUM MATERIAL & KANN-LISTE (KRITISCH)
 1. Scope zuerst: zuerst NUR Szenario, Übungsblätter und zugehörige Infotexte analysieren.
 2. Kann-Liste filtern: nur Punkte, die dieses Material tatsächlich abdeckt – mit Original-ID (z. B. A3) und exaktem Wortlaut. Nie Punkte anderer Themenbereiche übernehmen.
-3. Vollständigkeit: jede Original- und Teilaufgabe umsetzen; Originalnummerierung und Reihenfolge beibehalten („2b“ bleibt 2b).
-4. Operator und Anforderungsniveau bleiben erhalten: „Beurteilen Sie …“ wird nicht zur Klick-Aufgabe mit einer einzigen richtigen Antwort.
+3. Vollständigkeit: jede Original- und Teilaufgabe umsetzen; Originalnummerierung und Reihenfolge beibehalten („2b“ bleibt 2b). Das gilt auch für ersetzte Aufgaben.
+4. Operator und Anforderungsniveau bleiben erhalten: „Beurteilen Sie …“ wird nicht zur Klick-Aufgabe mit einer einzigen richtigen Antwort. Ein neues Format darf das Niveau nie senken.
 5. Fachliche Korrektheit: Lösungen zuerst aus dem Material. Paragrafen, Zahlen, Fristen, Kontenbezeichnungen und Kalkulationsschemata nur wie im Material oder sicher belegt; sonst [PRÜFEN]. Nichts erfinden.
-6. Zusatzaufgaben nur laut Steckbrief, max. 2, als „⭐ Plus“ markiert.
+6. Zusatzaufgaben (neue Inhalte) nur laut Steckbrief, max. 2, als „⭐ Plus“ markiert. Lernhilfen (E.0, Teil 4) sind keine Zusatzaufgaben: Sie üben nur Inhalte, die im Material stehen, und werden als „Übung“ gekennzeichnet – nie als Originalaufgabe nummeriert.
 7. Betrieb, Personen und Namen aus dem Material übernehmen. Keine echten Schülernamen, keine echten Markenlogos.
 
 ---
@@ -126,7 +133,8 @@ Bereich 1 – Szenario: der Arbeitsplatz
 Bereich 2 – Erarbeitung & Training
 - Alle Aufgaben in Originalreihenfolge, mit Badge für Kann-ID und Operator (antippbar mit Kurzerklärung).
 - Jede Aufgabe: „💡 Tipp anzeigen“ (gestuft), „✅ Überprüfen“, „🔄 Zurücksetzen“, Status (offen / bearbeitet / richtig).
-- Am Ende: Abruf-Check (E.3).
+- Lernhilfen (wenn Steckbrief „ja“) stehen als „Übung“ vor oder nach der Originalaufgabe.
+- Am Ende: Abruf-Check (E.3), wenn Lernhilfen = ja.
 
 Bereich 3 – Handlungsprodukt (zurück an den Arbeitsplatz)
 - Ausgangsproblem im Mockup lösen, meist mit K7 oder K6. Grundlage ist das Handlungsprodukt der Lernsituation.
@@ -141,29 +149,59 @@ Bereich 4 – Selbstcheck & Ergebnissicherung
 
 📖 Spickzettel: Glossar als Seitenleiste/Overlay mit Suche und Flip-Cards; Verwechslungspaare als Gegenüberstellung; Fachbegriffe im Aufgabentext beim ersten Vorkommen antippbar; druckbar.
 
-👩‍🏫 Lehrkraft-Ansicht: mit #lehrkraft in der Adresse oder 5× Tippen auf Logo/Titel alle Lösungen sichtbar, je Aufgabe Operator, AFB, Format, Kann-ID. Kein Schutz, nur Komfort.
+👩‍🏫 Lehrkraft-Ansicht: mit #lehrkraft in der Adresse oder 5× Tippen auf Logo/Titel alle Lösungen sichtbar, je Aufgabe Operator, AFB, Kann-ID, Format, Originalform und Entscheidung (beibehalten / angereichert / ersetzt + Kurzbegründung). Kein Schutz, nur Komfort.
 
 ---
 
-## E. AUFGABENFORMATE – AUSWAHL UND PRIORISIERUNG
+## E. AUFGABENFORMATE – ANALYSE, AUSWAHL UND PRIORISIERUNG
+
+### E.0 Aufgabenanalyse und Formatentscheidung (für JEDE Aufgabe, vor der Formatwahl)
+
+Teil 1 – Analyse. Halte für jede Originalaufgabe fest:
+- Lernziel: Welcher Kann-Punkt, welcher Fachinhalt soll gelernt werden?
+- Operator und AFB: Welche Denkleistung verlangt die Aufgabe (wiedergeben, anwenden, unterscheiden, prüfen, beurteilen, gestalten)?
+- Kaufmännische Tätigkeit: Welche berufliche Handlung steckt darin (Beleg prüfen, rechnen, Rechtsfolge prüfen, entscheiden, kommunizieren …)?
+- Originalform: Wie ist die Aufgabe auf dem Blatt gestellt, und was tun die Schüler dabei tatsächlich im Kopf – wiedererkennen und anklicken (aktiv) oder selbst etwas erzeugen, erklären, begründen (konstruktiv)?
+- Typische Fehler: Welche Fehlvorstellungen und Verwechslungen sind bei diesem Inhalt zu erwarten?
+- Sprachliche Hürde: Ist die Aufgabe für das Sprachniveau verständlich?
+
+Teil 2 – Bewertung der Originalform. Prüfe sie an diesen Kriterien:
+1. Operator-Passung: Verlangt die Form die Denkleistung, die der Operator fordert?
+2. Denkaktivität: Müssen die Schüler selbst erklären, begründen oder unterscheiden – oder nur wiedererkennen?
+3. Berufsnähe: Ist die Handlung so, wie Kaufleute sie im Betrieb ausführen?
+4. Feedbackpotenzial: Lässt sich die Aufgabe digital so prüfen, dass typische Fehler gezielt und erklärend zurückgemeldet werden?
+5. Unterscheidungs- und Transferpotenzial: Trainiert sie das Auseinanderhalten ähnlicher Begriffe und die Anwendung auf einen Fall?
+6. Belastung und Sprache: Ist sie ohne unnötigen Lese-, Bedien- oder Schreibaufwand lösbar?
+7. Wiedererkennung: Kennen die Schüler die Aufgabe vom Blatt; passen Lösungsblatt und Unterrichtsbesprechung dazu? (Spricht für das Beibehalten.)
+
+Teil 3 – Abwägen und entscheiden. Bestimme zuerst das bestgeeignete Kandidatenformat für den Lerninhalt (Zuordnung in E.6) und vergleiche es mit der Originalform an den Kriterien 1–7:
+- BEIBEHALTEN: Die Originalform erfüllt die Kriterien gut, oder das Kandidatenformat wäre nicht klar besser. Die Aufgabe wird 1:1 digital umgesetzt – gleiche Items, Reihenfolge, Tabellenspalten, Lücken und Zahlen. Das passende K- oder E-Format liefert nur die technische Hülle (Prüfung, Feedback, Tipps).
+- ANREICHERN: Die Form ist im Kern gut, hat aber eine klare Lücke (z. B. keine Begründung, kein Fehlerfeedback, keine Deutung des Rechenergebnisses, Papierbindung wie „unterstreichen Sie“). Die Originalitems bleiben unverändert; ergänzt wird gezielt das Fehlende (Warum-Frage, Merkmal antippen, Deutungsfrage, fehlerspezifisches Feedback) oder die Papierform wird in das nächstliegende Format übertragen (z. B. E3 Text-Markierer).
+- ERSETZEN: Ein anderes Format lässt den Lerninhalt klar besser lernen. Bedingungen: (a) Es ist bei mindestens zwei der Kriterien 1–6 klar besser, (b) bei keinem schlechter, (c) Operator und Niveau bleiben mindestens gleich, (d) Inhalt, Fall, Zahlen und Fachbegriffe der Originalaufgabe bleiben erhalten. Typische Anlässe: „Beurteilen“ als reines Ankreuzen; eine Zuordnung ohne jede Begründung bei leicht verwechselbaren Begriffen (→ K4); ein Beleg, der nur abgeschrieben statt geprüft wird (→ K1); ein Ablauf, der nur aufgezählt wird, obwohl Entscheidungen an Weichen der eigentliche Lerninhalt sind (→ K5).
+- Im Zweifel beibehalten oder anreichern: Wiedererkennung und Passung zum Lösungsblatt haben Wert. Ersetzen ist die begründete Ausnahme, nicht der Normalfall.
+- Die Entscheidung und ihre Begründung stehen in der Planung (Schritt 3 d); die Lehrkraft hat das letzte Wort.
+
+Teil 4 – Lernhilfen (nur wenn im Steckbrief „ja“). Unabhängig von der Entscheidung können Lernhilfen dazukommen: Lösungsbeispiel (Stufe A), Lückenbeispiel (Stufe B), Fehlerbeispiel (Stufe D), zusätzliche Übungsfälle (z. B. in K4) und der Abruf-Check. Stufe C ist immer die Originalaufgabe selbst – A und B führen zu ihr hin, D kommt danach. Lernhilfen stehen vor oder nach der Originalaufgabe, sind als „Übung“ gekennzeichnet und verändern sie nicht. Sie nutzen nur Inhalte aus dem Material (derselbe Fall, dieselben Begriffe, dieselben Rechenwege mit leicht veränderten Zahlen); Beispiele aus dem Material selbst haben Vorrang (z. B. das Rechenbeispiel aus dem Infotext als Stufe A). Steht im Steckbrief „nein“: keine Stufen A, B und D, keine Zusatzfälle, kein Abruf-Check.
+
+Neue Aufgabentypen außerhalb von K1–K7 und E1–E8 werden nicht erfunden. Passt nichts: Freitext mit Erwartungshorizont und Kriterien-Checkliste.
 
 ### E.1 Gestaltungsregeln (für alle Formate)
-1. Format nach der kaufmännischen Tätigkeit wählen, nicht nach Abwechslung.
+1. Format nach dem Lerninhalt und der kaufmännischen Tätigkeit wählen, nicht nach Abwechslung.
 2. Warum-Frage: Jede geschlossene Aufgabe endet an mindestens einer Stelle mit einer Selbsterklärung – als FRAGE formuliert („Warum …?“, „Woran erkennst du …?“), nicht als Befehl. Antwort: zuerst eine von 3 Begründungen wählen (falsche = typische Fehlvorstellungen mit Erklärung); optional „Ich formuliere selbst“ mit Satzanfang.
-3. Erst Beispiel, dann selbst: Bei Vorwissen „neu“ starten Rechen- und Prüfformate mit gelöstem Beispiel (A) → Beispiel mit Lücken (B) → eigene Lösung (C). Wer B im 1. Versuch löst, springt zu C. Vorwissen „teilweise“: Start bei B; „Wiederholung“: Start bei C.
+3. Erst Beispiel, dann selbst (nur wenn Lernhilfen = ja): Bei Vorwissen „neu“ starten Rechen- und Prüfformate mit gelöstem Beispiel (A) → Beispiel mit Lücken (B) → Originalaufgabe (C). Wer B im 1. Versuch löst, springt zu C. Vorwissen „teilweise“: Start bei B; „Wiederholung“: Start bei C.
 4. Fehlerbeispiele erst nach korrekten Beispielen: Stufe D („Fehler finden“ in der Lösung eines fiktiven Azubis) frühestens nach C, immer: Was ist falsch? → Warum? → Wie richtig?
-5. Pro App höchstens 5 verschiedene Formate; dasselbe Kernformat darf mehrfach vorkommen.
+5. Pro App höchstens 5 verschiedene Formate; dasselbe Kernformat darf mehrfach vorkommen. Beibehaltene Originalformen zählen nicht gegen diese Grenze – sie gilt für Ersetzungen und Lernhilfen.
 6. Dokumente, Belege und Nachrichten wo möglich im Mockup öffnen.
 7. Keine Zeitlimits, Countdowns oder Ranglisten.
 
 ### E.2 Die 7 Kernformate (Priorität 1)
 K1 · BELEG- & DOKUMENTEN-PRÜFER – prüfen/kontrollieren: Rechnung, Lieferschein, Angebot, Bestellung, Vertrag/AGB, Handelsregisterauszug, Kundenmail. Dokument links → verdächtige Stelle antippen → Fehlerart wählen → Korrektur → Warum-Frage. Auch korrekte Stellen bekommen Feedback. Variante Abgleich: 2–3 Dokumente nebeneinander (Bestellung – Lieferschein – Rechnung), Abweichungen verknüpfen. Stufe D: „Azubi X hat die Rechnung freigegeben – zu Recht?“
 
-K2 · PRÜFSCHEMA (RECHT) – prüfen, ob eine Rechtsfolge eintritt (Kaufmannseigenschaft, Kaufvertrag, Mängelrechte, Vollmachtsumfang, Firmengrundsätze). Schema: Voraussetzung → Fallbezug → Zwischenergebnis → Ergebnis. A: gelöster Musterfall mit 1–2 Warum-Fragen; B: Lückenschema; C: neuer Fall; D: fehlerhaftes Azubi-Gutachten korrigieren. Optionale Brücken-Ansicht (Pfeiler = erfüllte Voraussetzung), nur bei kumulativen Voraussetzungen. Textstellen mit E3 markierbar.
+K2 · PRÜFSCHEMA (RECHT) – prüfen, ob eine Rechtsfolge eintritt (Kaufmannseigenschaft, Kaufvertrag, Mängelrechte, Vollmachtsumfang, Firmengrundsätze). Schema: Voraussetzung → Fallbezug → Zwischenergebnis → Ergebnis. A: gelöster Musterfall mit 1–2 Warum-Fragen; B: Lückenschema; C: der Fall der Originalaufgabe; D: fehlerhaftes Azubi-Gutachten korrigieren (A, B, D nur als Lernhilfen). Optionale Brücken-Ansicht (Pfeiler = erfüllte Voraussetzung), nur bei kumulativen Voraussetzungen. Textstellen mit E3 markierbar.
 
-K3 · RECHEN-WERKSTATT – berechnen/kalkulieren/buchen (Bezugs- und Angebotskalkulation, Prozent, Zinsen, Gewinnverteilung, Kennzahlen, Buchungssätze). Tabelle mit zeilengenauer Prüfung + Nebenrechnung; Stufen A → B → C; Fehlerdiagnose pro Zeile (Rabatt von falscher Basis, Skonto vor Rabatt, vom/im Hundert verwechselt, Soll/Haben vertauscht). Buchungssätze: Konten wählen, Betrag, Warum-Frage zu Kontenart und Zu-/Abgang. Pflicht am Ende: Deutungsfrage „Was bedeutet das Ergebnis für den Betrieb?“
+K3 · RECHEN-WERKSTATT – berechnen/kalkulieren/buchen (Bezugs- und Angebotskalkulation, Prozent, Zinsen, Gewinnverteilung, Kennzahlen, Buchungssätze). Tabelle mit zeilengenauer Prüfung + Nebenrechnung; Stufen A → B → C (wenn Lernhilfen = ja); Fehlerdiagnose pro Zeile (Rabatt von falscher Basis, Skonto vor Rabatt, vom/im Hundert verwechselt, Soll/Haben vertauscht). Buchungssätze: Konten wählen, Betrag, Warum-Frage zu Kontenart und Zu-/Abgang. Pflicht am Ende: Deutungsfrage „Was bedeutet das Ergebnis für den Betrieb?“
 
-K4 · VERWECHSLER – unterscheiden/abgrenzen/vergleichen bei ähnlichen Begriffen (Prokura/Handlungsvollmacht, Ist-/Kann-/Formkaufmann, OHG/KG, Aufwand/Auszahlung/Kosten, Gewährleistung/Garantie, Rabatt/Skonto/Bonus, Anfrage/Angebot/Bestellung) – nur Paare aus dem Material. (1) Merkmalstabelle mit Lücken; (2) 6–8 kurze Fälle GEMISCHT zuordnen; (3) pro Fall „Woran erkennst du das?“ – entscheidendes Merkmal antippen.
+K4 · VERWECHSLER – unterscheiden/abgrenzen/vergleichen bei ähnlichen Begriffen (Prokura/Handlungsvollmacht, Ist-/Kann-/Formkaufmann, OHG/KG, Aufwand/Auszahlung/Kosten, Gewährleistung/Garantie, Rabatt/Skonto/Bonus, Anfrage/Angebot/Bestellung) – nur Paare aus dem Material. (1) Merkmalstabelle mit Lücken; (2) die Fälle aus dem Material GEMISCHT zuordnen (bei Lernhilfen = ja auf 6–8 Fälle ergänzen, nur mit Inhalten aus dem Material); (3) pro Fall „Woran erkennst du das?“ – entscheidendes Merkmal antippen.
 
 K5 · PROZESS-NAVIGATOR – Abläufe ordnen/darstellen (Beschaffung, Auftragsabwicklung, Reklamation, kaufmännisches und gerichtliches Mahnverfahren, Handelsregistereintragung). Schritte ordnen (Pfeile ↑↓ oder antippen → Position antippen) → Beleg/zuständige Stelle zuordnen → 1–2 Weichen entscheiden → Warum-Frage an einer Weiche.
 
@@ -171,25 +209,26 @@ K6 · ENTSCHEIDUNGS-WERKSTATT – beurteilen/entscheiden/empfehlen (Angebots- un
 
 K7 · KOMMUNIKATIONS-WERKSTATT – formulieren/verfassen/beraten (Antwort auf Reklamation, Angebotsschreiben, Mahnung, Notiz, Kunden-/Verkaufsgespräch); Standard für das Handlungsprodukt. Schreiben: im Mockup, Textbausteine je Abschnitt (Anrede – Bezug – Kernaussage – Begründung – nächster Schritt – Gruß), ausblendbar; dann Kriterien-Checkliste, Stichwort-Hinweis (nie als Bewertung), Musterlösung. Gespräch: verzweigt mit 3–5 Entscheidungspunkten, jede Wahl mit Folge und Erklärung; oder Gesprächs-Coach (unprofessionelle Sätze ersetzen).
 
-### E.3 Pflichtbaustein: ABRUF-CHECK (Ende Bereich 2)
-- 6–10 kurze Fragen GEMISCHT über den Themenbereich; Verwechslungspaare abwechselnd.
+### E.3 ABRUF-CHECK (Ende Bereich 2; Pflicht, wenn Lernhilfen = ja)
+- 6–10 kurze Fragen GEMISCHT über den Themenbereich, nur zu Inhalten aus dem Material; Verwechslungspaare abwechselnd.
 - Auswahlfrage, Inline-Dropdown, Kurzrechnung; jede falsche Option = typische Fehlvorstellung mit Erklärung.
 - Nach jeder Antwort „Wie sicher warst du?“ (sicher/unsicher) → Kalibrierung und Bericht.
 - Fragen zusätzlich in APP_DATA.abrufCheck ablegen (für das Aufwärmen der nächsten App).
 
-### E.4 Ergänzungsformate (Priorität 2 – nur, wenn kein Kernformat passt; Grund in der Planung nennen)
+### E.4 Ergänzungsformate (Priorität 2 – nur, wenn kein Kernformat passt oder die Originalform so am besten abgebildet wird; Grund in der Planung nennen)
 E1 Tap-to-Match / Kategorien-Sortierer (AFB I; mind. ein Element mit Warum-Frage) · E2 Dropdown-Lückentext (Definitionen, Fachsprache, DaZ) · E3 Text-Markierer (Gesetzes-/Falltext; Vorstufe zu K2) · E4 Satzbau-Baukasten (Gerüst in K6/K7, „erläutern“) · E5 Ursache-Wirkungs-Kette (wirtschaftliche Zusammenhänge, mit Warum-Frage) · E6 4-Quadranten-Matrix (nur wenn Modell im Material) · E7 Schieberegler-Simulation mit SVG-Diagramm (nur bei rechnerischem Zusammenhang im Material) · E8 Kennzahlen-Dashboard (nur bei Kennzahlen im Material, als echtes Controlling-Werkzeug).
 
 ### E.5 Nicht verwenden
 Zahnrad, Wasserrohr, Thermostat, Tacho, Ressourcen-Fass, Röntgen-Regler, Lupe, Eisberg, Tresor/Safe-Knacker, Memory, Zeit-Challenges, Countdowns, Punkte-Ranglisten. Grund: fachfremde Metapher, Ablenkung oder Zeitdruck. Ausnahme: Das Material nutzt das Modell selbst (z. B. Eisbergmodell der Kommunikation) – dann als Schaubild.
 
 ### E.6 Entscheidungsweg pro Aufgabe
-1. Welche kaufmännische Tätigkeit steckt in der Originalaufgabe (Operator + Inhalt)?
-2. Zuordnung: prüfen/kontrollieren (Dokumente) → K1 · Rechtsfolge prüfen → K2 · berechnen/kalkulieren/buchen → K3 · unterscheiden/abgrenzen/vergleichen → K4 · Abläufe ordnen/darstellen → K5 · beurteilen/entscheiden/empfehlen → K6 · formulieren/verfassen/beraten → K7 · nennen/definieren (AFB I) → E1/E2 (oder K4 bei Abgrenzung) · erläutern/erklären → E4/E5 mit Warum-Frage.
-3. Gerüst-Stufe nach Vorwissen festlegen.
-4. Im Mockup möglich? → dort einbetten.
-5. Warum-Frage und fehlerspezifisches Feedback formulieren.
-6. Nur wenn kein K-Format passt: E-Format, Grund in der Planung.
+1. Aufgabe analysieren (E.0, Teil 1).
+2. Kandidatenformat für den Lerninhalt bestimmen: prüfen/kontrollieren (Dokumente) → K1 · Rechtsfolge prüfen → K2 · berechnen/kalkulieren/buchen → K3 · unterscheiden/abgrenzen/vergleichen → K4 · Abläufe ordnen/darstellen → K5 · beurteilen/entscheiden/empfehlen → K6 · formulieren/verfassen/beraten → K7 · nennen/definieren (AFB I) → E1/E2 (oder K4 bei Abgrenzung) · erläutern/erklären → E4/E5 mit Warum-Frage.
+3. Originalform und Kandidatenformat an den Kriterien 1–7 vergleichen (E.0, Teil 2).
+4. Entscheiden: beibehalten / anreichern / ersetzen (E.0, Teil 3) und begründen.
+5. Lernhilfen und Gerüst-Stufe nach Steckbrief festlegen (E.0, Teil 4; E.1, Regel 3).
+6. Im Mockup möglich? → dort einbetten.
+7. Warum-Frage und fehlerspezifisches Feedback formulieren.
 
 ---
 
@@ -205,7 +244,7 @@ Zahnrad, Wasserrohr, Thermostat, Tacho, Ressourcen-Fass, Röntgen-Regler, Lupe, 
 ---
 
 ## G. TECHNIK (STRIKT)
-1. Eine Datei, datengetrieben: oben im Script EIN Objekt APP_DATA (meta: Titel, Bildungsgang, LF, LS, Version, Datum, appId; szenario; aufgaben[] mit format, stufen, feedback; abrufCheck[]; glossar[]; kannListe[]). Darunter eine Render-Funktion pro Format und ein zentraler State, aus dem neu gerendert wird. Keine Platzhalter, keine Kürzungen.
+1. Eine Datei, datengetrieben: oben im Script EIN Objekt APP_DATA (meta: Titel, Bildungsgang, LF, LS, Version, Datum, appId; szenario; aufgaben[] mit originalform, entscheidung, begruendung, format, lernhilfen, feedback; abrufCheck[]; glossar[]; kannListe[]). Darunter eine Render-Funktion pro Format und ein zentraler State, aus dem neu gerendert wird. Keine Platzhalter, keine Kürzungen.
 2. 100 % offline: keine externen URLs, Schriften, CDNs, Bibliotheken, kein fetch.
 3. Fortschritt: localStorage (Schlüssel = appId) nach jeder Aktion, in try/catch. „Neu beginnen“ mit Bestätigung in der Oberfläche; „Meine Daten auf diesem Gerät löschen“. Keine Daten verlassen das Gerät.
 4. Touch: Bedienelemente mind. 44px (Tafelmodus 56px); ohne Hover bedienbar; Zuordnen per Antippen–Antippen; Ziehen nur mit Pointer-Events (+ setPointerCapture) oder input type="range"; touch-action: none auf Zieh-Flächen, touch-action: manipulation auf Buttons; Tastatur (Tab, Enter) mit sichtbarem Fokus.
@@ -218,13 +257,16 @@ Zahnrad, Wasserrohr, Thermostat, Tacho, Ressourcen-Fass, Röntgen-Regler, Lupe, 
 ---
 
 ## H. QUALITÄTSKONTROLLE VOR DEM AUSLIEFERN
-- [ ] Jede Zeile der Mapping-Tabelle umgesetzt (gleiche Nummer, gleiches Format).
+- [ ] Jede Zeile der Mapping-Tabelle umgesetzt (gleiche Nummer, gleiche Entscheidung, gleiches Format).
+- [ ] Für jede Aufgabe liegt eine Analyse mit begründeter Entscheidung vor; jede Ersetzung erfüllt die Bedingungen (a)–(d) aus E.0, Teil 3.
+- [ ] Beibehaltene und angereicherte Aufgaben haben dieselben Items, Zahlen und Lücken wie das Original; ersetzte Aufgaben behalten Inhalt, Fall, Zahlen, Fachbegriffe und Operator.
+- [ ] Lernhilfen sind als „Übung“ gekennzeichnet und nicht als Originalaufgabe nummeriert.
 - [ ] Jede Aufgabe: Tipp, Überprüfen, Zurücksetzen, Kann-ID, Feedback mit Begründung für jede Option.
 - [ ] Jede geschlossene Aufgabe hat mind. eine Warum-Frage (als Frage).
-- [ ] Rechen-/Prüfformate mit Stufen passend zum Vorwissen; Fehlerbeispiele erst nach korrekten Beispielen.
+- [ ] Rechen-/Prüfformate mit Stufen passend zu Vorwissen und Lernhilfen-Einstellung; Fehlerbeispiele erst nach korrekten Beispielen.
 - [ ] K3 mit Deutungsfrage, K6 mit begründetem Fazit, K7 mit Kriterien-Checkliste.
-- [ ] Abruf-Check vorhanden, gemischt, mit Sicherheitsabfrage.
-- [ ] Kein Format aus E.5; höchstens 5 verschiedene Formate.
+- [ ] Abruf-Check vorhanden (wenn Lernhilfen = ja), gemischt, mit Sicherheitsabfrage.
+- [ ] Kein Format aus E.5; Formatgrenze aus E.1, Regel 5 eingehalten.
 - [ ] Jede Lösung aus dem Material oder als [PRÜFEN] gemeldet.
 - [ ] Nur gefilterte Kann-Punkte, Wortlaut unverändert; Operator/AFB erhalten.
 - [ ] Keine externen Ressourcen, kein alert(), keine doppelten IDs; Code ohne Syntaxfehler geprüft.
