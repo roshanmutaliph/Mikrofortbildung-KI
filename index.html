@@ -17,19 +17,19 @@
 :root{
   --blue:#113954;--blue-2:#1d5f8c;--blue-3:#2b7aa8;--acc:#ff6b4a;--acc-ink:#1b1b1b;
   --bg:#f2f5f8;--panel:#ffffff;--field:#e8eff5;--ink:#1f2d3a;--soft:#52647a;--line:#d6e0e8;
-  --link:#1d5f8c;--ok:#1d7a46;--ok-bg:#e3f4ea;--err:#b3261e;--err-bg:#fbe7e5;--warn-bg:#fff4e0;
+  --link:#1d5f8c;--ok:#1d7a46;--ok-ink:#17613a;--ok-bg:#e3f4ea;--err:#b3261e;--err-bg:#fbe7e5;--warn-bg:#fff4e0;
   --shadow:0 1px 2px rgba(17,57,84,.06),0 4px 16px rgba(17,57,84,.06);
   --shadow-h:0 2px 4px rgba(17,57,84,.08),0 10px 28px rgba(17,57,84,.12);
   --r:14px;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) td .mk{color:#0b1621}:root:not([data-theme=light]){
   --bg:#0b1621;--panel:#13212e;--field:#1a2c3c;--ink:#e6edf3;--soft:#a3b4c4;--line:#26394b;--link:#8cc4ec;
-  --ok:#6fd39a;--ok-bg:#12301f;--err:#ff8a80;--err-bg:#3a1714;--warn-bg:#33270f;
+  --ok:#6fd39a;--ok-ink:#7fdca6;--ok-bg:#12301f;--err:#ff8a80;--err-bg:#3a1714;--warn-bg:#33270f;
   --shadow:0 1px 2px rgba(0,0,0,.3);--shadow-h:0 8px 24px rgba(0,0,0,.4);color-scheme:dark}}
 :root[data-theme=dark]{
   --bg:#0b1621;--panel:#13212e;--field:#1a2c3c;--ink:#e6edf3;--soft:#a3b4c4;--line:#26394b;--link:#8cc4ec;
-  --ok:#6fd39a;--ok-bg:#12301f;--err:#ff8a80;--err-bg:#3a1714;--warn-bg:#33270f;
+  --ok:#6fd39a;--ok-ink:#7fdca6;--ok-bg:#12301f;--err:#ff8a80;--err-bg:#3a1714;--warn-bg:#33270f;
   --shadow:0 1px 2px rgba(0,0,0,.3);--shadow-h:0 8px 24px rgba(0,0,0,.4);color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 html{scroll-padding-top:84px;scroll-behavior:smooth}
@@ -116,7 +116,7 @@ section:nth-of-type(even){background:color-mix(in srgb,var(--field) 45%,var(--bg
 .logo{display:inline-flex;align-items:center;background:#fff;border:1px solid #e3e9ee;border-radius:10px;padding:7px 12px;margin-bottom:12px}
 .logo img{height:26px;width:auto}
 .pic{width:100%;height:auto;border-radius:10px;margin-bottom:16px}
-.pic.wide{max-height:340px;object-fit:cover;border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:20px}
+.pic.wide{max-height:320px;object-fit:cover;object-position:50% 18%;border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:20px}
 .kh-icon{width:44px;height:44px;border-radius:10px;margin-bottom:12px}
 .steps{counter-reset:s;list-style:none;padding:0!important;margin:10px 0 14px!important}
 .steps li{counter-increment:s;position:relative;padding-left:40px;margin-bottom:10px;min-height:28px}
@@ -154,7 +154,17 @@ th{background:var(--field);font-size:15px}
 td:first-child{font-weight:700;width:22%}
 th .logo{margin:0;padding:5px 9px}th .logo img{height:22px}
 .dim{opacity:.3}
-.hl{background:color-mix(in srgb,var(--acc) 9%,var(--panel))}
+.hl{box-shadow:inset 3px 0 0 var(--acc)}
+td.pos{background:var(--ok-bg)}
+td.neg{background:var(--err-bg)}
+.mk{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;margin-right:8px;vertical-align:-4px;color:#fff}
+.mk .icon{width:13px;height:13px;stroke-width:3}
+td.pos .mk{background:var(--ok)}
+td.neg .mk{background:var(--err)}
+:root[data-theme=dark] td .mk{color:#0b1621}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--soft);margin:0 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:16px;height:16px;border-radius:4px;display:inline-block}
 
 /* Ablage */
 .drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:170px;border:2px dashed color-mix(in srgb,var(--blue-3) 45%,var(--line));border-radius:var(--r);background:var(--field);text-align:center;padding:20px;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
@@ -195,6 +205,21 @@ th .logo{margin:0;padding:5px 9px}th .logo img{height:22px}
 .flow .num{width:36px;height:36px;border-radius:10px;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font-weight:800;margin-bottom:10px}
 
 /* Rest */
+.say{display:flex;gap:8px;align-items:flex-start;font-size:15px;font-weight:600;margin:4px 0 0;line-height:1.45}
+.say .icon{margin-top:2px}
+.say.good{color:var(--ok-ink)}
+.say.bad{color:var(--err)}
+.sub{font-size:22px;margin:36px 0 4px;display:flex;align-items:center;gap:10px}
+.subp{color:var(--soft);margin-bottom:16px}
+.skill{display:flex;flex-direction:column}
+.skill p{flex:1}
+.skill>.pill{align-self:flex-start}
+@media (max-width:420px){.skill .acts .row{grid-template-columns:1fr}}
+.skill .acts{display:grid;gap:8px;margin-top:12px}
+.skill .acts .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.skill .acts .btn,.skill .acts button{width:100%;font-size:14px;padding:8px 10px}
+.fazit{display:flex;gap:10px;align-items:center;margin-top:14px;background:color-mix(in srgb,var(--acc) 16%,var(--panel));border-left:4px solid var(--acc);border-radius:10px;padding:14px 18px;font-size:17px}
+.fazit .icon{color:var(--ok)}
 .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:600;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;z-index:30;display:flex;gap:8px;align-items:center;box-shadow:var(--shadow-h)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .totop{position:fixed;right:18px;bottom:18px;z-index:15;width:48px;height:48px;padding:0;border-radius:50%;opacity:0;pointer-events:none;transition:opacity .2s;box-shadow:var(--shadow-h)}
@@ -212,6 +237,7 @@ mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;bord
   .ticks{display:none}
   .grid,.grid.three,.flow{grid-template-columns:minmax(0,1fr)}
   nav .wrap{flex-wrap:wrap}
+  html{scroll-padding-top:130px}
   .search{width:100%;order:-1}
   kbd{display:none}
   .head{flex-direction:column;gap:12px}
@@ -250,6 +276,8 @@ mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;bord
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M6 11l6 6 6-6M4 21h16"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V8M6 13l6-6 6 6M4 3h16"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v4M12 17.5v.01"/></symbol>
   <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
@@ -290,8 +318,6 @@ mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;bord
       <a href="#kahoot"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg>Kahoot</a>
       <a href="#lernspaziergang"><svg class="icon" aria-hidden="true"><use href="#i-walk"/></svg>Lernspaziergang</a>
       <a href="#vergleich"><svg class="icon" aria-hidden="true"><use href="#i-compare"/></svg>KI-Vergleich</a>
-      <a href="#pruefen"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Prüfen &amp; Bewerten</a>
-      <a href="#prompting"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg>Prompting</a>
       <a href="#nrw"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg>NRW</a>
       <a href="#ablage"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>Ablage</a>
       <a href="#technik"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Technik</a>
@@ -314,13 +340,13 @@ mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;bord
   <div class="grid three">
     <article class="card"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span><h3>Claude for Microsoft 365</h3><span class="pill">Bezahltes Abo</span>
       <ol class="steps"><li>Word, Excel oder PowerPoint öffnen</li><li>Start → Add-Ins (älter: Einfügen → Add-Ins abrufen)</li><li>„Claude for Microsoft 365“ von Anthropic suchen, Hinzufügen</li><li>Seitenleiste öffnen, mit Claude-Konto anmelden</li><li>In jedem der drei Programme einmal starten</li></ol>
-      <p class="note">Merkt sich den Zusammenhang über alle drei Programme, eigene Skills gelten auch hier. In Word erscheinen Änderungen als Nachverfolgung.</p></article>
+      <p class="say good"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Merkt sich den Zusammenhang über alle drei Programme, eigene Skills gelten auch hier. In Word erscheinen Änderungen als Nachverfolgung.</span></p></article>
     <article class="card"><span class="logo"><img src="logo-chatgpt.png" width="311" height="96" alt="ChatGPT"></span><h3>ChatGPT-Add-in</h3><span class="pill ok">Auch kostenlos</span>
       <ol class="steps"><li>Office-Programm öffnen</li><li>Start → Add-Ins</li><li>„ChatGPT“ vom Anbieter OpenAI, LLC wählen, Hinzufügen</li><li>Mit ChatGPT-Konto anmelden</li></ol>
-      <p class="note">Chats getrennt von chatgpt.com, kein Gedächtnis, keine Skills. Vorsicht vor Fremd-Add-ins mit ähnlichem Namen.</p></article>
-    <article class="card"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span><h3>Kein Office-Plugin</h3><span class="pill">Google AI Pro / Workspace</span>
-      <ol class="steps"><li>Datei in Google Docs, Tabellen oder Präsentationen öffnen</li><li>Oben rechts auf „Frag Gemini“ ✦ klicken</li><li>Fertige Datei als Word, Excel oder PowerPoint herunterladen</li></ol>
-      <p class="note">Alternative: im Gemini-Chat ein Ergebnis „als Word-Datei“ erstellen lassen.</p></article>
+      <p class="say bad"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span>Chats getrennt von chatgpt.com, kein Gedächtnis, keine Skills. Vorsicht vor Fremd-Add-ins mit ähnlichem Namen.</span></p></article>
+    <article class="card"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span><h3>Kein Office-Plugin: Google Docs nutzen</h3><span class="pill">Google AI Pro / Workspace</span>
+      <ol class="steps"><li>Datei in Google Docs, Tabellen oder Präsentationen öffnen (Word-Dateien vorher in Google Drive hochladen)</li><li>Oben rechts auf „Frag Gemini“ ✦ klicken</li><li>Fertige Datei als Word, Excel oder PowerPoint herunterladen</li></ol>
+      <p class="say good"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>In Google Docs arbeitet Gemini direkt im Dokument. Auch über einen Link zum Google-Dokument lässt sich im Gemini-Chat direkt mit dem Dokument arbeiten.</span></p></article>
   </div>
   <div class="card tint" style="margin-top:18px"><h3><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Datenschutz bei Plugins</h3><p>Sobald die Seitenleiste offen ist, liest das Plugin die geöffnete Datei und schickt sie an den Anbieter. Also nie in Notenlisten, Gutachten oder anderen Dateien mit Schülerdaten öffnen. Wenn nötig: Kopie mit erfundenen Namen. Die Schul-IT kann Add-ins im Schulkonto sperren.</p></div>
 </div></section>
@@ -328,53 +354,67 @@ mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;bord
 <section id="skills" class="band" aria-labelledby="h-skills"><div class="wrap">
   <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></div><div><h2 id="h-skills">Skills und Projekte</h2><p>Einmal sauber erklären, dauerhaft nutzen. Der Skill legt fest, <b>wie</b> gearbeitet wird. Das Projekt legt fest, <b>wo und womit</b>.</p></div></div>
   <div class="grid">
-    <article class="card"><img class="pic" src="skills.jpg" width="632" height="316" alt="Illustration: Skill als Ordner mit SKILL.md" loading="lazy"><h3>Skill: gespeicherte Arbeitsweise</h3><p>Ein Prompt gilt nur im aktuellen Chat. Ein Skill ist gespeichert und funktioniert in jedem Chat.</p><ul><li><b>PowerPoint-JDBK:</b> Präsentationen im Schuldesign</li><li><b>Kann-Liste:</b> im JDBK-Format als Word-Datei</li><li><b>Kahoot-Vorlage:</b> Quiz in der offiziellen Excel-Vorlage</li><li><b>Lernspaziergang:</b> TXT-Tutor aus Material und Kann-Liste</li></ul></article>
+    <article class="card"><img class="pic" src="skills.jpg" width="632" height="316" alt="Illustration: Skill als Ordner mit SKILL.md" loading="lazy"><h3>Skill: gespeicherte Arbeitsweise</h3><p>Ein Prompt gilt nur im aktuellen Chat. Ein Skill ist gespeichert, und Claude nutzt ihn automatisch, sobald er passt. Unten gibt es meine Skills zum Herunterladen, jeweils auch als Masterprompt für jede andere KI.</p></article>
     <article class="card"><h3>Projekt: Arbeitsbereich zu einem Thema</h3><p>Material, Anweisungen und alle Chats an einem Ort. Jeder neue Chat kennt den Hintergrund, z. B. ein Projekt pro Klasse.</p>
       <p style="margin-top:14px"><span class="pill ok"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Vorteile</span></p>
       <ul class="checks"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Nichts neu erklären</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Material griffbereit</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Ordnung, je nach Konto teilbar</li></ul>
       <p style="margin-top:10px"><span class="pill acc"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Nachteile</span></p>
       <ul class="checks minus"><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Gilt nur im Projekt</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Bei viel Material gehen Details verloren</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Material liegt beim Anbieter: keine Schülerdaten</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Umzug zu einer anderen KI ist schwer</li></ul></article>
+  </div>
+
+  <h3 class="sub" id="meine-skills">Meine Skills zum Herunterladen</h3>
+  <p class="subp">Jeder Skill gibt es zweimal: als <b>Skill-Paket (ZIP) für Claude</b> und als <b>Masterprompt (TXT) für jede KI</b>.</p>
+  <div class="grid three" id="skillcards"></div>
+
+  <div class="grid" style="margin-top:18px">
+    <article class="card"><h3>So installierst du einen Skill in Claude</h3>
+      <ol class="steps"><li>In den Claude-Einstellungen die <b>Code-Ausführung und Dateierstellung</b> einschalten</li><li><b>Anpassen → Skills</b> öffnen</li><li>Auf <b>„+“ → „Skill erstellen“ → „Skill hochladen“</b> klicken</li><li>Die heruntergeladene <b>ZIP-Datei</b> auswählen, nicht entpacken</li><li>Fertig: Einfach loslegen, z. B. „Erstelle eine Kann-Liste zu …“. Claude nutzt den Skill automatisch.</li></ol>
+      <p class="note">Hochgeladene Skills sind privat für dein Konto. Menünamen können je nach Version leicht abweichen.</p></article>
+    <article class="card"><h3>Prompts als TXT-Datei weitergeben</h3>
+      <p>Ein Masterprompt ist eine Textdatei mit allen Anweisungen. Das funktioniert <b>in jeder KI</b>, auch ohne Claude:</p>
+      <ol class="steps"><li>Neuen Chat öffnen, z. B. in ChatGPT, Gemini oder Copilot</li><li>TXT-Datei in den Chat ziehen</li><li>Dazu schreiben: <b>„Bitte folge den Anweisungen in dieser Datei.“</b></li></ol>
+      <ul class="checks"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Leicht zu teilen: per Teams, E-Mail oder über die Ablage unten</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Eigene Prompts genauso speichern: Text in einen Editor, als <b>.txt</b> sichern</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Dauerhaft speichern geht auch: in Gemini als <b>Gem</b>, in ChatGPT als <b>eigenes GPT</b></li></ul>
+      <p class="note" style="margin-top:8px">Unterschied: Den Skill installiert man einmal, Claude nutzt ihn dann automatisch. Die TXT-Datei lädt man jedes Mal hoch, dafür klappt sie überall.</p></article>
+  </div>
+  <div class="grid" style="margin-top:18px">
     <article class="card"><h3>Gemini Notebook (früher NotebookLM)</h3><p>Stark bei genauen Quellenangaben und Audio- oder Video-Zusammenfassungen. Eng mit Gemini verbunden, keine offizielle Verbindung zu Claude.</p></article>
-    <article class="card"><h3>Ohne Claude</h3><p>Prompts lassen sich auch anderswo dauerhaft speichern: in Gemini als <b>Gem</b>, in ChatGPT als <b>eigenes GPT</b> oder in einem <b>Projekt</b>.</p></article>
+    <article class="card"><h3>Datenschutz bei Skills und Prompts</h3><p>Material, das du hochlädst, landet beim KI-Anbieter. Keine Schülerdaten, keine echten Namen, keine Noten.</p></article>
   </div>
 </div></section>
 
 <section id="kahoot" class="band" aria-labelledby="h-kahoot"><div class="wrap">
-  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg></div><div><h2 id="h-kahoot">Kahoot aus dem eigenen Material</h2><p>Aus Arbeitsblatt, Lernsituation oder Kann-Liste wird ein spielbares Quiz.</p></div></div>
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg></div><div><h2 id="h-kahoot">Kahoot aus dem eigenen Material</h2><p>Aus Arbeitsblatt, Lernsituation oder Kann-Liste wird ein spielbares Quiz. So geht es mit jeder der drei KIs.</p></div></div>
   <img class="pic wide" src="kahoot.jpg" width="1000" height="667" alt="Kahoot-Illustration: Menschen spielen ein Quiz auf Tablets und Handys" loading="lazy">
-  <div class="grid">
-    <article class="card"><img class="kh-icon" src="kahoot-icon.png" width="96" height="96" alt="" loading="lazy"><h3>Mit Kahoot-Anbindung</h3><p>Claude erstellt das Quiz und legt es direkt im eigenen Kahoot-Konto an. Kein Abtippen, kein Import. Im Kahoot-Editor lässt es sich noch anpassen.</p></article>
-    <article class="card"><img class="kh-icon" src="kahoot-icon.png" width="96" height="96" alt="" loading="lazy"><h3>Ohne Anbindung</h3><p>Ein Skill füllt die offizielle Kahoot-Excel-Vorlage. Die Datei lädst du bei Kahoot hoch.</p></article>
+  <div class="grid three">
+    <article class="card"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span><h3>Kahoot-Verbindung</h3><span class="pill ok">Direkt ins Kahoot-Konto</span>
+      <ol class="steps"><li>In Claude unter <b>Einstellungen → Konnektoren</b> „Kahoot“ verbinden</li><li>Material anhängen: „Erstelle ein Kahoot mit 15 Fragen dazu“</li><li>Claude legt das Quiz in deinem Kahoot-Konto an</li></ol>
+      <p class="note">Ohne Verbindung: Skill „Kahoot-Vorlage“ (oben) erstellt eine Excel-Datei zum Importieren.</p></article>
+    <article class="card"><span class="logo"><img src="logo-chatgpt.png" width="311" height="96" alt="ChatGPT"></span><h3>App „Kahoot Creator“</h3><span class="pill ok">Direkt ins Kahoot-Konto</span>
+      <ol class="steps"><li>Neuen Chat starten, auf <b>„+“ → „Mehr“ → „Kahoot Creator“</b> klicken</li><li>Material anhängen, z. B. „Mach daraus 10 Fragen“</li><li>Entwurf über den Button im Kahoot-Konto öffnen und fertigstellen</li></ol>
+      <p class="note">Bis zu 20 Fragen pro Anfrage, Entwurf im Chat weiter bearbeitbar.</p></article>
+    <article class="card"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span><h3>Über die Excel-Vorlage</h3><span class="pill">Keine Kahoot-Anbindung</span>
+      <ol class="steps"><li>Masterprompt „Kahoot“ (oben) und Material in Gemini hochladen</li><li>Gemini erstellt die Fragen als Excel-Datei (.xlsx)</li><li>In Kahoot: <b>Hinzufügen → Importieren → Tabelle importieren</b></li></ol>
+      <p class="note">Importiert werden nur Quizfragen. Wahr/Falsch kommt als Quizfrage mit zwei Antworten an.</p></article>
   </div>
+  <p class="note" style="margin-top:12px">Der Masterprompt „Kahoot“ funktioniert in jeder KI. Je nach Kahoot-Tarif hat Kahoot auch einen eigenen KI-Generator, z. B. aus einer PDF.</p>
 </div></section>
 
 <section id="lernspaziergang" class="band" aria-labelledby="h-walk"><div class="wrap">
-  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-walk"/></svg></div><div><h2 id="h-walk">Lernspaziergang: der Praxisteil</h2><p>Aus Kann-Liste und Material entsteht eine Textdatei. Damit lernen die Schüler*innen im Sprachmodus jeder KI. Die KI fragt, statt zu erzählen.</p></div></div>
-  <div class="grid">
-    <article class="card">
-      <h3>Starter-Prompt</h3>
-      <p>In eine KI einfügen, dann Kann-Liste und Material anhängen. Die KI baut daraus die TXT-Datei für die Klasse.</p>
-      <div class="codebox"><pre id="prompt" tabindex="0" aria-label="Starter-Prompt Lernspaziergang">Du hilfst mir als Lehrkraft, einen „Lernspaziergang“ vorzubereiten.
+  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-walk"/></svg></div><div><h2 id="h-walk">Lernspaziergang: der Praxisteil</h2><p>Aus Kann-Liste und Material entsteht eine Textdatei. Damit lernen die Schüler*innen im Sprachmodus jeder KI. Die KI fragt, statt zu erzählen. Zwei Varianten, je als Skill und als Masterprompt.</p></div></div>
+  <div class="grid" id="walkcards"></div>
 
-Ich gebe dir eine Kann-Liste und das Unterrichtsmaterial. Erstelle daraus EINE Textdatei, die meine Schüler*innen in jede KI einfügen können. Die Datei enthält das gesamte Material in Textform und eine Anweisung an die KI:
+  <h3 class="sub">Live-Sprachmodus im Vergleich</h3>
+  <p class="legend"><span><i style="background:var(--ok-bg);border:1px solid var(--ok)"></i>Stärke</span><span><i style="background:var(--err-bg);border:1px solid var(--err)"></i>Schwäche</span></p>
+  <div class="scroll stack"><table id="live"><caption class="sr">Live-Sprachmodus von Claude, ChatGPT und Gemini im Vergleich</caption><thead><tr><th scope="col"></th><th scope="col"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span></th><th scope="col"><span class="logo"><img src="logo-chatgpt.png" width="311" height="96" alt="ChatGPT"></span></th><th scope="col"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span></th></tr></thead><tbody></tbody></table></div>
+  <div class="fazit"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Für den Lernspaziergang:</b> Jede App mit Sprachmodus funktioniert.</span></div>
 
-1. Rolle: Du bist ein geduldiger Lern-Tutor. Du erarbeitest die Inhalte FRAGEND mit den Schüler*innen und erzählst nicht einfach.
-2. Start: Fordere die Schüler*innen auf, sich für den Spaziergang bereit zu machen und in den Sprachmodus zu wechseln.
-3. Selbsteinschätzung zu jedem Oberpunkt der Kann-Liste.
-4. Erarbeitung: Fragen zum Material, Lernsituationen kurz auffrischen.
-5. Gezielte Fragen zu jedem Kann-Listen-Punkt.
-6. Transferaufgabe mit einer neuen Situation.
-7. Abschluss: Lernnachweis mit der Kann-Liste, farbig markiert (Grün = kann ich bis Rot = noch gar nicht).
-
-Regeln: Bei Hängern gestufte Hinweise, Lösung erst ganz zum Schluss. Nur Inhalte aus dem Material, nichts erfinden. Keine persönlichen Daten erfragen.
-
-Fehlt dir Material oder die Kann-Liste, frage nach, bevor du anfängst.</pre></div>
-      <div class="row"><button type="button" data-copy="prompt"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Prompt kopieren</span></button><button type="button" class="ghost" id="dlPrompt"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Als TXT herunterladen</button></div>
-    </article>
+  <div class="grid" style="margin-top:18px">
     <article class="card">
       <h3>Warum das funktioniert</h3>
       <ul class="checks"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bei der Sache:</b> Die KI bleibt beim Material und der Kann-Liste</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Echtes Lernen:</b> Fragen statt Antworten zum Abschreiben</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Niedrige Hürde:</b> Sprechen statt Schreiben, gut bei Schreibschwierigkeiten oder Deutsch als Zweitsprache</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bewegung:</b> Lernen beim Gehen, z. B. im Blücherpark</span></li></ul>
-      <h3 style="margin-top:18px">Grenzen</h3>
+    </article>
+    <article class="card">
+      <h3>Grenzen</h3>
       <ul class="checks minus"><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Die KI kann Fehler machen</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Funktioniert nur, wenn Schüler*innen aktiv mitmachen</li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Gratis-Versionen: Sprachmodus begrenzt, besser 10–15 Minuten pro Runde planen</li></ul>
       <div class="card tint" style="margin-top:16px;padding:14px 16px"><h3 style="margin-bottom:4px"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Vorher testen</h3><p style="margin:0">Dieselbe TXT-Datei in ChatGPT, Gemini und Claude ausprobieren: Bleibt die KI in der Tutor-Rolle und stellt sie Fragen?</p></div>
     </article>
@@ -386,26 +426,9 @@ Fehlt dir Material oder die Kann-Liste, frage nach, bevor du anfängst.</pre></d
   <div class="seg" role="group" aria-label="KI hervorheben">
     <button type="button" data-k="0" aria-pressed="true">Alle</button><button type="button" data-k="1" aria-pressed="false">Claude</button><button type="button" data-k="2" aria-pressed="false">ChatGPT</button><button type="button" data-k="3" aria-pressed="false">Gemini</button>
   </div>
+  <p class="legend"><span><i style="background:var(--ok-bg);border:1px solid var(--ok)"></i>Stärke</span><span><i style="background:var(--err-bg);border:1px solid var(--err)"></i>Schwäche</span><span><i style="background:var(--panel);border:1px solid var(--line)"></i>Gleichwertig</span></p>
   <div class="scroll stack"><table id="cmp"><caption class="sr">Vergleich von Claude, ChatGPT und Gemini</caption><thead><tr><th scope="col">Thema</th><th scope="col"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span></th><th scope="col"><span class="logo"><img src="logo-chatgpt.png" width="311" height="96" alt="ChatGPT"></span></th><th scope="col"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span></th></tr></thead><tbody></tbody></table></div>
   <p class="note" style="margin-top:10px">Stand November 2026. Funktionen und Grenzen ändern sich häufig.</p>
-</div></section>
-
-<section id="pruefen" class="band" aria-labelledby="h-check"><div class="wrap">
-  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></div><div><h2 id="h-check">Prüfen, bewerten und Ergebnissen nicht blind trauen</h2><p>Die Fragen, die im Kollegium fast immer kommen.</p></div></div>
-  <div class="grid">
-    <article class="card"><h3>Wenn Schüler*innen KI nutzen</h3><ul><li>KI-Detektoren sind unzuverlässig, darauf lässt sich kein Täuschungsvorwurf stützen</li><li>Besser: Prozess bewerten, mündlich nachfragen, Bezug zum eigenen Betrieb oder Unterricht</li><li><b>KI-Ampel</b> pro Aufgabe: <span class="pill ok">Grün</span>erlaubt, <span class="pill" style="background:#fff1c2;color:#5a4300">Gelb</span>mit Kennzeichnung, <span class="pill" style="background:var(--err-bg);color:var(--err)">Rot</span>nicht erlaubt</li></ul></article>
-    <article class="card"><h3>KI-Ergebnisse prüfen</h3><ul><li>KI erfindet manchmal Quellen, Zahlen oder Paragraphen und klingt dabei überzeugt</li><li>Verzerrungen sind möglich, z. B. bei Rollenbildern in Beispielaufgaben</li><li>Was ins Schülermaterial kommt, prüft die Lehrkraft. KI liefert Entwürfe.</li></ul></article>
-    <article class="card"><h3>Differenzieren und Barrierefreiheit</h3><ul><li>Texte in Einfache oder Leichte Sprache übertragen</li><li>Glossare und Wortlisten erstellen</li><li>Dieselbe Aufgabe auf drei Niveaus</li><li>Elternbriefe in Herkunftssprachen</li></ul></article>
-    <article class="card"><h3>KI als Unterrichtsthema</h3><ul><li>Wie verändert KI den Ausbildungsberuf, z. B. im Autohaus oder im Büro?</li><li>Klasse sucht die Fehler in einer KI-Erklärung</li><li>Gesprächsstoff: Urheberrecht bei KI-Bildern, Energieverbrauch, echte Zeitersparnis</li></ul></article>
-  </div>
-</div></section>
-
-<section id="prompting" class="band" aria-labelledby="h-prompt"><div class="wrap">
-  <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg></div><div><h2 id="h-prompt">Spickzettel: besser prompten</h2><p>Vier Bausteine, die fast jede Antwort verbessern.</p></div></div>
-  <div class="grid">
-    <article class="card"><h3>Die Bausteine</h3><ol class="steps"><li><b>Rolle:</b> „Du bist Lehrkraft für Wirtschaft am Berufskolleg.“</li><li><b>Zielgruppe:</b> „für eine 11. Klasse Automobilkaufleute“</li><li><b>Ziel:</b> „damit sie Kaufvertragsstörungen unterscheiden können“</li><li><b>Format:</b> „als Arbeitsblatt mit drei Aufgaben und Lösung“</li></ol><p class="note">Danach im Gespräch nachschärfen, statt neu anzufangen. Tipp: „Stell mir zuerst Rückfragen.“</p></article>
-    <article class="card"><h3>Beispiel zum Kopieren</h3><div class="codebox"><pre id="ex" tabindex="0" aria-label="Beispiel-Prompt">Du bist Lehrkraft für Wirtschaft an einem Berufskolleg. Erstelle für eine 11. Klasse Automobilkaufleute ein Arbeitsblatt zu Kaufvertragsstörungen (mangelhafte Lieferung, Lieferverzug). Ziel: Die Schüler*innen können die Fälle unterscheiden und Rechte des Käufers nennen. Format: kurzer Fall aus dem Autohaus, drei Aufgaben, Lösung getrennt. Stell mir zuerst Rückfragen, bevor du loslegst.</pre></div><button type="button" data-copy="ex"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Beispiel kopieren</span></button></article>
-  </div>
 </div></section>
 
 <section id="nrw" class="band" aria-labelledby="h-nrw"><div class="wrap">
@@ -479,8 +502,11 @@ $("bar").innerHTML=agenda.map(a=>`<a class="blk${a[3]==="#ff6b4a"?" hot":""}" hr
 
 /* Vergleichstabelle */
 const heads=["Thema","Claude","ChatGPT","Gemini"];
-const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","Nur bezahltes Abo","Auch kostenlos, mit Grenzen","Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills","Eigene GPTs","Gems"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","Voice, am natürlichsten, unterbrechbar","Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","Google-Konto, in Deutschland ab 16"],["Besonderheit","Zusammenhang über alle Office-Programme","Weit verbreitet, viele kennen es","Gemini Notebook mit genauen Quellen"]];
-document.querySelector("#cmp tbody").innerHTML=rows.map(r=>`<tr>${r.map((c,i)=>i?`<td data-l="${heads[i]}">${c}</td>`:`<td>${c}</td>`).join("")}</tr>`).join("");
+const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","-Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","-Nur bezahltes Abo","+Auch kostenlos, mit Grenzen","-Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills","Eigene GPTs","Gems"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","+Voice, am natürlichsten, unterbrechbar","+Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","-Google-Konto, in Deutschland ab 16"],["Besonderheit","+Zusammenhang über alle Office-Programme","+Weit verbreitet, viele kennen es","+Gemini Notebook mit genauen Quellen"]];
+
+const cell=(c,i)=>{if(!i)return `<td>${c}</td>`;const m=c[0]==="+"?"pos":c[0]==="-"?"neg":"";const t=m?c.slice(1):c;
+  return `<td data-l="${heads[i]}"${m?` class="${m}"`:""}>${m?`<span class="mk">${ic(m==="pos"?"plus":"minus")}<span class="sr">${m==="pos"?"Stärke: ":"Schwäche: "}</span></span>`:""}${t}</td>`};
+document.querySelector("#cmp tbody").innerHTML=rows.map(r=>`<tr>${r.map(cell).join("")}</tr>`).join("");
 const segs=[...document.querySelectorAll(".seg button")];
 segs.forEach(b=>b.addEventListener("click",()=>{
   segs.forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
@@ -488,22 +514,41 @@ segs.forEach(b=>b.addEventListener("click",()=>{
   document.querySelectorAll("#cmp tr").forEach(tr=>[...tr.cells].forEach((c,i)=>{c.classList.toggle("dim",k>0&&i>0&&i!==k);c.classList.toggle("hl",k>0&&i===k)}));
 }));
 
+/* Skills und Masterprompts */
+const SK=[
+ {id:"powerpoint-jdbk",grp:"skills",t:"PowerPoint im JDBK-Design",d:"Präsentationen mit Logo, Schulblau, großer Schrift für Prowise, Arbeitsaufträgen, ausgeblendeten Lösungen und Lehrernotizen.",p:["Claude: Code-Ausführung an"]},
+ {id:"kann-liste",grp:"skills",t:"Kann-Liste",d:"Kann-Listen im Aufbau der JDBK-Vorlage „XX Kann-Liste Kraft“ mit Nr., Ich kann …, TNW und Häkchenfeld.",p:["Word-Vorlage mitschicken"]},
+ {id:"kahoot",zip:"kahoot-erstellen",grp:"skills",t:"Kahoot-Vorlage",d:"Quiz in der offiziellen Kahoot-Excel-Vorlage, mit getrennter Lösungsdatei und Belegen aus dem Material.",p:["Import in Kahoot"]},
+ {id:"kannliste-lernspaziergang",grp:"walk",t:"KannListe-Lernspaziergang",k:"Klassenarbeit vorbereiten",d:"Die Tutor-KI geht die ganze Kann-Liste durch: Selbsteinschätzung, erarbeiten, abfragen, Transferaufgabe und Lernnachweis.",p:["Kann-Liste + Material"]},
+ {id:"szenario-lernspaziergang",grp:"walk",t:"Szenario-Lernspaziergang",k:"Lernsituation erarbeiten",d:"Die Tutor-KI erzählt eine Lernsituation und erarbeitet den Inhalt fragend daraus. Abgefragt werden die passenden Kann-Punkte.",p:["Szenario + Material + Kann-Liste"]}
+];
+const card=x=>`<article class="card skill">${x.k?`<span class="pill acc">${esc(x.k)}</span>`:""}<h3>${esc(x.t)}</h3><p>${esc(x.d)}</p><div>${x.p.map(v=>`<span class="pill">${esc(v)}</span>`).join("")}</div>
+ <div class="acts"><a class="btn" href="skill-${x.zip||x.id}.zip" download>${ic("down")}Skill für Claude (ZIP)</a>
+ <div class="row"><button type="button" class="ghost" data-mp="${x.id}">${ic("copy")}<span>Prompt kopieren</span></button><a class="btn ghost" href="masterprompt-${x.id}.txt" download>${ic("down")}Prompt (TXT)</a></div></div></article>`;
+$("skillcards").innerHTML=SK.filter(x=>x.grp==="skills").map(card).join("");
+$("walkcards").innerHTML=SK.filter(x=>x.grp==="walk").map(card).join("");
+const MP={};
+SK.forEach(x=>{fetch("masterprompt-"+x.id+".txt").then(r=>r.ok?r.text():Promise.reject()).then(t=>{MP[x.id]=t}).catch(()=>{})});
+
 /* Kopieren */
 async function copyText(text){
   try{await navigator.clipboard.writeText(text);return true}
   catch(e){const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","");t.style.position="fixed";t.style.opacity="0";document.body.append(t);t.select();let ok=false;try{ok=document.execCommand("copy")}catch(_){}t.remove();return ok}
 }
-document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",async()=>{
-  const label=b.querySelector("span"),orig=label.textContent;
-  const ok=await copyText($(b.dataset.copy).textContent);
-  if(ok){b.classList.add("done");label.textContent="Kopiert";say("In die Zwischenablage kopiert")}
-  else{const r=document.createRange();r.selectNodeContents($(b.dataset.copy));const s=getSelection();s.removeAllRanges();s.addRange(r);say("Text markiert, bitte mit cmd/Strg + C kopieren","alert")}
+document.addEventListener("click",async e=>{
+  const b=e.target.closest("button[data-mp]");if(!b)return;
+  const label=b.querySelector("span"),orig=label.textContent;const text=MP[b.dataset.mp];
+  if(!text){say("Prompt noch nicht geladen – bitte „Prompt (TXT)“ nutzen","alert");return}
+  if(await copyText(text)){b.classList.add("done");label.textContent="Kopiert";say("Masterprompt kopiert")}else say("Kopieren nicht möglich – bitte „Prompt (TXT)“ nutzen","alert");
   setTimeout(()=>{b.classList.remove("done");label.textContent=orig},1800);
-}));
+});
+
+/* Live-Sprachmodus */
+const live=[["Name","Sprachmodus","Voice „Live“","Gemini Live"],["Stärke","+Wartet, denkt nach, stellt Rückfragen","+Sehr natürlich, man kann unterbrechen","+Kamera und Bildschirm teilen, kostenlos"],["Schwäche","-Nur abwechselnd sprechen; kostenlos nur kleines Modell","-Kostenlos nur begrenzte Zeit pro Tag","-Kamera nur bei eingeschaltetem Display"]];
+document.querySelector("#live tbody").innerHTML=live.map(r=>`<tr>${r.map(cell).join("")}</tr>`).join("");
 
 /* Datei speichern */
 const saveFile=(name,blob)=>{const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)};
-$("dlPrompt").addEventListener("click",()=>{saveFile("Lernspaziergang-Starter-Prompt.txt",new Blob([$("prompt").textContent],{type:"text/plain;charset=utf-8"}));say("Download gestartet","down")});
 
 /* Ablage: Liste */
 const fl=$("files"),queue=$("queue"),fcount=$("fcount");
@@ -586,7 +631,7 @@ window.addEventListener("drop",e=>{if(!drop.contains(e.target))e.preventDefault(
 
 /* Suche */
 const q=$("q"),hits=$("hits"),hitbar=$("hitbar"),nohits=$("nohits");
-const cards=[...document.querySelectorAll("main .card:not(.card .card), #cmp tbody tr")];
+const cards=[...document.querySelectorAll("main .card:not(.card .card), #cmp tbody tr, #live tbody tr")];
 const sections=[...document.querySelectorAll("main section")];
 const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
 const clearMarks=()=>{document.querySelectorAll("main mark").forEach(m=>m.replaceWith(m.textContent));cards.forEach(c=>c.normalize())};
