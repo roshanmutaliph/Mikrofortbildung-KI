@@ -1,0 +1,84 @@
+KI-WERKSTATT JDBK – AUDIO-ERKLÄRUNGEN MIT DER STIMME „FABLE“
+==============================================================
+
+So erstellst du die Audios (ca. 15 Minuten):
+1. Öffne https://www.openai.fm (am besten in Safari, dann gibt es MP3-Dateien).
+2. Wähle bei „Voice“ die Stimme Fable.
+3. Lösche den Text im Feld „Vibe“ und füge diesen Vibe ein:
+
+   Sprich Deutsch mit deutscher Aussprache. Freundlich, ruhig und klar, wie eine
+   Kollegin, die im Lehrerzimmer etwas kurz erklärt. Mittleres Tempo, kleine
+   Pausen nach jedem Satz. Fachbegriffe wie Plugin, Skill oder Prompt deutlich sprechen.
+
+4. Füge bei „Script“ den ersten Text unten ein, klicke auf Play und hör kurz rein.
+5. Passt es, klicke auf Download. Benenne die Datei sofort um, genau wie unten
+   angegeben (z. B. audio-plugins.mp3). In Chrome heißt die Endung .wav, das geht auch.
+6. Für die anderen acht Texte wiederholen. Der Vibe bleibt stehen.
+7. Alle Dateien bei GitHub in den Hauptordner hochladen (Add file → Upload files).
+   Die Webseite erkennt sie automatisch: Aus „Vorlesestimme“ wird „KI-Stimme“.
+
+Hinweis: Die Stimmen von OpenAI sind vor allem für Englisch gemacht. Wenn Fable auf
+Deutsch zu englisch klingt, sag Bescheid. Dann suchen wir eine andere Stimme.
+
+--------------------------------------------------------------
+1. Dateiname: audio-plugins.mp3
+   Button: Was sind Plugins und Add-ins?
+   Script:
+
+Plugins oder Add-ins sind kleine Erweiterungen für Word, Excel und PowerPoint. Damit sitzt die KI direkt im Programm, in einer Seitenleiste neben deiner Datei. Sie überarbeitet Texte, baut Folien oder erklärt Formeln, und du musst nichts mehr zwischen Fenstern hin und her kopieren. Bei Claude heißt das Add-in „Claude for Microsoft 365“ und braucht ein bezahltes Abo. Das Add-in von ChatGPT gibt es auch kostenlos. Gemini hat kein Office-Add-in, arbeitet dafür direkt in Google Docs. Ganz wichtig: Sobald die Seitenleiste offen ist, geht die Datei an den Anbieter. Öffne sie also nie in Notenlisten, Gutachten oder anderen Dateien mit Schülerdaten.
+
+--------------------------------------------------------------
+2. Dateiname: audio-skills.mp3
+   Button: Was sind Skills und Projekte?
+   Script:
+
+Ein normaler Prompt gilt nur im aktuellen Chat. Ein Skill ist eine gespeicherte Arbeitsweise: Du erklärst der KI einmal sauber, wie etwas gemacht wird, zum Beispiel eine Kann-Liste im Format unserer Schule. Danach nutzt Claude den Skill automatisch, sobald er passt. Ein Projekt ist dagegen ein Arbeitsbereich zu einem Thema, zum Beispiel eins pro Klasse. Dort liegen Material und Anweisungen, und jeder neue Chat kennt den Hintergrund. Kurz gesagt: Der Skill legt fest, wie gearbeitet wird. Das Projekt legt fest, wo und womit. Die Skills auf dieser Seite kannst du herunterladen, für andere KIs auch als Masterprompt in einer Textdatei.
+
+--------------------------------------------------------------
+3. Dateiname: audio-kahoot.mp3
+   Button: Wie wird aus meinem Material ein Kahoot?
+   Script:
+
+Du gibst der KI dein Material, zum Beispiel ein Arbeitsblatt, eine Lernsituation oder eine Kann-Liste, und sagst, wie viele Fragen du möchtest. Claude und ChatGPT lassen sich direkt mit deinem Kahoot-Konto verbinden. Dann liegt das Quiz fertig in Kahoot, und du prüfst es nur noch. Ohne Verbindung, zum Beispiel mit Gemini, erstellt die KI eine Excel-Datei in der offiziellen Kahoot-Vorlage. Die importierst du in Kahoot mit wenigen Klicks. Egal auf welchem Weg: Schau die Fragen vor dem Einsatz einmal durch, denn auch die KI kann sich irren.
+
+--------------------------------------------------------------
+4. Dateiname: audio-lernspaziergang.mp3
+   Button: Was ist der Lernspaziergang?
+   Script:
+
+Aus deiner Kann-Liste und deinem Material entsteht eine kleine Textdatei. Die Schülerinnen und Schüler laden sie in eine KI auf ihrem Handy, starten den Sprachmodus und gehen los, zum Beispiel durch den Blücherpark. Die KI erzählt nicht einfach, sondern stellt Fragen und fragt die Kann-Punkte ab. So lernen sie sprechend statt schreibend. Das senkt die Hürde, gerade bei Schreibschwierigkeiten oder Deutsch als Zweitsprache. Es gibt zwei Varianten: eine zur Vorbereitung auf die Klassenarbeit und eine, die eine Lernsituation erzählt. Die Folie für den Start kannst du hier herunterladen. Teste die Datei vorher einmal selbst.
+
+--------------------------------------------------------------
+5. Dateiname: audio-webanwendung.mp3
+   Button: Wie entsteht eine Lern-App?
+   Script:
+
+Hier wird aus deinem Unterrichtsmaterial eine interaktive Lern-App. Du gibst der KI die Lernsituation, alle Übungsblätter und die Kann-Liste. Heraus kommt eine einzige HTML-Datei. Sie läuft im Browser, auch am iPad oder am Prowise-Display, ohne Installation und ohne Konto. In der App stecken ein Arbeitsplatz mit der Lernsituation, alle Aufgaben mit Tipps und Feedback und am Ende ein Selbstcheck zur Kann-Liste. Die KI prüft jede Aufgabe und entscheidet: beibehalten, anreichern oder ersetzen. Im Zweifel bleibt die Originalform, und du hast das letzte Wort.
+
+--------------------------------------------------------------
+6. Dateiname: audio-vergleich.mp3
+   Button: Was unterscheidet Claude, ChatGPT und Gemini?
+   Script:
+
+Die drei KIs können vieles Ähnliche, nennen es aber anders. Gespeicherte Anleitungen heißen bei Claude Skills, bei ChatGPT eigene GPTs und bei Gemini Gems. Arbeitsbereiche heißen bei Claude und ChatGPT Projekte, bei Gemini Notebooks. Office-Add-ins haben Claude und ChatGPT, Gemini arbeitet stattdessen in Google Docs. Beim Sprachmodus klingt ChatGPT am natürlichsten, Gemini Live kann zusätzlich Kamera und Bildschirm nutzen. Tipp: Klick in der Tabelle auf eine KI, dann wird ihre Spalte hervorgehoben. Die Funktionen ändern sich oft, deshalb steht unter der Tabelle der Stand.
+
+--------------------------------------------------------------
+7. Dateiname: audio-nrw.mp3
+   Button: Geht das auch ohne eigenes Abo?
+   Script:
+
+Ja. Nicht alle arbeiten privat mit Claude oder ChatGPT, und das ist auch nicht nötig. In N R W gibt es A I S Chat, früher Telli. Das ist ein datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos und dienstlich nutzbar. Dazu kommt ein Selbstlernkurs des Schulministeriums. Er zeigt, wo KI im Unterricht hilft und wo ihre Grenzen liegen. Außerdem gibt es einen Handlungsleitfaden zum Umgang mit textgenerierenden KI-Systemen, mit Prompting-Karten auf der Seite lernen digital Punkt N R W. Ein guter Einstieg, wenn du erst einmal ohne eigenes Konto ausprobieren möchtest.
+
+--------------------------------------------------------------
+8. Dateiname: audio-ablage.mp3
+   Button: Wie funktioniert die Ablage?
+   Script:
+
+Die Ablage ist unser gemeinsamer Ordner. Du kannst hier Material hochladen und herunterladen, ganz ohne Anmeldung. Zieh eine Datei einfach in das Feld oder klick darauf. Pro Datei gehen bis zu zwanzig Megabyte. Wenn du magst, schreib deinen Namen dazu, damit die anderen wissen, von wem das Material ist. Alles landet im selben Ordner, und in der Liste siehst du, was schon drin ist. Bitte lade nur Unterrichtsmaterial hoch, niemals Dateien mit Schülerdaten wie Noten oder Namen.
+
+--------------------------------------------------------------
+9. Dateiname: audio-technik.mp3
+   Button: Wie ist diese Seite gebaut?
+   Script:
+
+Diese Seite kommt ohne eigenen Server aus und besteht aus drei Bausteinen. Erstens: Die Webseite liegt kostenlos bei GitHub. Das ist das Schaufenster, das alle im Browser sehen. Zweitens: Die Ablage ist ein Google-Drive-Ordner. Ein kleines Skript verbindet ihn mit der Seite, deshalb klappt das Hoch- und Herunterladen ohne Anmeldung. Drittens: Den Code schreibt die KI. Wünsche und Bilder gehen im Chat an die KI, fertige Dateien kommen zurück, und hochgeladen wird bei GitHub von Hand. So etwas kannst du auch für deine eigenen Themen bauen.
