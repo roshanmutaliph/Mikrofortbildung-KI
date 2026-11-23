@@ -1,18 +1,20 @@
-MASTERPROMPT „JDBK-HTML-Mail“
+MASTERPROMPT „JDBK-HTML-Mail“ (Baukasten)
 Joseph-DuMont-Berufskolleg Köln · KI-Werkstatt
 
 ==================================================
 FÜR LEHRKRÄFTE – SO NUTZEN SIE DIESE DATEI
 ==================================================
-Die KI gestaltet Rundmails und Einladungen im JDBK-Design: blauer Kopf, „Das Wichtigste in Kürze“, Faktenkacheln (Wann, Wo, Mitbringen, Frist), Info-Karten und ein Button. Die Mail funktioniert in Outlook und Gmail.
+Die KI gestaltet Einladungen, Erinnerungen, Rundmails, Anleitungen, Abfragen sowie Mails zu Konferenzen und pädagogischen Tagen im JDBK-Design. Dafür sortiert sie Ihren Text in feste Bausteine: Faktenkacheln, gelbe Hinweis-Box, nummerierte Schritte, Checkliste, Ablauf, Terminliste und Zu-/Absage-Buttons. Die Mail funktioniert in Outlook und Gmail.
 
 1. Öffnen Sie einen neuen Chat in einer KI Ihrer Wahl (z. B. ChatGPT, Gemini, Claude oder Copilot).
 2. Ziehen Sie diese Datei in das Chatfenster. Alternativ kopieren Sie den gesamten Text hinein.
-3. Schreiben Sie dazu: „Bitte folge den Anweisungen in dieser Datei.“ und nennen Sie Anlass, Zielgruppe, Termin, Ort und was die Empfänger tun sollen.
-4. Speichern Sie das Ergebnis als .html-Datei (oder laden Sie es herunter).
-5. Versand: Datei im Browser öffnen → alles markieren und kopieren (Cmd/Strg + A, Cmd/Strg + C) → in eine neue Mail in Outlook oder Gmail einfügen. Erst eine Testmail an sich selbst schicken.
+3. Schreiben Sie dazu: „Bitte folge den Anweisungen in dieser Datei.“ und fügen Sie Ihren Inhalt ein: Stichpunkte, Rohtext oder eine weitergeleitete Mail.
+4. Die KI zeigt zuerst einen kurzen Plan (Mail-Typ, Bausteine, Betreff). Bestätigen Sie mit „OK“ oder sagen Sie, was anders sein soll.
+5. Speichern Sie das Ergebnis als .html-Datei (oder laden Sie es herunter).
+6. Versand: Datei im Browser öffnen → alles markieren und kopieren (Cmd/Strg + A, Cmd/Strg + C) → in eine neue Mail in Outlook oder Gmail einfügen. Erst eine Testmail an sich selbst schicken.
 
 Tipp: Mit Claude können Sie diese Anleitung auch dauerhaft als Skill speichern (Skill „jdbk-html-email“). Dann entfällt das Hochladen.
+Datenschutz: Keine Namen von Schüler*innen, keine Noten und keine privaten Adressen in den Chat geben.
 
 ==================================================
 AN DIE KI
@@ -25,50 +27,88 @@ Alles ab der nächsten Trennlinie sind deine Arbeitsanweisungen für dieses Gesp
 
 Erstellt eine HTML-E-Mail im Corporate Design des Joseph-DuMont-Berufskollegs (JDBK) Köln. Ziel: Wer die Mail öffnet, weiß in 5 Sekunden, worum es geht, was zu tun ist und bis wann.
 
+Prinzip: Die Gestaltung ist fest, der Inhalt wird sortiert. Jede Mail besteht aus einem festen Rahmen und den Bausteinen, die zum Inhalt passen. Jeder Baustein sieht immer gleich aus (fertige HTML-Stücke in Abschnitt 7).
+
 ## 1. Infos einsammeln
 
-Diese Angaben werden gebraucht. Was im Auftrag schon steht, nicht noch einmal abfragen. Fehlt Wichtiges (vor allem Datum/Frist oder Button-Ziel), in EINER kurzen Rückfrage nachfragen.
+Der Inhalt darf in jeder Form kommen: Stichpunkte, Rohtext, eine weitergeleitete Mail. Herauslesen:
 
-- Anlass (z. B. Volleyballturnier, SV-Info, Mikrofortbildung)
-- Zielgruppe (Kollegium, Klassensprecher*innen, Schüler*innen)
+- Anlass und Zielgruppe (Kollegium, Klassensprecher*innen, Schüler*innen)
 - Anrede: Du oder Sie (Kollegium meist Du, Schüler*innen Du, Eltern/Externe Sie)
 - Kerninfos: Datum, Uhrzeit, Ort, Mitbringliste, Frist, Hinweise
 - Handlungsaufforderung: was sollen die Empfänger tun, bis wann?
-- Button: Beschriftung + URL oder mailto:-Link (Leerzeichen im Betreff als %20)
-- Absender für den Footer
+- Button: Beschriftung + URL oder mailto:-Link (Leerzeichen im Betreff als %20, Umlaute codiert)
+- Absender für den Fuß
 
-Keinen Button erfinden: Gibt es keinen Link, den Button weglassen. Keine Fakten erfinden, keine Adressen raten.
+Was im Auftrag schon steht, nicht noch einmal abfragen. Fehlt Wichtiges (vor allem Datum/Frist oder Button-Ziel), in EINER kurzen Rückfrage nachfragen. Keinen Button erfinden: Gibt es keinen Link, fällt der Button weg. Keine Fakten erfinden, keine Adressen raten.
 
-## 2. Aufbau (immer diese Reihenfolge)
+## 2. Plan
 
-1. **Header:** dunkelblauer Banner #113954, Titel in Weiß (26–28px, fett), darunter eine Unterzeile (15px, #cfdbe6). KEINE Bilder, KEIN Logo.
-2. **Das Wichtigste in Kürze:** genau ein Satz, 17px, der den Kern sagt.
-3. **Faktenleiste:** 2–4 Kacheln nebeneinander (2 pro Zeile), je Emoji + Label in Großbuchstaben (12px, #113954, fett) + Wert (16px, fett). Z. B. 📅 WANN · 📍 WO · 🎒 MITBRINGEN · ⏰ FRIST. Nur Kacheln, für die es Infos gibt.
-4. **Info-Karten (2–3):** Überschrift mit einem Emoji, darunter max. 3–4 kurze Stichpunkte, Schlüsselbegriffe fett.
-5. **Button:** #113954, weiße Schrift, mittig, als bulletproof button.
-6. **Footer:** Absender + „Joseph-DuMont-Berufskolleg Köln“, 13px, #6b7c8c.
+Den Inhalt einem Mail-Typ zuordnen und die Bausteine wählen (Abschnitte 4 und 5).
 
-## 3. Stil
+- Viel oder unklarer Inhalt: erst den Plan in drei Zeilen zeigen (Mail-Typ · Bausteine in Reihenfolge · Betreff) und auf OK warten.
+- Kurzer, eindeutiger Auftrag: direkt bauen und den Plan in der Antwort in einer Zeile nennen.
 
-- Seitenhintergrund #f0f4f8, Inhaltskarte #ffffff mit border-radius:14px.
-- Kacheln und Info-Karten: Hintergrund #e8eff5, border-radius:10px, Akzentlinie links 4px #113954 bei Info-Karten.
-- Text #1f2d3a, Schrift Arial, Helvetica, sans-serif, Fließtext 15–16px, line-height 1.5.
-- Kurze Sätze, keine Textwände, höchstens ca. 150 Wörter Fließtext.
-- Emojis sparsam: eins pro Überschrift bzw. Kachel, nie im Fließtext.
-- Bei Schüler*innen einfache Sprache.
-- Gendern mit Sternchen (Schüler*innen).
+## 3. Fester Rahmen (in jeder Mail)
 
-## 4. Technik
+1. **Kopf:** dunkelblauer Banner #113954, Titel weiß (27px, fett), darunter Unterzeile (15px, #cfdbe6). Ein Themen-Emoji im Titel ist erlaubt. KEINE Bilder, KEIN Logo.
+2. **Kernsatz:** genau ein Satz (höchstens zwei kurze), 17px, der das Wichtigste sagt. Daten fett.
+3. *Bausteine (höchstens 5 verschiedene)*
+4. **Hauptbutton:** genau einer, #113954, weiße Schrift, mittig, Text beginnt mit 👉. Entfällt ohne Link oder wenn die Ja/Nein-Rückmeldung genutzt wird.
+5. **Fuß:** Absender + „Joseph-DuMont-Berufskolleg Köln“, 13px, #6b7c8c.
 
-- Tabellen-Layout mit role="presentation", Inhaltstabelle width="600" + style="width:100%;max-width:600px".
-- Sämtliches CSS inline. Einzige Ausnahme: der kleine <style>-Block aus dem Gerüst (Media-Query, damit Kacheln auf dem Handy untereinander stehen).
+## 4. Bausteine und Sortierregeln
+
+| Inhalt | Baustein | Aussehen |
+|---|---|---|
+| Datum, Uhrzeit, Ort | Faktenleiste | 2–4 Kacheln #e8eff5, je Emoji + LABEL + Wert fett |
+| Frist, Änderung, Achtung | Hinweis-Box | hellgelb #fff4d6, Linie links #e0a100, steht direkt unter dem Kernsatz |
+| mehrere Themen | Themenübersicht + je Thema eine Info-Karte | Übersicht #f0f4f8 „📋 IN DIESER MAIL“; Karten #e8eff5 mit Linie #113954 |
+| Details zu einem Thema | Info-Karte | Überschrift mit Emoji, 2–4 Stichpunkte |
+| Reihenfolge („erst …, dann …“) | Schritte | weiße Zahl im dunkelblauen Kreis, ein Satz pro Schritt |
+| Mitbringen, vorbereiten | Checkliste | grünes ✔ vor jedem Punkt |
+| Programm mit Uhrzeiten | Ablauf | Uhrzeit fett links, Programmpunkt rechts, feine Trennlinien |
+| mehrere Termine | Terminliste | wie Ablauf, links das Datum |
+| Zu- oder Absage gewünscht | Ja/Nein-Rückmeldung | zwei Buttons: „✅ Ich bin dabei“ gefüllt, „❌ Ich kann nicht“ mit Rand; mailto mit fertigem Betreff |
+| Rückfragen an eine Person | Ansprechperson | Karte #f0f4f8 mit 👤, Name, Rolle, E-Mail |
+
+## 5. Rezepte (Startpunkt, Sortierregeln ergänzen)
+
+- **Einladung:** Faktenleiste, Info-Karten, Checkliste
+- **Erinnerung mit Frist:** Hinweis-Box, Faktenleiste
+- **Rundmail mit mehreren Themen:** Themenübersicht, Info-Karten, Terminliste, Ansprechperson
+- **Anleitung:** Schritte, Hinweis-Box, Ansprechperson
+- **Abfrage oder Umfrage:** Faktenleiste, Ja/Nein-Rückmeldung
+- **Konferenz, pädagogische Tage:** Ablauf, Faktenleiste, Checkliste
+
+Reihenfolge in der Mail: Kernsatz → Hinweis-Box bzw. Themenübersicht → Faktenleiste → Ablauf/Karten/Schritte → Checkliste/Terminliste → Ansprechperson → Button bzw. Ja/Nein.
+
+## 6. Übersichtlich gestalten, Emojis und Symbole
+
+Übersichtlich:
+- Das Wichtigste oben: erst der Kernsatz, dann was zu tun ist und bis wann. Die Mail muss beim Überfliegen funktionieren.
+- Jeder Baustein mit Überschrift hat eine kurze Überschrift mit Emoji.
+- Stichpunkte statt Absätze, höchstens zwei Sätze am Stück. Daten, Uhrzeiten, Fristen und Schlüsselbegriffe fett.
+- Viel Weißraum zwischen den Bausteinen (die Abstände aus den HTML-Stücken nicht verkleinern).
+- Insgesamt höchstens ca. 200 Wörter. Lieber kürzen oder auf einen Link verweisen.
+- Bei Schüler*innen einfache Sprache. Gendern mit Sternchen (Schüler*innen).
+
+Emojis als Wegweiser:
+- Eins vor jeder Überschrift, jedem Kachel-Label und jedem Button-Text. Nie mehrere hintereinander, nie mitten im Satz (Ausnahme: Teams-Reaktionen wie 👍 oder ❤️, wenn sie gemeint sind).
+- Feste Bedeutungen: 📅 Datum · 🕒 Uhrzeit/Ablauf · 📍 Ort · ⏰ Frist · ⚠️ Achtung/Änderung · 🎒 Mitbringen · 💡 Tipp · 👉 Aktion/Link · 📎 Anhang · 👤 Ansprechperson · 📋 Überblick · ✅ Ja/erledigt · ❌ Nein/entfällt
+- Für Themen-Überschriften ein passendes Emoji frei wählen (z. B. 🏐 Turnier, 🎄 Weihnachten, 🤖 KI, 💬 Themen, 🧭 So geht's).
+- Symbole für Struktur: ✔ in Checklisten, → für „das musst du tun“, · als Trenner zwischen kurzen Angaben.
+- Emojis und Symbole als Zeichen einfügen, nie als Bilder.
+
+## 7. Technik und HTML-Stücke
+
+- Tabellen-Layout mit role="presentation", Inhaltstabelle width="600" + style="width:100%;max-width:600px". Jeder Baustein ist eine eigene Tabellenzeile.
+- Sämtliches CSS inline. Einzige Ausnahme: der <style>-Block aus dem Gerüst (Kacheln und Ja/Nein-Buttons stehen auf dem Handy untereinander).
 - Unsichtbarer Preheader direkt nach <body>.
 - Keine Web-Fonts, keine Bilder, kein JavaScript, keine Formulare.
-- Unter 100 KB bleiben (sonst kürzt Gmail).
+- Unter 100 KB bleiben (sonst kürzt Gmail). Eine Mail mit 5 Bausteinen hat etwa 7 KB.
 
-## 5. Gerüst
-
-Dieses Gerüst als Grundlage nehmen und mit Inhalt füllen; Kacheln und Karten nach Bedarf vervielfältigen oder weglassen.
+Gerüst:
 
 ```html
 <!DOCTYPE html>
@@ -76,10 +116,11 @@ Dieses Gerüst als Grundlage nehmen und mit Inhalt füllen; Kacheln und Karten n
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
 <title>TITEL</title>
 <style>
 @media only screen and (max-width:620px){
-  .stack{display:block !important;width:100% !important;max-width:100% !important;}
+  .stack{display:block !important;width:100% !important;max-width:100% !important;padding-left:0 !important;padding-right:0 !important;}
   .px{padding-left:20px !important;padding-right:20px !important;}
 }
 </style>
@@ -89,56 +130,7 @@ Dieses Gerüst als Grundlage nehmen und mit Inhalt füllen; Kacheln und Karten n
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f4f8;">
 <tr><td align="center" style="padding:24px 12px;">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:14px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;color:#1f2d3a;">
-
-<!-- HEADER -->
-<tr><td class="px" style="background:#113954;padding:28px 32px;">
-  <div style="font-size:27px;line-height:1.25;font-weight:bold;color:#ffffff;">TITEL</div>
-  <div style="font-size:15px;line-height:1.4;color:#cfdbe6;padding-top:6px;">UNTERZEILE</div>
-</td></tr>
-
-<!-- KURZ -->
-<tr><td class="px" style="padding:24px 32px 8px;font-size:17px;line-height:1.5;">KERNSATZ</td></tr>
-
-<!-- FAKTEN (2 pro Zeile) -->
-<tr><td class="px" style="padding:8px 26px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr>
-  <td class="stack" width="50%" valign="top" style="padding:6px;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8eff5;border-radius:10px;">
-    <tr><td style="padding:14px 16px;">
-      <div style="font-size:12px;font-weight:bold;letter-spacing:0.5px;color:#113954;">📅 WANN</div>
-      <div style="font-size:16px;font-weight:bold;padding-top:4px;">WERT</div>
-    </td></tr></table>
-  </td>
-  <!-- zweite Kachel gleich aufbauen -->
-</tr>
-</table>
-</td></tr>
-
-<!-- INFO-KARTE (wiederholen) -->
-<tr><td class="px" style="padding:10px 32px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8eff5;border-radius:10px;border-left:4px solid #113954;">
-<tr><td style="padding:16px 20px;font-size:15px;line-height:1.5;">
-  <div style="font-size:17px;font-weight:bold;color:#113954;padding-bottom:6px;">🏐 ÜBERSCHRIFT</div>
-  • Stichpunkt mit <strong>Schlüsselbegriff</strong><br>
-  • Stichpunkt
-</td></tr></table>
-</td></tr>
-
-<!-- BUTTON -->
-<tr><td align="center" style="padding:20px 32px 28px;">
-<table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-  <td align="center" bgcolor="#113954" style="border-radius:10px;">
-    <a href="LINK" style="display:inline-block;padding:14px 28px;font-size:16px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:10px;">BUTTONTEXT</a>
-  </td>
-</tr></table>
-</td></tr>
-
-<!-- FOOTER -->
-<tr><td class="px" style="padding:18px 32px 24px;border-top:1px solid #e3e9ef;font-size:13px;line-height:1.5;color:#6b7c8c;">
-  ABSENDER<br>Joseph-DuMont-Berufskolleg Köln
-</td></tr>
-
+<!-- BAUSTEINE HIER, jeder Baustein eine Tabellenzeile -->
 </table>
 </td></tr>
 </table>
@@ -146,13 +138,91 @@ Dieses Gerüst als Grundlage nehmen und mit Inhalt füllen; Kacheln und Karten n
 </html>
 ```
 
-## 6. Prüfen und ausliefern
+Bausteine. Platzhalter: TITEL, UNTERZEILE, PREHEADER, KERNSATZ, TEXT, WERT, EMOJI, ÜBERSCHRIFT, NAME, ROLLE, ADRESSE, LINK, BUTTONTEXT, ANLASS, ABSENDER. Fette Stellen mit `<strong>`. Zeilen in Listen, Schritten und Kacheln nach Bedarf vervielfältigen:
+
+```html
+<!-- KOPF (immer) -->
+<tr><td class="px" style="background:#113954;padding:28px 32px;"><div style="font-size:27px;line-height:1.25;font-weight:bold;color:#ffffff;">EMOJI TITEL</div><div style="font-size:15px;line-height:1.4;color:#cfdbe6;padding-top:6px;">UNTERZEILE</div></td></tr>
+
+<!-- KERNSATZ (immer) -->
+<tr><td class="px" style="padding:26px 32px 10px;font-size:17px;line-height:1.5;color:#1f2d3a;">KERNSATZ mit <strong>fetten</strong> Daten</td></tr>
+
+<!-- HINWEIS-BOX (direkt unter dem Kernsatz) -->
+<tr><td class="px" style="padding:10px 32px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#fff4d6;border-radius:10px;border-left:4px solid #e0a100;">
+<tr><td style="padding:14px 18px;font-size:15px;line-height:1.5;color:#1f2d3a;"><strong style="color:#7a5600;">⏰ FRIST: FR, 04.12.</strong><br>TEXT → was zu tun ist</td></tr></table>
+</td></tr>
+
+<!-- FAKTENLEISTE (2–4 Kacheln, 2 pro Zeile) -->
+<tr><td class="px" style="padding:8px 26px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td class="stack" width="50%" valign="top" style="padding:6px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8eff5;border-radius:10px;">
+<tr><td style="padding:14px 16px;"><div style="font-size:12px;font-weight:bold;letter-spacing:0.5px;color:#113954;">📅 WANN</div><div style="font-size:16px;line-height:1.35;font-weight:bold;color:#1f2d3a;padding-top:4px;">WERT</div></td></tr></table></td><td class="stack" width="50%" valign="top" style="padding:6px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8eff5;border-radius:10px;">
+<tr><td style="padding:14px 16px;"><div style="font-size:12px;font-weight:bold;letter-spacing:0.5px;color:#113954;">📍 WO</div><div style="font-size:16px;line-height:1.35;font-weight:bold;color:#1f2d3a;padding-top:4px;">WERT</div></td></tr></table>
+</td></tr></table>
+</td></tr>
+
+<!-- INFO-KARTE (je Thema eine) -->
+<tr><td class="px" style="padding:10px 32px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e8eff5;border-radius:10px;border-left:4px solid #113954;">
+<tr><td style="padding:16px 20px;font-size:15px;line-height:1.5;color:#1f2d3a;"><div style="font-size:17px;line-height:1.3;font-weight:bold;color:#113954;padding-bottom:6px;">EMOJI ÜBERSCHRIFT</div><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="16" valign="top" style="padding:2px 0;font-size:15px;line-height:1.5;color:#113954;font-weight:bold;">•</td><td valign="top" style="padding:2px 0;font-size:15px;line-height:1.5;color:#1f2d3a;">Stichpunkt mit <strong>Schlüsselbegriff</strong></td></tr>
+<tr><td width="16" valign="top" style="padding:2px 0;font-size:15px;line-height:1.5;color:#113954;font-weight:bold;">•</td><td valign="top" style="padding:2px 0;font-size:15px;line-height:1.5;color:#1f2d3a;">Stichpunkt</td></tr></table>
+</td></tr></table>
+</td></tr>
+
+<!-- SCHRITTE -->
+<tr><td class="px" style="padding:12px 32px;"><div style="font-size:17px;line-height:1.3;font-weight:bold;color:#113954;padding-bottom:10px;">🧭 So geht's</div><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="40" valign="top" style="padding:0 0 12px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">
+<tr><td align="center" valign="middle" width="28" height="28" style="width:28px;height:28px;background:#113954;border-radius:14px;color:#ffffff;font-size:14px;font-weight:bold;line-height:28px;">1</td></tr></table></td><td valign="top" style="padding:4px 0 12px;font-size:15px;line-height:1.5;color:#1f2d3a;">Schritt eins</td></tr>
+<tr><td width="40" valign="top" style="padding:0 0 12px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">
+<tr><td align="center" valign="middle" width="28" height="28" style="width:28px;height:28px;background:#113954;border-radius:14px;color:#ffffff;font-size:14px;font-weight:bold;line-height:28px;">2</td></tr></table></td><td valign="top" style="padding:4px 0 12px;font-size:15px;line-height:1.5;color:#1f2d3a;">Schritt zwei</td></tr></table>
+</td></tr>
+
+<!-- CHECKLISTE -->
+<tr><td class="px" style="padding:12px 32px;"><div style="font-size:17px;line-height:1.3;font-weight:bold;color:#113954;padding-bottom:10px;">🎒 Bitte mitbringen</div><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="28" valign="top" style="padding:3px 0;font-size:16px;line-height:1.5;font-weight:bold;color:#1e7a46;">&#10004;</td><td valign="top" style="padding:3px 0;font-size:15px;line-height:1.5;color:#1f2d3a;">Punkt</td></tr>
+<tr><td width="28" valign="top" style="padding:3px 0;font-size:16px;line-height:1.5;font-weight:bold;color:#1e7a46;">&#10004;</td><td valign="top" style="padding:3px 0;font-size:15px;line-height:1.5;color:#1f2d3a;">Punkt</td></tr></table>
+</td></tr>
+
+<!-- ABLAUF / TERMINLISTE (Spaltenbreite: 70 für Uhrzeiten, 92 für Daten) -->
+<tr><td class="px" style="padding:12px 32px;"><div style="font-size:17px;line-height:1.3;font-weight:bold;color:#113954;padding-bottom:10px;">🕒 Ablauf</div><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="70" valign="top" style="padding:9px 12px 9px 0;font-size:15px;line-height:1.4;font-weight:bold;color:#113954;white-space:nowrap;">14:15</td><td valign="top" style="padding:9px 0;font-size:15px;line-height:1.4;color:#1f2d3a;">Programmpunkt</td></tr>
+<tr><td width="70" valign="top" style="border-top:1px solid #e3e9ef;padding:9px 12px 9px 0;font-size:15px;line-height:1.4;font-weight:bold;color:#113954;white-space:nowrap;">14:30</td><td valign="top" style="border-top:1px solid #e3e9ef;padding:9px 0;font-size:15px;line-height:1.4;color:#1f2d3a;">Programmpunkt</td></tr></table>
+</td></tr>
+
+<!-- THEMENÜBERSICHT (bei Rundmails direkt unter dem Kernsatz) -->
+<tr><td class="px" style="padding:6px 32px 10px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f4f8;border-radius:10px;">
+<tr><td style="padding:14px 18px;font-size:15px;line-height:1.5;color:#1f2d3a;"><div style="font-size:12px;font-weight:bold;letter-spacing:0.5px;color:#113954;padding-bottom:6px;">📋 IN DIESER MAIL</div><span style="font-size:15px;">EMOJI Thema 1</span><br><span style="font-size:15px;">EMOJI Thema 2</span></td></tr></table>
+</td></tr>
+
+<!-- ANSPRECHPERSON -->
+<tr><td class="px" style="padding:10px 32px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f4f8;border-radius:10px;">
+<tr><td style="padding:14px 18px;font-size:15px;line-height:1.5;color:#1f2d3a;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="44" valign="top" style="font-size:26px;line-height:1;">👤</td><td valign="top" style="font-size:15px;line-height:1.5;color:#1f2d3a;"><div style="font-size:12px;font-weight:bold;letter-spacing:0.5px;color:#113954;">FRAGEN?</div><strong>NAME</strong> · ROLLE<br><a href="mailto:ADRESSE@jdbk.de" style="color:#113954;font-weight:bold;">ADRESSE@jdbk.de</a></td></tr></table>
+</td></tr></table>
+</td></tr>
+
+<!-- HAUPTBUTTON (genau einer, nur mit echtem Link) -->
+<tr><td align="center" class="px" style="padding:22px 32px 28px;"><table role="presentation" cellpadding="0" cellspacing="0" border="0">
+<tr><td align="center" bgcolor="#113954" style="border-radius:10px;"><a href="LINK" style="display:inline-block;padding:14px 28px;font-size:16px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:10px;">👉 BUTTONTEXT</a></td></tr></table>
+</td></tr>
+
+<!-- JA/NEIN-RÜCKMELDUNG (ersetzt den Hauptbutton) -->
+<tr><td class="px" style="padding:16px 26px 26px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td class="stack" width="50%" align="center" style="padding:6px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td align="center" bgcolor="#113954" style="background:#113954;border:2px solid #113954;border-radius:10px;"><a href="mailto:ADRESSE?subject=Zusage%20ANLASS" style="display:block;padding:13px 10px;font-size:16px;font-weight:bold;color:#ffffff;text-decoration:none;">✅ Ich bin dabei</a></td></tr></table></td><td class="stack" width="50%" align="center" style="padding:6px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td align="center"  style="background:#ffffff;border:2px solid #113954;border-radius:10px;"><a href="mailto:ADRESSE?subject=Absage%20ANLASS" style="display:block;padding:13px 10px;font-size:16px;font-weight:bold;color:#113954;text-decoration:none;">❌ Ich kann nicht</a></td></tr></table>
+</td></tr></table>
+</td></tr>
+
+<!-- FUSS (immer) -->
+<tr><td class="px" style="padding:18px 32px 24px;border-top:1px solid #e3e9ef;font-size:13px;line-height:1.5;color:#6b7c8c;">ABSENDER<br>Joseph-DuMont-Berufskolleg Köln</td></tr>
+```
+
+## 8. Prüfen und ausliefern
 
 1. Kannst du Dateien erstellen: Datei schreiben, Name nach Anlass, z. B. `sv-schuelerrat-dezember.html`. Sonst den vollständigen HTML-Code in einem einzigen Codeblock ausgeben, damit die Lehrkraft ihn als .html-Datei speichern kann.
-2. Prüfen: Alle Daten, Zeiten, Orte und Links stimmen wörtlich mit den Angaben überein; keine Platzhalter (GROSSBUCHSTABEN-Wörter aus dem Gerüst) mehr übrig; Dateigröße unter 100 KB.
-3. Die Datei bzw. den Code bereitstellen.
-4. In der Antwort kurz liefern:
+2. Prüfen: Alle Daten, Wochentage, Zeiten, Orte und Links stimmen wörtlich mit den Angaben überein; keine Platzhalter mehr übrig; höchstens 5 Bausteine; Dateigröße unter 100 KB.
+3. In der Antwort kurz liefern:
    - **Betreff** (mit einem Emoji am Anfang) und **Preheader**
    - Versand in 3 Schritten: Datei im Browser öffnen → alles markieren und kopieren (Cmd/Strg+A, Cmd/Strg+C) → in eine neue Mail in Outlook oder Gmail einfügen. Erst eine Testmail an sich selbst schicken.
 
-Änderungswünsche ("Termin größer", "weniger Emojis") direkt in derselben Datei umsetzen und neu schicken.
+Änderungswünsche („Termin größer“, „weniger Emojis“, „statt Checkliste eine Terminliste“) direkt umsetzen und den vollständigen Code neu ausgeben.
