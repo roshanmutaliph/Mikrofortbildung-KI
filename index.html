@@ -280,6 +280,33 @@ mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;bord
   .stack td:not(:first-child)::before{content:attr(data-l);display:block;font-size:13px;font-weight:700;color:var(--soft)}
   .facts{grid-template-columns:minmax(0,1fr)}
 }
+/* Folie für Schüler*innen im Lernspaziergang */
+.sus-folie{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:center;margin-top:18px}
+.sus-shot{display:block;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.sus-shot img{display:block;width:100%;height:auto}
+.sus-txt h3{margin-top:10px}
+.sus-txt .btn{margin-top:14px}
+@media (max-width:760px){.sus-folie{grid-template-columns:minmax(0,1fr)}}
+/* Kurz erklärt: Audio pro Themenbereich */
+.exwrap{margin-top:14px}
+.explain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.exbtn{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:6px 18px 6px 6px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;text-align:left;cursor:pointer;box-shadow:var(--shadow);transition:box-shadow .15s,border-color .15s,transform .1s}
+button.exbtn:hover{background:var(--panel);color:var(--ink);box-shadow:var(--shadow-h);border-color:var(--blue-2)}
+button.exmore:hover{background:none;color:var(--link);text-decoration-thickness:2px}
+.exbtn:active{transform:translateY(1px)}
+.exbtn:focus-visible,.exmore:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ex-ico{position:relative;width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;flex:none}
+.ex-ico .icon{width:20px;height:20px}
+.ex-lbl{display:flex;flex-direction:column;line-height:1.25}
+.ex-lbl b{font-size:16px;font-weight:700}
+.ex-lbl small{font-size:13px;color:var(--soft)}
+.exbtn.on{border-color:var(--acc)}
+.exbtn.on .ex-ico{background:var(--acc);color:#1b1b1b}
+.exbtn.on .ex-ico::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--acc);animation:expulse 1.4s ease-out infinite}
+@keyframes expulse{from{opacity:.9;transform:scale(.9)}to{opacity:0;transform:scale(1.35)}}
+.exmore{background:none;border:0;padding:6px 2px;font:600 14px var(--sans);color:var(--link);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.exread{max-width:70ch;margin:10px 0 0;background:var(--field);border-radius:10px;padding:12px 16px;font-size:15px;line-height:1.55}
+.exread small{display:block;margin-top:6px;color:var(--soft);font-size:13px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -303,6 +330,8 @@ mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;bord
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M6 11l6 6 6-6M4 21h16"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V8M6 13l6-6 6 6M4 3h16"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/></symbol>
   <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
   <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="11" rx="1.5"/><path d="M2 19h20M9 7.5l-2 2 2 2M15 7.5l2 2-2 2"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
@@ -437,6 +466,17 @@ mark{background:color-mix(in srgb,var(--acc) 38%,transparent);color:inherit;bord
 <section id="lernspaziergang" class="band" aria-labelledby="h-walk"><div class="wrap">
   <div class="head"><div class="badge"><svg class="icon" aria-hidden="true"><use href="#i-headphones"/></svg></div><div><span class="pill acc">Praxisteil 1</span><h2 id="h-walk">Anwenden: Lernspaziergang</h2><p>Aus Kann-Liste und Material entsteht eine Textdatei. Damit lernen die Schüler*innen im Sprachmodus jeder KI. Die KI fragt, statt zu erzählen. Zwei Varianten, je als Skill und als Masterprompt.</p></div></div>
   <div class="grid" id="walkcards"></div>
+  <article class="card sus-folie">
+    <a class="sus-shot" href="anleitung-lernspaziergang-vorschau.jpg" target="_blank" rel="noopener" title="Vorschau groß öffnen"><img src="anleitung-lernspaziergang-vorschau.jpg" width="1200" height="675" loading="lazy" alt="Vorschau der Folie „So startest du den Lernspaziergang“: sechs Schritte von Speichern bis Sprechen, darunter Hinweise zu Pause und Datenschutz"></a>
+    <div class="sus-txt">
+      <span class="pill acc">Für den Unterricht</span>
+      <h3>Folie für Schüler*innen: So startest du den Lernspaziergang</h3>
+      <p>Sechs Schritte zum Zeigen am Prowise: Datei speichern, KI öffnen, temporären Chat nutzen, Datei laden, abschicken, sprechen. Dazu Hinweise zu Pausen und Datenschutz.</p>
+      <p class="note">In den Notizen stehen Zeitbedarf, ein Tipp zum Vormachen und Impulsfragen. Die Screenshots zeigen Gemini als Beispiel.</p>
+      <div><span class="pill">PowerPoint · 1 Folie</span><span class="pill">mit Notizen</span></div>
+      <a class="btn" href="anleitung-lernspaziergang-sus.pptx" download><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Folie herunterladen (PPTX)</a>
+    </div>
+  </article>
 
   <h3 class="sub">Live-Sprachmodus im Vergleich</h3>
   <p class="legend"><span><i style="background:var(--ok-bg);border:1px solid var(--ok)"></i>Stärke</span><span><i style="background:var(--err-bg);border:1px solid var(--err)"></i>Schwäche</span></p>
@@ -726,6 +766,54 @@ if("IntersectionObserver" in window){
   const topObs=new IntersectionObserver(([en])=>$("totop").classList.toggle("on",!en.isIntersecting));topObs.observe($("top"));
 }
 $("totop").addEventListener("click",()=>{window.scrollTo({top:0});$("top").setAttribute("tabindex","-1");$("top").focus({preventScroll:true})});
+
+
+/* Kurz erklärt: Audio pro Themenbereich.
+   Liegt audio-<id>.mp3 (oder .wav) im Repository, wird diese Datei abgespielt (KI-Stimme).
+   Sonst liest die Vorlesestimme des Geräts denselben Text vor. */
+const EXPL=[{"id": "plugins", "q": "Was sind Plugins und Add-ins?", "t": "Plugins oder Add-ins sind kleine Erweiterungen für Word, Excel und PowerPoint. Damit sitzt die KI direkt im Programm, in einer Seitenleiste neben deiner Datei. Sie überarbeitet Texte, baut Folien oder erklärt Formeln, und du musst nichts mehr zwischen Fenstern hin und her kopieren. Bei Claude heißt das Add-in „Claude for Microsoft 365“ und braucht ein bezahltes Abo. Das Add-in von ChatGPT gibt es auch kostenlos. Gemini hat kein Office-Add-in, arbeitet dafür direkt in Google Docs. Ganz wichtig: Sobald die Seitenleiste offen ist, geht die Datei an den Anbieter. Öffne sie also nie in Notenlisten, Gutachten oder anderen Dateien mit Schülerdaten."}, {"id": "skills", "q": "Was sind Skills und Projekte?", "t": "Ein normaler Prompt gilt nur im aktuellen Chat. Ein Skill ist eine gespeicherte Arbeitsweise: Du erklärst der KI einmal sauber, wie etwas gemacht wird, zum Beispiel eine Kann-Liste im Format unserer Schule. Danach nutzt Claude den Skill automatisch, sobald er passt. Ein Projekt ist dagegen ein Arbeitsbereich zu einem Thema, zum Beispiel eins pro Klasse. Dort liegen Material und Anweisungen, und jeder neue Chat kennt den Hintergrund. Kurz gesagt: Der Skill legt fest, wie gearbeitet wird. Das Projekt legt fest, wo und womit. Die Skills auf dieser Seite kannst du herunterladen, für andere KIs auch als Masterprompt in einer Textdatei."}, {"id": "kahoot", "q": "Wie wird aus meinem Material ein Kahoot?", "t": "Du gibst der KI dein Material, zum Beispiel ein Arbeitsblatt, eine Lernsituation oder eine Kann-Liste, und sagst, wie viele Fragen du möchtest. Claude und ChatGPT lassen sich direkt mit deinem Kahoot-Konto verbinden. Dann liegt das Quiz fertig in Kahoot, und du prüfst es nur noch. Ohne Verbindung, zum Beispiel mit Gemini, erstellt die KI eine Excel-Datei in der offiziellen Kahoot-Vorlage. Die importierst du in Kahoot mit wenigen Klicks. Egal auf welchem Weg: Schau die Fragen vor dem Einsatz einmal durch, denn auch die KI kann sich irren."}, {"id": "lernspaziergang", "q": "Was ist der Lernspaziergang?", "t": "Aus deiner Kann-Liste und deinem Material entsteht eine kleine Textdatei. Die Schülerinnen und Schüler laden sie in eine KI auf ihrem Handy, starten den Sprachmodus und gehen los, zum Beispiel durch den Blücherpark. Die KI erzählt nicht einfach, sondern stellt Fragen und fragt die Kann-Punkte ab. So lernen sie sprechend statt schreibend. Das senkt die Hürde, gerade bei Schreibschwierigkeiten oder Deutsch als Zweitsprache. Es gibt zwei Varianten: eine zur Vorbereitung auf die Klassenarbeit und eine, die eine Lernsituation erzählt. Die Folie für den Start kannst du hier herunterladen. Teste die Datei vorher einmal selbst."}, {"id": "webanwendung", "q": "Wie entsteht eine Lern-App?", "t": "Hier wird aus deinem Unterrichtsmaterial eine interaktive Lern-App. Du gibst der KI die Lernsituation, alle Übungsblätter und die Kann-Liste. Heraus kommt eine einzige HTML-Datei. Sie läuft im Browser, auch am iPad oder am Prowise-Display, ohne Installation und ohne Konto. In der App stecken ein Arbeitsplatz mit der Lernsituation, alle Aufgaben mit Tipps und Feedback und am Ende ein Selbstcheck zur Kann-Liste. Die KI prüft jede Aufgabe und entscheidet: beibehalten, anreichern oder ersetzen. Im Zweifel bleibt die Originalform, und du hast das letzte Wort."}, {"id": "vergleich", "q": "Was unterscheidet Claude, ChatGPT und Gemini?", "t": "Die drei KIs können vieles Ähnliche, nennen es aber anders. Gespeicherte Anleitungen heißen bei Claude Skills, bei ChatGPT eigene GPTs und bei Gemini Gems. Arbeitsbereiche heißen bei Claude und ChatGPT Projekte, bei Gemini Notebooks. Office-Add-ins haben Claude und ChatGPT, Gemini arbeitet stattdessen in Google Docs. Beim Sprachmodus klingt ChatGPT am natürlichsten, Gemini Live kann zusätzlich Kamera und Bildschirm nutzen. Tipp: Klick in der Tabelle auf eine KI, dann wird ihre Spalte hervorgehoben. Die Funktionen ändern sich oft, deshalb steht unter der Tabelle der Stand."}, {"id": "nrw", "q": "Geht das auch ohne eigenes Abo?", "t": "Ja. Nicht alle arbeiten privat mit Claude oder ChatGPT, und das ist auch nicht nötig. In NRW gibt es AIS.chat, früher telli. Das ist ein datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos und dienstlich nutzbar. Dazu kommt ein Selbstlernkurs des Schulministeriums. Er zeigt, wo KI im Unterricht hilft und wo ihre Grenzen liegen. Außerdem gibt es einen Handlungsleitfaden zum Umgang mit textgenerierenden KI-Systemen, mit Prompting-Karten auf lernen-digital.nrw. Ein guter Einstieg, wenn du erst einmal ohne eigenes Konto ausprobieren möchtest.", "s": "Ja. Nicht alle arbeiten privat mit Claude oder ChatGPT, und das ist auch nicht nötig. In N R W gibt es A I S Chat, früher Telli. Das ist ein datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos und dienstlich nutzbar. Dazu kommt ein Selbstlernkurs des Schulministeriums. Er zeigt, wo KI im Unterricht hilft und wo ihre Grenzen liegen. Außerdem gibt es einen Handlungsleitfaden zum Umgang mit textgenerierenden KI-Systemen, mit Prompting-Karten auf der Seite lernen digital Punkt N R W. Ein guter Einstieg, wenn du erst einmal ohne eigenes Konto ausprobieren möchtest."}, {"id": "ablage", "q": "Wie funktioniert die Ablage?", "t": "Die Ablage ist unser gemeinsamer Ordner. Du kannst hier Material hochladen und herunterladen, ganz ohne Anmeldung. Zieh eine Datei einfach in das Feld oder klick darauf. Pro Datei gehen bis zu zwanzig Megabyte. Wenn du magst, schreib deinen Namen dazu, damit die anderen wissen, von wem das Material ist. Alles landet im selben Ordner, und in der Liste siehst du, was schon drin ist. Bitte lade nur Unterrichtsmaterial hoch, niemals Dateien mit Schülerdaten wie Noten oder Namen."}, {"id": "technik", "q": "Wie ist diese Seite gebaut?", "t": "Diese Seite kommt ohne eigenen Server aus und besteht aus drei Bausteinen. Erstens: Die Webseite liegt kostenlos bei GitHub. Das ist das Schaufenster, das alle im Browser sehen. Zweitens: Die Ablage ist ein Google-Drive-Ordner. Ein kleines Skript verbindet ihn mit der Seite, deshalb klappt das Hoch- und Herunterladen ohne Anmeldung. Drittens: Den Code schreibt die KI. Wünsche und Bilder gehen im Chat an die KI, fertige Dateien kommen zurück, und hochgeladen wird bei GitHub von Hand. So etwas kannst du auch für deine eigenen Themen bauen."}];
+const mmss=t=>{t=Math.max(1,Math.round(t));return Math.floor(t/60)+":"+String(t%60).padStart(2,"0")};
+let exCur=null;
+const exVoice=()=>{if(!("speechSynthesis" in window))return null;const v=speechSynthesis.getVoices().filter(x=>/^de(-|_|$)/i.test(x.lang));
+  for(const p of [/natural|online|neural/i,/google/i,/anna|helena|katja|petra|markus|conrad|yannick|eddy|flo/i]){const f=v.find(x=>p.test(x.name));if(f)return f}return v[0]||null};
+if("speechSynthesis" in window){speechSynthesis.getVoices();speechSynthesis.addEventListener?.("voiceschanged",()=>{})}
+function exSet(x,on){const b=x.btn;b.setAttribute("aria-pressed",String(on));b.classList.toggle("on",on);
+  b.querySelector(".ex-ico use").setAttribute("href",on?"#i-stop":"#i-sound");
+  b.querySelector(".ex-lbl small").textContent=on?"Läuft … zum Stoppen tippen":x.meta}
+function exStop(){if(!exCur)return;const x=exCur;exCur=null;if(x.audio){x.audio.pause();x.audio.currentTime=0}
+  if(x.speaking&&"speechSynthesis" in window)speechSynthesis.cancel();x.speaking=false;exSet(x,false)}
+function exPlay(x){if(exCur===x){exStop();return}exStop();exCur=x;exSet(x,true);
+  if(x.has){x.audio.currentTime=0;x.audio.play().catch(()=>{x.has=false;exSpeak(x)});return}
+  exSpeak(x)}
+function exSpeak(x){if(!("speechSynthesis" in window)){exStop();say("Vorlesen klappt in diesem Browser nicht. Nutze „Mitlesen“.","alert");return}
+  const u=new SpeechSynthesisUtterance(x.e.s||x.e.t);u.lang="de-DE";const v=exVoice();if(v)u.voice=v;u.rate=1;
+  u.onend=u.onerror=()=>{if(exCur===x){x.speaking=false;exCur=null;exSet(x,false)}};
+  speechSynthesis.cancel();x.speaking=true;speechSynthesis.speak(u)}
+EXPL.forEach(e=>{
+  const sec=document.getElementById(e.id);const host=sec&&sec.querySelector(".head > div:not(.badge)");if(!host)return;
+  const est=mmss((e.s||e.t).split(/\s+/).length/2.3);
+  const box=document.createElement("div");box.className="exwrap";
+  box.innerHTML=`<div class="explain"><button type="button" class="exbtn" aria-pressed="false"><span class="ex-ico">${ic("sound")}</span><span class="ex-lbl"><b>${esc(e.q)}</b><small></small></span></button>
+<button type="button" class="exmore" aria-expanded="false" aria-controls="ex-${e.id}">Mitlesen</button></div>
+<p class="exread" id="ex-${e.id}" hidden>${esc(e.t)}<small></small></p>`;
+  host.appendChild(box);
+  const x={e,btn:box.querySelector(".exbtn"),has:false,audio:null,speaking:false,meta:"Kurz erklärt · ca. "+est+" · Vorlesestimme"};
+  const note=()=>{box.querySelector(".exread small").textContent=x.has?"Gesprochen von einer KI-Stimme.":"Vorgelesen von der Stimme deines Geräts."};
+  x.btn.querySelector("small").textContent=x.meta;note();
+  x.btn.addEventListener("click",()=>exPlay(x));
+  const more=box.querySelector(".exmore"),txt=box.querySelector(".exread");
+  more.addEventListener("click",()=>{const open=txt.hidden;txt.hidden=!open;more.setAttribute("aria-expanded",String(open));more.textContent=open?"Text ausblenden":"Mitlesen"});
+  if(location.protocol.startsWith("http")){
+    const head=u=>fetch(u,{method:"HEAD",cache:"no-cache"}).then(r=>r.ok?u:null).catch(()=>null);
+    head("audio-"+e.id+".mp3").then(u=>u||head("audio-"+e.id+".wav")).then(url=>{if(!url)return;
+      const a=new Audio();a.preload="metadata";a.src=url;x.audio=a;x.has=true;
+      x.meta="Kurz erklärt · ca. "+est+" · KI-Stimme";if(exCur!==x)x.btn.querySelector("small").textContent=x.meta;note();
+      a.addEventListener("loadedmetadata",()=>{if(isFinite(a.duration)){x.meta="Kurz erklärt · "+mmss(a.duration)+" · KI-Stimme";if(exCur!==x)x.btn.querySelector("small").textContent=x.meta}});
+      a.addEventListener("ended",()=>{if(exCur===x){exCur=null;exSet(x,false)}});
+    });
+  }
+});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)exStop()});
 
 list();
 }
