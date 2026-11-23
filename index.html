@@ -628,6 +628,23 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
 #live th.rec{background:var(--ok-soft)}
 .rec-tag{margin-left:10px;vertical-align:middle}
 
+
+/* Umfrage: So weit ist das Kollegium */
+.anon{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.45;margin:0 0 4px}
+.anon .icon{width:16px;height:16px;margin-top:1px;color:var(--ok)}
+.poll{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px}
+.poll li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;align-items:center}
+.poll .pl{font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px}
+.poll .pv{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.poll .pv b{color:var(--ink);font-size:14px}
+.poll .pb{grid-column:1/-1;height:12px;border-radius:99px;background:var(--surface-3);overflow:hidden;box-shadow:inset 0 1px 2px rgba(16,24,40,.08)}
+.poll .pb i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#2b7aa8,#113954);box-shadow:inset 0 1px 0 rgba(255,255,255,.35);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.poll li.mine .pb i{background:linear-gradient(90deg,#ff9274,#ff6b4a)}
+.you-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);vertical-align:1px}
+.poll .you-dot{flex:none}
+.poll-empty{grid-column:1/-1;color:var(--muted);font-size:15px}
+@media (max-width:760px){.poll{grid-template-columns:minmax(0,1fr)}}
+
 /* ---------- Bildschirmbreiten ---------- */
 @media (max-width:1599px){html:not(.beamer) .nav-links a .icon{display:none}}
 @media (max-width:1300px){.brand>span:last-child{display:none}}
@@ -810,7 +827,8 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
         <li><label><input type="checkbox" data-id="webapps"><span>Ich habe Webanwendungen für meine Schüler*innen erstellt.</span></label><a href="#webanwendung" aria-label="Zum Abschnitt Webanwendung"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
         <li><label><input type="checkbox" data-id="htmlmail"><span>Ich kann eine HTML-Mail erstellen und versenden.</span></label><a href="#mails" aria-label="Zum Abschnitt E-Mails"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
       </ul>
-      <div class="plan-foot"><span class="note" id="plannote">Noch nichts abgehakt. Gespeichert wird nur in diesem Browser.</span><button class="linkbtn" type="button" id="planreset">Zurücksetzen</button></div>
+      <p class="anon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>Deine Häkchen fließen anonym in die Auswertung des Kollegiums ein (Grafik unten). Es werden keine Namen gespeichert.</span></p>
+      <div class="plan-foot"><span class="note" id="plannote">Noch nichts abgehakt.</span><button class="linkbtn" type="button" id="planreset">Zurücksetzen</button></div>
     </div>
 
     <div class="tile c-7 facts-tile">
@@ -827,6 +845,12 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
       <div class="bar" id="bar"></div>
       <div class="ticks" aria-hidden="true"><span>14:15</span><span>14:30</span><span>14:45</span><span>15:00</span></div>
       <p class="note" style="margin-top:12px">Zeiten ungefähr. Ein Klick auf einen Block springt zum Thema.</p>
+    </div>
+
+    <div class="tile c-12" id="kollegium">
+      <div class="tile-h"><div><h2>So weit ist das Kollegium</h2><p class="note" id="pollmeta" style="margin:4px 0 0">Auswertung wird geladen …</p></div><span class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>anonym</span></div>
+      <ul class="poll" id="poll" aria-live="polite"></ul>
+      <p class="note" style="margin-top:14px">Zählt alle Häkchen aus dem „Überblick für mich selbst“. Der Punkt <span class="you-dot" aria-hidden="true"></span> markiert, was du selbst abgehakt hast.</p>
     </div>
   </div>
 </header>
@@ -1194,7 +1218,7 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
     <tr><td>KI-Chat</td><td data-l="Was liegt dort?">Arbeitsweg: Wünsche hin, fertige Dateien zurück</td><td data-l="Wer hat Zugriff?">Ersteller und KI</td></tr>
   </tbody></table></div>
   <div class="grid mt">
-    <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Schrift und Datenschutz dieser Seite</summary><div class="acc-body"><p>Die Schrift Inter (SIL Open Font License) liegt mit im Repository. Die Seite lädt keine Schriften, Skripte oder Zähler von fremden Servern. Nur die Ablage spricht mit dem Google-Apps-Script. Dein Überblick, der Farbmodus, deine KI-Wahl und dein Name für die Ablage werden nur in deinem Browser gespeichert.</p></div></details>
+    <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Schrift und Datenschutz dieser Seite</summary><div class="acc-body"><p>Die Schrift Inter (SIL Open Font License) liegt mit im Repository. Die Seite lädt keine Schriften, Skripte oder Zähler von fremden Servern. Nur die Ablage spricht mit dem Google-Apps-Script. Der Farbmodus, deine KI-Wahl und dein Name für die Ablage werden nur in deinem Browser gespeichert. Die Häkchen im Überblick zählt die Seite anonym mit einer zufälligen Kennung, ohne Namen, für die Grafik „So weit ist das Kollegium“.</p></div></details>
     <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-screen"/></svg>Tastenkürzel und Beamer-Ansicht</summary><div class="acc-body"><p><span class="kbd">/</span> Suche öffnen · <span class="kbd">B</span> Beamer-Ansicht an oder aus. In der Beamer-Ansicht ist die Schrift größer und du springst mit <span class="kbd">→</span> und <span class="kbd">←</span> von Bereich zu Bereich, mit <span class="kbd">Esc</span> zurück.</p></div></details>
   </div>
 </div></section>
@@ -1259,6 +1283,7 @@ sysDark.addEventListener?.("change",e=>{if(!store.get("kiw-theme",""))applyTheme
 /* ---------- Ablauf + Live-Status am Fortbildungstag ---------- */
 $("bar").innerHTML=agenda.map(a=>`<a class="blk${a[3]==="#ff6b4a"?" hot":""}" href="${a[2]}" style="flex:${a[1]};background:${a[3]}"><b>${a[0]}</b><span>${a[1]} Min.</span></a>`).join("");
 const START=new Date(2026,11,14,14,15);
+const REVEAL=new Date(2026,11,14,14,20); /* ab dann zeigt die Seite die Umfrage-Ergebnisse */
 const nowFn=()=>{const p=new URLSearchParams(location.search).get("jetzt");const d=p?new Date(p):null;return d&&!isNaN(d)?d:new Date()};
 function liveTick(){
   const now=nowFn(),blks=[...$("bar").children],live=$("live"),txt=$("livetxt");let t=START.getTime(),cur=-1;
@@ -1282,8 +1307,36 @@ const draw=()=>{const n=boxes.filter(b=>b.checked).length,all=boxes.length;fg.st
 boxes.forEach(b=>{b.checked=done.has(b.dataset.id);b.addEventListener("change",()=>{
   b.checked?done.add(b.dataset.id):done.delete(b.dataset.id);store.set(KEY,JSON.stringify([...done]));draw();
   if(b.checked&&done.size===boxes.length)say("Alles abgehakt – stark!")})});
-$("planreset").addEventListener("click",()=>{done.clear();boxes.forEach(b=>b.checked=false);store.del(KEY);draw();say("Überblick zurückgesetzt","refresh")});
+$("planreset").addEventListener("click",()=>{done.clear();boxes.forEach(b=>b.checked=false);store.del(KEY);draw();say("Überblick zurückgesetzt","refresh");pollSend()});
 fg.style.strokeDasharray=String(C);draw();
+
+/* Umfrage: jedes Häkchen zählt anonym (zufällige Kennung pro Browser, keine Namen) */
+const SHORT={prompts:"Prompts wiederkehrend nutzen",word:"Plugin für Word installiert",skillwas:"Weiß, was ein Skill ist",skillnutzen:"Nutzt Skills",
+  kahootschnell:"Kahoot schnell erstellen und verfügbar machen",kahootplugin:"Plugin für Kahoot installiert",kiformate:"Interaktive KI-Formate im Unterricht",
+  webapps:"Webanwendungen erstellt",htmlmail:"HTML-Mail erstellen und versenden"};
+let uid=store.get("kiw-uid","");
+if(!/^[a-z0-9]{12,40}$/.test(uid)){uid=[...crypto.getRandomValues(new Uint8Array(12))].map(x=>(x%36).toString(36)).join("")+Date.now().toString(36);store.set("kiw-uid",uid)}
+const pollEl=$("poll"),pollMeta=$("pollmeta");
+function pollDraw(r){
+  if(!r||!r.ok||!r.counts){pollMeta.textContent="Die Auswertung ist gerade nicht erreichbar.";if(!pollEl.children.length)pollEl.innerHTML='<li class="poll-empty">Bitte später noch einmal vorbeischauen.</li>';return}
+  if(nowFn()<REVEAL){pollMeta.textContent="Die Ergebnisse werden am Mo, 14.12., ab 14:20 Uhr sichtbar.";
+    pollEl.innerHTML='<li class="poll-empty">Bis dahin wird nur gezählt. Hake oben schon ab, was du kannst – zur Fortbildung siehst du dann, wo das Kollegium steht.</li>';return}
+  const n=r.n||0;
+  pollMeta.textContent=n===0?"Noch keine Teilnahme – hake oben ab, was du schon kannst.":n===1?"1 Person hat mitgemacht.":n+" Personen haben mitgemacht.";
+  pollEl.innerHTML=boxes.map(b=>{const k=b.dataset.id,c=r.counts[k]||0,p=n?Math.round(c/n*100):0,mine=done.has(k);
+    return `<li class="${mine?"mine":""}"><span class="pl">${mine?'<span class="you-dot" title="von dir abgehakt"></span>':""}${esc(SHORT[k]||k)}</span><span class="pv"><b>${p} %</b> · ${c} von ${n}</span><span class="pb" role="img" aria-label="${p} Prozent"><i data-w="${p}"></i></span></li>`}).join("");
+  requestAnimationFrame(()=>pollEl.querySelectorAll(".pb i").forEach(i=>i.style.width=i.dataset.w+"%"));
+}
+let pollLast=null,pollT=0;
+function pollLoad(){fetch(SCRIPT_URL+"?action=stats").then(r=>r.ok?r.json():null).then(r=>{pollLast=r;pollDraw(r)}).catch(()=>pollDraw(null))}
+function pollSend(){clearTimeout(pollT);pollT=setTimeout(()=>{
+  fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"vote",id:uid,items:[...done]})})
+    .then(r=>r.ok?r.json():null).then(r=>{if(r&&r.ok){store.set("kiw-poll-sent","1");pollLast=r}pollDraw(r&&r.ok?r:pollLast)}).catch(()=>pollDraw(pollLast))},700)}
+boxes.forEach(b=>b.addEventListener("change",pollSend));
+if(done.size&&!store.get("kiw-poll-sent",""))pollSend();else pollLoad();
+/* Ab 14:20 Uhr erscheinen die Balken von selbst und aktualisieren sich jede Minute – ohne Neuladen */
+setInterval(()=>{if(nowFn()>=REVEAL&&!document.hidden)pollLoad()},60000);
+{const ms=REVEAL-nowFn();if(ms>0&&ms<864e5)setTimeout(pollLoad,ms+1500)}
 }
 
 /* ---------- Vergleichstabellen ---------- */
