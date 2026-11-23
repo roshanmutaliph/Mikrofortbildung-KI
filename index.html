@@ -307,6 +307,54 @@ button.exmore:hover{background:none;color:var(--link);text-decoration-thickness:
 .exmore{background:none;border:0;padding:6px 2px;font:600 14px var(--sans);color:var(--link);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .exread{max-width:70ch;margin:10px 0 0;background:var(--field);border-radius:10px;padding:12px 16px;font-size:15px;line-height:1.55}
 .exread small{display:block;margin-top:6px;color:var(--soft);font-size:13px}
+/* Mehr Luft und klarere Hierarchie (23.11.2026) */
+main .band{padding:clamp(56px,7vw,104px) max(5vw,16px)}
+main .band .head{gap:20px;margin-bottom:clamp(30px,3.4vw,44px)}
+main .band .head h2{font-size:clamp(28px,3.4vw,38px);font-weight:800;line-height:1.12;letter-spacing:-.025em;color:var(--ink)}
+main .band .head p{font-size:18px;line-height:1.6;margin-top:10px}
+.grid{gap:clamp(18px,2.2vw,26px)}
+.card{padding:clamp(22px,2.4vw,30px) clamp(22px,2.6vw,32px)}
+.card > h3{font-size:20px;line-height:1.25;letter-spacing:-.01em;margin-bottom:12px;color:var(--ink)}
+.card p,.card li{line-height:1.65}
+.card li{margin-bottom:8px}
+.sub{margin-top:clamp(44px,5vw,60px);margin-bottom:6px}
+.subp{margin-bottom:20px}
+@media (max-width:760px){
+  main .band .head{gap:14px}
+  main .band .head p{font-size:17px}
+  .card{padding:22px 20px}
+}
+/* Ablage: Hinweis und Drive-Button */
+.drop .dropbtn{margin-top:6px;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;background:var(--blue);color:#fff;font-weight:700;font-size:15px}
+.drop:hover .dropbtn,.drop:focus-visible .dropbtn{background:var(--blue-2)}
+.howto{margin:14px 0 0;padding:14px 16px 14px 14px;border-radius:12px;background:color-mix(in srgb,var(--blue-3) 10%,var(--panel));border:1px solid color-mix(in srgb,var(--blue-3) 28%,var(--line))}
+.howto b.ht{display:flex;align-items:center;gap:8px;font-size:16px;margin-bottom:8px;color:var(--ink)}
+.howto b.ht .icon{color:var(--blue-3)}
+.howto ol{list-style:none;counter-reset:ht;margin:0;padding:0}
+.howto li{counter-increment:ht;position:relative;padding-left:36px;margin:0 0 8px;font-size:15px;line-height:1.55}
+.howto li:last-child{margin-bottom:0}
+.howto li::before{content:counter(ht);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .drop .dropbtn,:root:not([data-theme=light]) .howto li::before{background:var(--blue-2)}}
+:root[data-theme=dark] .drop .dropbtn,:root[data-theme=dark] .howto li::before{background:var(--blue-2)}
+.drivebox{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.btn.drivebtn{width:100%;gap:10px;font-size:16px;font-weight:700;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-bottom-width:3px;box-shadow:var(--shadow)}
+.btn.drivebtn:hover{background:var(--field);color:var(--ink);border-color:var(--blue-2)}
+.btn.drivebtn img{width:24px;height:auto;flex:none}
+.btn.drivebtn .icon{color:var(--soft);transform:rotate(45deg)}
+.drivebox small{display:block;margin-top:8px;font-size:13px;color:var(--soft);text-align:center}
+/* Karten „Skill installieren“ / „Masterprompt nutzen“ */
+.how .card > .pill{margin:0}
+.how .card > h3{margin-top:12px;margin-bottom:4px;font-size:22px}
+.how .how-lead{color:var(--soft);margin:0 0 4px;font-size:16px}
+.how .steps{margin:14px 0 16px!important}
+.how .steps li{margin-bottom:12px}
+.how-tags{display:flex;flex-wrap:wrap;gap:8px}
+.how-tags .pill{margin:0}
+.how-keep{background:var(--field);border-radius:12px;padding:14px 16px}
+.how-keep > b{display:block;font-size:15px;margin-bottom:8px}
+.how-keep dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:15px;line-height:1.5}
+.how-keep dt{font-weight:700}
+.how-keep dd{margin:0;color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -330,6 +378,7 @@ button.exmore:hover{background:none;color:var(--link);text-decoration-thickness:
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M6 11l6 6 6-6M4 21h16"/></symbol>
   <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V8M6 13l6-6 6 6M4 3h16"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L19 7"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
   <symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
   <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/></symbol>
   <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
@@ -425,15 +474,31 @@ button.exmore:hover{background:none;color:var(--link);text-decoration-thickness:
   <p class="subp">Jeder Skill gibt es zweimal: als <b>Skill-Paket (ZIP) für Claude</b> und als <b>Masterprompt (TXT) für jede KI</b>.</p>
   <div class="grid three" id="skillcards"></div>
 
-  <div class="grid" style="margin-top:18px">
-    <article class="card"><h3>So installierst du einen Skill in Claude</h3>
-      <ol class="steps"><li>In den Claude-Einstellungen die <b>Code-Ausführung und Dateierstellung</b> einschalten</li><li><b>Anpassen → Skills</b> öffnen</li><li>Auf <b>„+“ → „Skill erstellen“ → „Skill hochladen“</b> klicken</li><li>Die heruntergeladene <b>ZIP-Datei</b> auswählen, nicht entpacken</li><li>Fertig: Einfach loslegen, z. B. „Erstelle eine Kann-Liste zu …“. Claude nutzt den Skill automatisch.</li></ol>
-      <p class="note">Hochgeladene Skills sind privat für dein Konto. Menünamen können je nach Version leicht abweichen.</p></article>
-    <article class="card"><h3>Prompts als TXT-Datei weitergeben</h3>
-      <p>Ein Masterprompt ist eine Textdatei mit allen Anweisungen. Das funktioniert <b>in jeder KI</b>, auch ohne Claude:</p>
-      <ol class="steps"><li>Neuen Chat öffnen, z. B. in ChatGPT, Gemini oder Copilot</li><li>TXT-Datei in den Chat ziehen</li><li>Dazu schreiben: <b>„Bitte folge den Anweisungen in dieser Datei.“</b></li></ol>
-      <ul class="checks"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Leicht zu teilen: per Teams, E-Mail oder über die Ablage unten</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Eigene Prompts genauso speichern: Text in einen Editor, als <b>.txt</b> sichern</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Dauerhaft speichern geht auch: in Gemini als <b>Gem</b>, in ChatGPT als <b>eigenes GPT</b></li></ul>
-      <p class="note" style="margin-top:8px">Unterschied: Den Skill installiert man einmal, Claude nutzt ihn dann automatisch. Die TXT-Datei lädt man jedes Mal hoch, dafür klappt sie überall.</p></article>
+  <div class="grid how" style="margin-top:18px">
+    <article class="card">
+      <span class="pill">Für Claude</span>
+      <h3>Skill installieren</h3>
+      <p class="how-lead">Einmal hochladen, danach nutzt Claude ihn automatisch.</p>
+      <ol class="steps">
+        <li>In den Einstellungen <b>Code-Ausführung und Dateierstellung</b> einschalten</li>
+        <li><b>Anpassen → Skills → „+“ → Skill hochladen</b></li>
+        <li>Die <b>ZIP-Datei</b> auswählen, nicht entpacken</li>
+      </ol>
+      <div class="how-tags"><span class="pill ok">Auch im Gratis-Konto</span><span class="pill">Gilt auch in Word, Excel, PowerPoint</span><span class="pill">Nur für dein Konto</span></div>
+    </article>
+    <article class="card">
+      <span class="pill acc">Für jede KI</span>
+      <h3>Masterprompt nutzen</h3>
+      <p class="how-lead">Jedes Mal hochladen, dafür klappt es überall.</p>
+      <ol class="steps">
+        <li>Neuen Chat öffnen, z. B. in ChatGPT, Gemini oder Copilot</li>
+        <li>Die <b>TXT-Datei</b> hineinziehen</li>
+        <li>Dazu schreiben: <b>„Folge den Anweisungen in dieser Datei.“</b></li>
+      </ol>
+      <div class="how-keep"><b>Dauerhaft speichern</b>
+        <dl><dt>Gemini</dt><dd>als <b>Gem</b>, auch kostenlos – nicht nutzbar in Gemini Live</dd><dt>ChatGPT</dt><dd>als <b>Projekt</b> – eigene GPTs enden am 11.12.2026</dd></dl>
+      </div>
+    </article>
   </div>
   <div class="grid" style="margin-top:18px">
     <article class="card"><h3>Gemini Notebook (früher NotebookLM)</h3><p>Stark bei genauen Quellenangaben und Audio- oder Video-Zusammenfassungen. Eng mit Gemini verbunden, keine offizielle Verbindung zu Claude.</p></article>
@@ -546,19 +611,32 @@ button.exmore:hover{background:none;color:var(--link);text-decoration-thickness:
   <div class="grid">
     <article class="card">
       <h3>Hochladen</h3>
-      <div class="drop" id="drop" role="button" tabindex="0" aria-describedby="drophelp">
+      <label class="fld" for="from" style="margin:0 0 14px">Dein Name (optional)<input id="from" type="text" autocomplete="name" maxlength="80" placeholder="z. B. R. Mutaliph"></label>
+      <div class="drop" id="drop" role="button" tabindex="0" aria-describedby="drophelp howto">
         <svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>
         <b>Dateien hierher ziehen</b>
-        <span id="drophelp">oder klicken bzw. Enter drücken · bis 20 MB pro Datei · PDF, Office, Bilder, Text, Audio, Video</span>
+        <span id="drophelp">oder tippen bzw. Enter drücken · bis 20 MB pro Datei · PDF, Office, Bilder, Text, Audio, Video</span>
+        <span class="dropbtn" aria-hidden="true"><svg class="icon" style="width:18px;height:18px;color:#fff"><use href="#i-up"/></svg>Datei auswählen</span>
       </div>
       <input id="file" type="file" multiple class="sr" tabindex="-1" aria-hidden="true">
-      <label class="fld" for="from">Dein Name (optional)<input id="from" type="text" autocomplete="name" maxlength="80" placeholder="z. B. R. Mutaliph"></label>
+      <div class="howto" id="howto">
+        <b class="ht"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>So funktioniert die Ablage</b>
+        <ol>
+          <li><b>Name eintragen</b> (freiwillig), damit alle sehen, von wem die Datei ist.</li>
+          <li><b>Datei hineinziehen</b> oder auf „Datei auswählen“ tippen. Das Hochladen startet sofort, ganz ohne Anmeldung.</li>
+          <li><b>Fertig:</b> Die Datei liegt im gemeinsamen Google-Drive-Ordner und steht unter „Im Ordner“. Dort lädt sie jede*r mit „Laden“ herunter.</li>
+        </ol>
+      </div>
       <ul id="queue" class="queue" aria-live="polite"></ul>
       <p class="note" style="display:flex;gap:6px;align-items:flex-start"><svg class="icon" aria-hidden="true" style="margin-top:3px"><use href="#i-alert"/></svg>Bitte nur Unterrichtsmaterial hochladen, keine Dateien mit Schülerdaten.</p>
     </article>
     <article class="card">
       <div class="fhead"><h3>Im Ordner <span class="note" id="fcount"></span></h3><button class="ghost" id="reload" type="button" aria-label="Liste aktualisieren"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg><span>Aktualisieren</span></button></div>
       <div id="files" aria-live="polite" aria-busy="true"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+      <div class="drivebox">
+        <a class="btn drivebtn" href="https://drive.google.com/drive/folders/18R8_WRkydWQKZ6-logLiKiWODDGz7pUO" target="_blank" rel="noopener"><img src="logo-google-drive.png" width="94" height="86" alt="">Ordner in Google Drive öffnen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr">(öffnet einen neuen Tab)</span></a>
+        <small>Öffnet den gemeinsamen Ordner direkt bei Google Drive.</small>
+      </div>
     </article>
   </div>
   <p class="note" style="margin-top:14px">Außerdem: <a href="https://claude.ai/artifact/F9R4j6z3u3yrweqMKyTZ8V" rel="noopener">Anleitung Office-Plugins</a> (bei Claude, mit Login).</p>
@@ -603,7 +681,7 @@ $("bar").innerHTML=agenda.map(a=>`<a class="blk${a[3]==="#ff6b4a"?" hot":""}" hr
 
 /* Vergleichstabelle */
 const heads=["Thema","Claude","ChatGPT","Gemini"];
-const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","-Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","-Nur bezahltes Abo","+Auch kostenlos, mit Grenzen","-Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills","Eigene GPTs","Gems"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","+Voice, am natürlichsten, unterbrechbar","+Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","-Google-Konto, in Deutschland ab 16"],["Besonderheit","+Zusammenhang über alle Office-Programme","+Weit verbreitet, viele kennen es","+Gemini Notebook mit genauen Quellen"]];
+const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","-Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","-Nur bezahltes Abo","+Auch kostenlos, mit Grenzen","-Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills, auch kostenlos","-Eigene GPTs, enden am 11.12.2026","Gems, auch kostenlos"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","+Voice, am natürlichsten, unterbrechbar","+Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","-Google-Konto, in Deutschland ab 16"],["Besonderheit","+Zusammenhang über alle Office-Programme","+Weit verbreitet, viele kennen es","+Gemini Notebook mit genauen Quellen"]];
 
 const cell=(c,i)=>{if(!i)return `<td>${c}</td>`;const m=c[0]==="+"?"pos":c[0]==="-"?"neg":"";const t=m?c.slice(1):c;
   return `<td data-l="${heads[i]}"${m?` class="${m}"`:""}>${m?`<span class="mk">${ic(m==="pos"?"plus":"minus")}<span class="sr">${m==="pos"?"Stärke: ":"Schwäche: "}</span></span>`:""}${t}</td>`};
@@ -758,24 +836,68 @@ q.addEventListener("keydown",e=>{if(e.key==="Escape"){q.value="";runSearch();q.b
 $("clearq").addEventListener("click",()=>{q.value="";runSearch();q.focus()});
 document.addEventListener("keydown",e=>{if(e.key==="/"&&!/input|textarea/i.test(document.activeElement.tagName)){e.preventDefault();q.focus()}});
 
-/* Aktiver Reiter + Nach-oben-Knopf */
+/* Aktiver Reiter (Scrollspy) + Nach-oben-Knopf
+   Markierungslinie: oberes Drittel des Sichtbereichs unter der Menüleiste. Ein IntersectionObserver mit
+   einem 1 px hohen Streifen auf dieser Linie meldet jeden Abschnittswechsel – beim Scrollen, nach Sprüngen
+   über die Zeitleiste oder die Menü-Reiter und bei der Browser-Suche. Markiert wird der letzte Abschnitt,
+   dessen Oberkante die Linie schon erreicht hat; am Seitenende immer der letzte Abschnitt. */
 const tabLinks=[...document.querySelectorAll("#tabs a")];
-if("IntersectionObserver" in window){
-  const spy=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){tabLinks.forEach(a=>{const on=a.getAttribute("href")==="#"+en.target.id;a.setAttribute("aria-current",String(on));if(on){const tb=$("tabs");if(a.offsetLeft<tb.scrollLeft||a.offsetLeft+a.offsetWidth>tb.scrollLeft+tb.clientWidth)tb.scrollTo({left:a.offsetLeft-12})}})}})},{rootMargin:"-40% 0px -55% 0px"});
-  sections.forEach(s=>spy.observe(s));
-  const topObs=new IntersectionObserver(([en])=>$("totop").classList.toggle("on",!en.isIntersecting));topObs.observe($("top"));
+const tabBar=$("tabs"),navEl=document.querySelector("nav"),footEl=document.querySelector("footer");
+const tabFor=new Map(tabLinks.map(a=>[decodeURIComponent(a.hash.slice(1)),a]));
+const spySecs=sections.filter(s=>tabFor.has(s.id));
+const spyCalm=matchMedia("(prefers-reduced-motion: reduce)");
+let spyActive;
+function spyReveal(a){
+  const bar=tabBar.getBoundingClientRect(),r=a.getBoundingClientRect(),pad=16;
+  if(r.left>=bar.left+pad&&r.right<=bar.right-pad)return;
+  const left=tabBar.scrollLeft+(r.left-bar.left)-(bar.width-r.width)/2;
+  tabBar.scrollTo({left:Math.max(0,left),behavior:spyCalm.matches?"auto":"smooth"});
 }
+function spySetActive(id){
+  if(id===spyActive)return;spyActive=id;
+  tabLinks.forEach(a=>{if(id&&tabFor.get(id)===a)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current")});
+  if(id)spyReveal(tabFor.get(id));
+}
+const spyLine=()=>{const n=navEl.offsetHeight;return Math.round(n+(innerHeight-n)*0.3)};
+function spyPick(){
+  const line=spyLine(),vis=spySecs.filter(s=>s.getClientRects().length);let id=null;
+  for(const s of vis){if(s.getBoundingClientRect().top<=line)id=s.id;else break}
+  if(vis.length&&innerHeight+scrollY>=document.documentElement.scrollHeight-4)id=vis[vis.length-1].id;
+  spySetActive(id);
+}
+let spyRaf=0;const spyNow=()=>{if(!spyRaf)spyRaf=requestAnimationFrame(()=>{spyRaf=0;spyPick()})};
+let spyObs=null;
+function spyWatch(){
+  if(!("IntersectionObserver" in window))return;
+  if(spyObs)spyObs.disconnect();
+  const line=spyLine();
+  spyObs=new IntersectionObserver(spyNow,{rootMargin:`-${line}px 0px -${Math.max(0,innerHeight-line-1)}px 0px`,threshold:0});
+  spySecs.forEach(s=>spyObs.observe(s));
+}
+if("IntersectionObserver" in window){
+  spyWatch();
+  if(footEl)new IntersectionObserver(spyNow,{threshold:[0,1]}).observe(footEl);
+  const topObs=new IntersectionObserver(([en])=>$("totop").classList.toggle("on",!en.isIntersecting));topObs.observe($("top"));
+}else addEventListener("scroll",spyNow,{passive:true});
+let spyT;const spyRebuild=()=>{clearTimeout(spyT);spyT=setTimeout(()=>{spyWatch();spyPick()},120)};
+addEventListener("resize",spyRebuild);
+if("ResizeObserver" in window)new ResizeObserver(spyRebuild).observe(navEl);
+addEventListener("hashchange",spyNow);
+if("onscrollend" in window)addEventListener("scrollend",spyNow);
+$("q").addEventListener("input",()=>setTimeout(spyNow,200));
+spyPick();
 $("totop").addEventListener("click",()=>{window.scrollTo({top:0});$("top").setAttribute("tabindex","-1");$("top").focus({preventScroll:true})});
 
 
 /* Kurz erklärt: Audio pro Themenbereich.
    Liegt audio-<id>.mp3 (oder .wav) im Repository, wird diese Datei abgespielt (KI-Stimme).
    Sonst liest die Vorlesestimme des Geräts denselben Text vor. */
-const EXPL=[{"id": "plugins", "q": "Was sind Plugins und Add-ins?", "t": "Plugins oder Add-ins sind kleine Erweiterungen für Word, Excel und PowerPoint. Damit sitzt die KI direkt im Programm, in einer Seitenleiste neben deiner Datei. Sie überarbeitet Texte, baut Folien oder erklärt Formeln, und du musst nichts mehr zwischen Fenstern hin und her kopieren. Bei Claude heißt das Add-in „Claude for Microsoft 365“ und braucht ein bezahltes Abo. Das Add-in von ChatGPT gibt es auch kostenlos. Gemini hat kein Office-Add-in, arbeitet dafür direkt in Google Docs. Ganz wichtig: Sobald die Seitenleiste offen ist, geht die Datei an den Anbieter. Öffne sie also nie in Notenlisten, Gutachten oder anderen Dateien mit Schülerdaten."}, {"id": "skills", "q": "Was sind Skills und Projekte?", "t": "Ein normaler Prompt gilt nur im aktuellen Chat. Ein Skill ist eine gespeicherte Arbeitsweise: Du erklärst der KI einmal sauber, wie etwas gemacht wird, zum Beispiel eine Kann-Liste im Format unserer Schule. Danach nutzt Claude den Skill automatisch, sobald er passt. Ein Projekt ist dagegen ein Arbeitsbereich zu einem Thema, zum Beispiel eins pro Klasse. Dort liegen Material und Anweisungen, und jeder neue Chat kennt den Hintergrund. Kurz gesagt: Der Skill legt fest, wie gearbeitet wird. Das Projekt legt fest, wo und womit. Die Skills auf dieser Seite kannst du herunterladen, für andere KIs auch als Masterprompt in einer Textdatei."}, {"id": "kahoot", "q": "Wie wird aus meinem Material ein Kahoot?", "t": "Du gibst der KI dein Material, zum Beispiel ein Arbeitsblatt, eine Lernsituation oder eine Kann-Liste, und sagst, wie viele Fragen du möchtest. Claude und ChatGPT lassen sich direkt mit deinem Kahoot-Konto verbinden. Dann liegt das Quiz fertig in Kahoot, und du prüfst es nur noch. Ohne Verbindung, zum Beispiel mit Gemini, erstellt die KI eine Excel-Datei in der offiziellen Kahoot-Vorlage. Die importierst du in Kahoot mit wenigen Klicks. Egal auf welchem Weg: Schau die Fragen vor dem Einsatz einmal durch, denn auch die KI kann sich irren."}, {"id": "lernspaziergang", "q": "Was ist der Lernspaziergang?", "t": "Aus deiner Kann-Liste und deinem Material entsteht eine kleine Textdatei. Die Schülerinnen und Schüler laden sie in eine KI auf ihrem Handy, starten den Sprachmodus und gehen los, zum Beispiel durch den Blücherpark. Die KI erzählt nicht einfach, sondern stellt Fragen und fragt die Kann-Punkte ab. So lernen sie sprechend statt schreibend. Das senkt die Hürde, gerade bei Schreibschwierigkeiten oder Deutsch als Zweitsprache. Es gibt zwei Varianten: eine zur Vorbereitung auf die Klassenarbeit und eine, die eine Lernsituation erzählt. Die Folie für den Start kannst du hier herunterladen. Teste die Datei vorher einmal selbst."}, {"id": "webanwendung", "q": "Wie entsteht eine Lern-App?", "t": "Hier wird aus deinem Unterrichtsmaterial eine interaktive Lern-App. Du gibst der KI die Lernsituation, alle Übungsblätter und die Kann-Liste. Heraus kommt eine einzige HTML-Datei. Sie läuft im Browser, auch am iPad oder am Prowise-Display, ohne Installation und ohne Konto. In der App stecken ein Arbeitsplatz mit der Lernsituation, alle Aufgaben mit Tipps und Feedback und am Ende ein Selbstcheck zur Kann-Liste. Die KI prüft jede Aufgabe und entscheidet: beibehalten, anreichern oder ersetzen. Im Zweifel bleibt die Originalform, und du hast das letzte Wort."}, {"id": "vergleich", "q": "Was unterscheidet Claude, ChatGPT und Gemini?", "t": "Die drei KIs können vieles Ähnliche, nennen es aber anders. Gespeicherte Anleitungen heißen bei Claude Skills, bei ChatGPT eigene GPTs und bei Gemini Gems. Arbeitsbereiche heißen bei Claude und ChatGPT Projekte, bei Gemini Notebooks. Office-Add-ins haben Claude und ChatGPT, Gemini arbeitet stattdessen in Google Docs. Beim Sprachmodus klingt ChatGPT am natürlichsten, Gemini Live kann zusätzlich Kamera und Bildschirm nutzen. Tipp: Klick in der Tabelle auf eine KI, dann wird ihre Spalte hervorgehoben. Die Funktionen ändern sich oft, deshalb steht unter der Tabelle der Stand."}, {"id": "nrw", "q": "Geht das auch ohne eigenes Abo?", "t": "Ja. Nicht alle arbeiten privat mit Claude oder ChatGPT, und das ist auch nicht nötig. In NRW gibt es AIS.chat, früher telli. Das ist ein datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos und dienstlich nutzbar. Dazu kommt ein Selbstlernkurs des Schulministeriums. Er zeigt, wo KI im Unterricht hilft und wo ihre Grenzen liegen. Außerdem gibt es einen Handlungsleitfaden zum Umgang mit textgenerierenden KI-Systemen, mit Prompting-Karten auf lernen-digital.nrw. Ein guter Einstieg, wenn du erst einmal ohne eigenes Konto ausprobieren möchtest.", "s": "Ja. Nicht alle arbeiten privat mit Claude oder ChatGPT, und das ist auch nicht nötig. In N R W gibt es A I S Chat, früher Telli. Das ist ein datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos und dienstlich nutzbar. Dazu kommt ein Selbstlernkurs des Schulministeriums. Er zeigt, wo KI im Unterricht hilft und wo ihre Grenzen liegen. Außerdem gibt es einen Handlungsleitfaden zum Umgang mit textgenerierenden KI-Systemen, mit Prompting-Karten auf der Seite lernen digital Punkt N R W. Ein guter Einstieg, wenn du erst einmal ohne eigenes Konto ausprobieren möchtest."}, {"id": "ablage", "q": "Wie funktioniert die Ablage?", "t": "Die Ablage ist unser gemeinsamer Ordner. Du kannst hier Material hochladen und herunterladen, ganz ohne Anmeldung. Zieh eine Datei einfach in das Feld oder klick darauf. Pro Datei gehen bis zu zwanzig Megabyte. Wenn du magst, schreib deinen Namen dazu, damit die anderen wissen, von wem das Material ist. Alles landet im selben Ordner, und in der Liste siehst du, was schon drin ist. Bitte lade nur Unterrichtsmaterial hoch, niemals Dateien mit Schülerdaten wie Noten oder Namen."}, {"id": "technik", "q": "Wie ist diese Seite gebaut?", "t": "Diese Seite kommt ohne eigenen Server aus und besteht aus drei Bausteinen. Erstens: Die Webseite liegt kostenlos bei GitHub. Das ist das Schaufenster, das alle im Browser sehen. Zweitens: Die Ablage ist ein Google-Drive-Ordner. Ein kleines Skript verbindet ihn mit der Seite, deshalb klappt das Hoch- und Herunterladen ohne Anmeldung. Drittens: Den Code schreibt die KI. Wünsche und Bilder gehen im Chat an die KI, fertige Dateien kommen zurück, und hochgeladen wird bei GitHub von Hand. So etwas kannst du auch für deine eigenen Themen bauen."}];
+const EXPL=[{"id": "plugins", "q": "Was ist ein Plugin?", "a": "Ein Plugin, in Office auch Add-in genannt, ist eine Erweiterung, mit der die KI direkt in Word, Excel oder PowerPoint arbeitet.", "b": "Zum Beispiel Claude in Word: Du öffnest die Seitenleiste neben deinem Text und bittest Claude, ihn zu überarbeiten. Die Änderungen erscheinen direkt im Dokument als Nachverfolgung, und du entscheidest, was bleibt. Das Kopieren zwischen Fenstern fällt weg.", "t": "Ein Plugin, in Office auch Add-in genannt, ist eine Erweiterung, mit der die KI direkt in Word, Excel oder PowerPoint arbeitet. Zum Beispiel Claude in Word: Du öffnest die Seitenleiste neben deinem Text und bittest Claude, ihn zu überarbeiten. Die Änderungen erscheinen direkt im Dokument als Nachverfolgung, und du entscheidest, was bleibt. Das Kopieren zwischen Fenstern fällt weg."}, {"id": "skills", "q": "Was ist ein Skill?", "a": "Ein Skill ist eine gespeicherte Arbeitsanleitung, die die KI automatisch nutzt, sobald sie zur Aufgabe passt.", "b": "Zum Beispiel der Skill „Kann-Liste“: Einmal installiert, schreibst du nur noch „Erstelle eine Kann-Liste zu diesem Material“ und hängst dein Material an. Claude baut die Liste dann jedes Mal im Aufbau unserer Schulvorlage, mit Nummer, „Ich kann …“ und Häkchenfeld.", "t": "Ein Skill ist eine gespeicherte Arbeitsanleitung, die die KI automatisch nutzt, sobald sie zur Aufgabe passt. Zum Beispiel der Skill „Kann-Liste“: Einmal installiert, schreibst du nur noch „Erstelle eine Kann-Liste zu diesem Material“ und hängst dein Material an. Claude baut die Liste dann jedes Mal im Aufbau unserer Schulvorlage, mit Nummer, „Ich kann …“ und Häkchenfeld.", "s": "Ein Skill ist eine gespeicherte Arbeitsanleitung, die die KI automatisch nutzt, sobald sie zur Aufgabe passt. Zum Beispiel der Skill Kann-Liste: Einmal installiert, schreibst du nur noch: Erstelle eine Kann-Liste zu diesem Material. Und du hängst dein Material an. Claude baut die Liste dann jedes Mal im Aufbau unserer Schulvorlage, mit Nummer, Ich-kann-Satz und Häkchenfeld."}, {"id": "kahoot", "q": "Wie wird aus meinem Material ein Kahoot?", "a": "Die KI macht aus deinem eigenen Unterrichtsmaterial ein spielbares Kahoot-Quiz.", "b": "Zum Beispiel mit Claude: Du verbindest Claude einmal mit Kahoot, hängst dein Arbeitsblatt an und schreibst „Erstelle ein Kahoot mit 15 Fragen dazu“. Claude legt das Quiz direkt in deinem Kahoot-Konto an. Du prüfst es nur noch kurz und kannst es im Unterricht starten.", "t": "Die KI macht aus deinem eigenen Unterrichtsmaterial ein spielbares Kahoot-Quiz. Zum Beispiel mit Claude: Du verbindest Claude einmal mit Kahoot, hängst dein Arbeitsblatt an und schreibst „Erstelle ein Kahoot mit 15 Fragen dazu“. Claude legt das Quiz direkt in deinem Kahoot-Konto an. Du prüfst es nur noch kurz und kannst es im Unterricht starten.", "s": "Die KI macht aus deinem eigenen Unterrichtsmaterial ein spielbares Kahoot-Quiz. Zum Beispiel mit Claude: Du verbindest Claude einmal mit Kahoot, hängst dein Arbeitsblatt an und schreibst: Erstelle ein Kahoot mit fünfzehn Fragen dazu. Claude legt das Quiz direkt in deinem Kahoot-Konto an. Du prüfst es nur noch kurz und kannst es im Unterricht starten."}, {"id": "lernspaziergang", "q": "Was ist der Lernspaziergang?", "a": "Beim Lernspaziergang lernen Schülerinnen und Schüler im Gespräch mit einer KI, die Fragen stellt, statt selbst zu erzählen.", "b": "Zum Beispiel vor einer Klassenarbeit: Aus deiner Kann-Liste und deinem Material entsteht eine Textdatei. Die Schülerinnen und Schüler laden sie aufs Handy, starten den Sprachmodus und gehen los, etwa durch den Blücherpark. Die KI fragt die Kann-Liste Punkt für Punkt ab, und am Ende gibt es einen Lernnachweis für dich.", "t": "Beim Lernspaziergang lernen Schülerinnen und Schüler im Gespräch mit einer KI, die Fragen stellt, statt selbst zu erzählen. Zum Beispiel vor einer Klassenarbeit: Aus deiner Kann-Liste und deinem Material entsteht eine Textdatei. Die Schülerinnen und Schüler laden sie aufs Handy, starten den Sprachmodus und gehen los, etwa durch den Blücherpark. Die KI fragt die Kann-Liste Punkt für Punkt ab, und am Ende gibt es einen Lernnachweis für dich."}, {"id": "webanwendung", "q": "Was ist eine Lern-App?", "a": "Eine Lern-App ist eine interaktive Webseite, die die KI aus deiner Lernsituation, den Übungsblättern und der Kann-Liste baut.", "b": "Zum Beispiel wird die Lernsituation zu einem klickbaren Postfach des Ausbildungsbetriebs. Die Schülerinnen und Schüler öffnen die Mails, lösen die Aufgaben mit Tipps und Feedback und prüfen sich am Ende im Selbstcheck an der Kann-Liste. Die App läuft im Browser, auch am iPad oder am Prowise-Display.", "t": "Eine Lern-App ist eine interaktive Webseite, die die KI aus deiner Lernsituation, den Übungsblättern und der Kann-Liste baut. Zum Beispiel wird die Lernsituation zu einem klickbaren Postfach des Ausbildungsbetriebs. Die Schülerinnen und Schüler öffnen die Mails, lösen die Aufgaben mit Tipps und Feedback und prüfen sich am Ende im Selbstcheck an der Kann-Liste. Die App läuft im Browser, auch am iPad oder am Prowise-Display."}, {"id": "vergleich", "q": "Was zeigt der KI-Vergleich?", "a": "Der Vergleich zeigt, dass Claude, ChatGPT und Gemini vieles Ähnliche können, es aber unterschiedlich nennen.", "b": "Zum Beispiel gespeicherte Anleitungen: Bei Claude heißen sie Skills, bei Gemini Gems. Bei ChatGPT laufen die eigenen GPTs im Dezember aus, dort nimmst du stattdessen ein Projekt. Tipp: Klick in der Tabelle auf eine KI, dann wird ihre Spalte hervorgehoben.", "t": "Der Vergleich zeigt, dass Claude, ChatGPT und Gemini vieles Ähnliche können, es aber unterschiedlich nennen. Zum Beispiel gespeicherte Anleitungen: Bei Claude heißen sie Skills, bei Gemini Gems. Bei ChatGPT laufen die eigenen GPTs im Dezember aus, dort nimmst du stattdessen ein Projekt. Tipp: Klick in der Tabelle auf eine KI, dann wird ihre Spalte hervorgehoben."}, {"id": "nrw", "q": "Geht das auch ohne eigenes Abo?", "a": "Ja, das Land NRW bietet KI-Angebote, die du dienstlich und ohne privates Abo nutzen kannst.", "b": "Zum Beispiel AIS.chat, früher telli: ein datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos. Damit kannst du KI im Schulalltag ausprobieren, ohne ein eigenes Konto bei Claude oder ChatGPT.", "t": "Ja, das Land NRW bietet KI-Angebote, die du dienstlich und ohne privates Abo nutzen kannst. Zum Beispiel AIS.chat, früher telli: ein datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos. Damit kannst du KI im Schulalltag ausprobieren, ohne ein eigenes Konto bei Claude oder ChatGPT.", "s": "Ja, das Land N R W bietet KI-Angebote, die du dienstlich und ohne privates Abo nutzen kannst. Zum Beispiel A I S Chat, früher Telli: ein datenschutzkonformer KI-Chat des Landes, für Berufskollegs kostenlos. Damit kannst du KI im Schulalltag ausprobieren, ohne ein eigenes Konto bei Claude oder ChatGPT."}, {"id": "ablage", "q": "Was ist die Ablage?", "a": "Die Ablage ist ein gemeinsamer Ordner, in dem alle Material teilen und herunterladen können, ganz ohne Anmeldung.", "b": "Zum Beispiel ziehst du deine Kann-Liste als PDF in das Feld und schreibst auf Wunsch deinen Namen dazu. Kurz darauf steht sie in der Liste, und alle können sie herunterladen. Bitte lade nur Unterrichtsmaterial hoch, keine Dateien mit Schülerdaten.", "t": "Die Ablage ist ein gemeinsamer Ordner, in dem alle Material teilen und herunterladen können, ganz ohne Anmeldung. Zum Beispiel ziehst du deine Kann-Liste als PDF in das Feld und schreibst auf Wunsch deinen Namen dazu. Kurz darauf steht sie in der Liste, und alle können sie herunterladen. Bitte lade nur Unterrichtsmaterial hoch, keine Dateien mit Schülerdaten.", "s": "Die Ablage ist ein gemeinsamer Ordner, in dem alle Material teilen und herunterladen können, ganz ohne Anmeldung. Zum Beispiel ziehst du deine Kann-Liste als P D F in das Feld und schreibst auf Wunsch deinen Namen dazu. Kurz darauf steht sie in der Liste, und alle können sie herunterladen. Bitte lade nur Unterrichtsmaterial hoch, keine Dateien mit Schülerdaten."}, {"id": "technik", "q": "Wie ist diese Seite gebaut?", "a": "Die Seite besteht aus drei kostenlosen Bausteinen: GitHub für die Webseite, Google Drive für die Ablage und eine KI, die den Code schreibt.", "b": "Zum Beispiel der Code: Du schickst der KI im Chat deine Wünsche und Bilder, sie schickt dir die fertigen Dateien zurück, und du lädst sie bei GitHub hoch. Programmieren musst du dafür nicht.", "t": "Die Seite besteht aus drei kostenlosen Bausteinen: GitHub für die Webseite, Google Drive für die Ablage und eine KI, die den Code schreibt. Zum Beispiel der Code: Du schickst der KI im Chat deine Wünsche und Bilder, sie schickt dir die fertigen Dateien zurück, und du lädst sie bei GitHub hoch. Programmieren musst du dafür nicht."}];
 const mmss=t=>{t=Math.max(1,Math.round(t));return Math.floor(t/60)+":"+String(t%60).padStart(2,"0")};
 let exCur=null;
-const exVoice=()=>{if(!("speechSynthesis" in window))return null;const v=speechSynthesis.getVoices().filter(x=>/^de(-|_|$)/i.test(x.lang));
-  for(const p of [/natural|online|neural/i,/google/i,/anna|helena|katja|petra|markus|conrad|yannick|eddy|flo/i]){const f=v.find(x=>p.test(x.name));if(f)return f}return v[0]||null};
+const exVoice=()=>{if(!("speechSynthesis" in window))return null;
+  const v=speechSynthesis.getVoices().filter(x=>/^de(-|_|$)/i.test(x.lang)&&!/eddy|flo|grandma|grandpa|oma|opa|reed|rocko|sandy|shelley|albert|bad news|bahh|bells|boing|bubbles|cellos|jester|organ|superstar|trinoids|whisper|wobble|zarvox/i.test(x.name));
+  for(const p of [/premium|erweitert|enhanced|natural|neural/i,/google/i,/online/i,/petra|anna|helena|katja|markus|yannick|viktor|martin|conrad|amala/i]){const f=v.find(x=>p.test(x.name));if(f)return f}return v[0]||null};
 if("speechSynthesis" in window){speechSynthesis.getVoices();speechSynthesis.addEventListener?.("voiceschanged",()=>{})}
 function exSet(x,on){const b=x.btn;b.setAttribute("aria-pressed",String(on));b.classList.toggle("on",on);
   b.querySelector(".ex-ico use").setAttribute("href",on?"#i-stop":"#i-sound");
@@ -795,10 +917,10 @@ EXPL.forEach(e=>{
   const box=document.createElement("div");box.className="exwrap";
   box.innerHTML=`<div class="explain"><button type="button" class="exbtn" aria-pressed="false"><span class="ex-ico">${ic("sound")}</span><span class="ex-lbl"><b>${esc(e.q)}</b><small></small></span></button>
 <button type="button" class="exmore" aria-expanded="false" aria-controls="ex-${e.id}">Mitlesen</button></div>
-<p class="exread" id="ex-${e.id}" hidden>${esc(e.t)}<small></small></p>`;
+<p class="exread" id="ex-${e.id}" hidden><b>${esc(e.a||"")}</b> ${esc(e.b||e.t)}<small></small></p>`;
   host.appendChild(box);
   const x={e,btn:box.querySelector(".exbtn"),has:false,audio:null,speaking:false,meta:"Kurz erklärt · ca. "+est+" · Vorlesestimme"};
-  const note=()=>{box.querySelector(".exread small").textContent=x.has?"Gesprochen von einer KI-Stimme.":"Vorgelesen von der Stimme deines Geräts."};
+  const note=()=>{box.querySelector(".exread small").textContent=x.has?"Gesprochen von einer KI-Stimme: Piper-Stimme „dii“ (OpenVoiceOS), Lizenz CC BY-NC-SA 4.0.":"Vorgelesen von der Stimme deines Geräts."};
   x.btn.querySelector("small").textContent=x.meta;note();
   x.btn.addEventListener("click",()=>exPlay(x));
   const more=box.querySelector(".exmore"),txt=box.querySelector(".exread");
