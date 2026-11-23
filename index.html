@@ -226,7 +226,8 @@ button{font:inherit;color:inherit}
 .sec{padding:var(--sec) 0;border-top:1px solid var(--line)}
 .sec:nth-of-type(even){background:var(--surface-2)}
 :root[data-theme=dark] .sec:nth-of-type(even){background:#0c1522}
-.sec-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 20px;margin-bottom:clamp(36px,4.5vw,56px);max-width:880px}
+.sec-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px 20px;margin-bottom:clamp(36px,4.5vw,56px)}
+.sec-head>.eyebrow,.sec-head>h2,.sec-head>.lead{grid-column:2}
 .sec-ic{grid-row:span 3;display:grid;place-items:center;width:52px;height:52px;border-radius:15px;background:var(--primary);color:#fff;box-shadow:var(--shadow-sm),inset 0 0 0 1px rgba(255,255,255,.12)}
 .sec-ic .icon{width:25px;height:25px}
 .eyebrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
@@ -345,7 +346,8 @@ code,.kbdtxt{font:600 .92em var(--mono);background:var(--surface-2);border:1px s
 .mp-view[open]>summary::before{transform:rotate(45deg)}
 
 /* Kurz erklärt (Audio) */
-.exwrap{grid-column:2;margin-top:14px}
+.exwrap{grid-column:3;grid-row:1/span 3;justify-self:end;align-self:start;max-width:390px;margin:0}
+.exwrap .explain{justify-content:flex-end}
 .explain{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
 .exbtn{display:inline-flex;align-items:center;gap:12px;padding:6px 18px 6px 6px;border-radius:99px;border:1px solid var(--line-2);background:var(--surface);cursor:pointer;text-align:left;box-shadow:var(--shadow-sm);transition:border-color .15s,box-shadow .15s}
 .exbtn:hover{border-color:var(--brand-fg);box-shadow:var(--shadow)}
@@ -519,6 +521,113 @@ html.beamer .note{font-size:17px}
 html.beamer .nav-links a{font-size:16px}
 html.beamer .sec{padding:96px 0}
 
+
+/* ---------- Glas und Spiegelung ----------
+   Weiche Farbflächen liegen fest hinter der Seite. Darüber: Glasflächen mit Lichtkante oben,
+   diagonalem Reflex und Spiegelung an den Symbolkacheln. Textkarten bleiben nur leicht milchig. */
+:root{--glass-bg:linear-gradient(140deg,rgba(255,255,255,.80),rgba(255,255,255,.52));--glass-line:rgba(255,255,255,.78);
+  --glass-ring:0 0 0 1px rgba(17,57,84,.07);--glass-hi:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.3);
+  --sheen:linear-gradient(125deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.14) 24%,rgba(255,255,255,0) 42%);
+  --card-bg:rgba(255,255,255,.84);--btn-primary:linear-gradient(180deg,#2a6c98 0%,#113954 100%)}
+:root[data-theme=dark]{--glass-bg:linear-gradient(140deg,rgba(34,52,80,.70),rgba(14,24,40,.52));--glass-line:rgba(255,255,255,.10);
+  --glass-ring:0 0 0 1px rgba(0,0,0,.25);--glass-hi:inset 0 1px 0 rgba(255,255,255,.12);
+  --sheen:linear-gradient(125deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.03) 26%,rgba(255,255,255,0) 44%);
+  --card-bg:rgba(15,25,40,.84);--btn-primary:linear-gradient(180deg,#2f86b9 0%,#1d5f8c 100%)}
+body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:none;
+  background:radial-gradient(38vmax 28vmax at 6% 10%,rgba(43,122,168,.30),transparent 62%),radial-gradient(34vmax 26vmax at 96% 6%,rgba(255,107,74,.24),transparent 62%),
+  radial-gradient(42vmax 30vmax at 86% 88%,rgba(111,211,154,.20),transparent 62%),radial-gradient(38vmax 28vmax at 10% 92%,rgba(124,110,255,.18),transparent 62%),radial-gradient(30vmax 22vmax at 50% 45%,rgba(43,122,168,.10),transparent 65%)}
+:root[data-theme=dark] body::before{opacity:.75}
+.hero{background:none}
+.sec,.sec:nth-of-type(even),:root[data-theme=dark] .sec:nth-of-type(even){background:transparent}
+.sec{border-top:1px solid var(--glass-line)}
+.tile,.glass,.mtype,.tabs,.exbtn,.icon-btn,.btn-ghost,.seg,.chips button,.totop,.bctl{isolation:isolate}
+.tile,.glass{background:var(--glass-bg);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);box-shadow:var(--glass-hi),var(--glass-ring),var(--shadow)}
+.tile::after,.glass::after,.mtype::after,.sec-ic::after,.brand-mark::after,.btn::after,.exbtn::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:var(--sheen);z-index:-1}
+.btn::after,.sec-ic::after,.brand-mark::after{z-index:auto}
+.card{background:var(--card-bg);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),var(--shadow-sm)}
+:root[data-theme=dark] .card{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),var(--shadow-sm)}
+.card.callout{background:var(--warn-soft)}
+.card.callout.info{background:var(--brand-soft)}
+.nav{background:linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.62));box-shadow:inset 0 -1px 0 rgba(255,255,255,.6),0 8px 24px -18px rgba(16,24,40,.35)}
+:root[data-theme=dark] .nav{background:linear-gradient(180deg,rgba(12,20,34,.82),rgba(12,20,34,.66));box-shadow:inset 0 -1px 0 rgba(255,255,255,.05)}
+.nav-ind{background:var(--glass-bg);box-shadow:var(--glass-hi),0 0 0 1px var(--line-2),0 4px 12px -6px rgba(16,24,40,.25)}
+/* Symbolkacheln mit Spiegelung */
+.sec-ic,.brand-mark{position:relative;overflow:hidden;background:linear-gradient(160deg,#3a8cc0 0%,#1d5f8c 38%,#113954 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -3px 8px rgba(0,0,0,.25),0 10px 24px -10px rgba(17,57,84,.65);
+}
+.sec-ic{-webkit-box-reflect:below 4px linear-gradient(transparent 55%,rgba(255,255,255,.22))}
+.sec-ic::after,.brand-mark::after{background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,0) 46%)}
+.sec-ic .icon{position:relative;z-index:1}
+.brand-mark svg{position:relative;z-index:1}
+/* Knöpfe mit Glanz */
+.btn{position:relative;overflow:hidden}
+.btn::after{background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.45) 48%,rgba(255,255,255,0) 66%);transform:translateX(-120%);transition:transform .6s}
+.btn:hover::after{transform:translateX(120%)}
+.btn-primary{background:var(--btn-primary);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 8px 18px -10px rgba(17,57,84,.8)}
+.btn-primary:hover{background:var(--btn-primary);filter:brightness(1.08)}
+.btn-accent{background:linear-gradient(180deg,#ff9274 0%,#ff6b4a 55%,#ef5634 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 22px -12px rgba(255,107,74,.9)}
+.btn-accent:hover{background:linear-gradient(180deg,#ff9b80 0%,#ff7552 55%,#f25e3d 100%)}
+.btn-ghost{background:var(--glass-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:var(--line-2);box-shadow:var(--glass-hi)}
+.btn-ghost:hover{background:var(--surface);border-color:var(--brand-fg)}
+.btn.is-done{background:var(--ok)}
+.exbtn{position:relative;overflow:hidden;background:var(--glass-bg);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:var(--line-2);box-shadow:var(--glass-hi),var(--shadow-sm)}
+.ex-ico{background:var(--btn-primary);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+/* Reiter: deutlich als Knöpfe erkennbar */
+.tabhead{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:20px}
+.tabhead .tabs{margin:0}
+.tablabel{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ki-hint{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin:0}
+.ki-hint .icon{width:15px;height:15px}
+.tabs{background:var(--glass-bg);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line-2);box-shadow:var(--glass-hi),var(--shadow-sm);gap:6px}
+.tabs [role=tab]{border:1px solid var(--line);background:rgba(255,255,255,.55);color:var(--ink-2);min-height:42px;padding:8px 18px}
+:root[data-theme=dark] .tabs [role=tab]{background:rgba(255,255,255,.04)}
+.tabs [role=tab]:hover{background:var(--surface);color:var(--ink);border-color:var(--brand-fg)}
+.tabs [role=tab][aria-selected=true]{background:var(--btn-primary);color:#fff;border-color:transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 6px 14px -8px rgba(17,57,84,.8)}
+.seg{background:var(--glass-bg);border-color:var(--line-2);box-shadow:var(--glass-hi)}
+.seg button{border:1px solid var(--line);background:rgba(255,255,255,.5)}
+:root[data-theme=dark] .seg button{background:rgba(255,255,255,.04)}
+.seg button[aria-pressed=true]{background:var(--btn-primary);color:#fff;border-color:transparent}
+.chips button{background:var(--glass-bg);box-shadow:var(--glass-hi)}
+.chips button[aria-pressed=true]{background:var(--btn-primary)}
+/* Mail-Typen als Karten-Knöpfe */
+.mpick{margin-bottom:26px}
+.mpick-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 16px}
+.mpick-no{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:linear-gradient(180deg,#ff9274,#ff6b4a);color:#1b1b1b;font-weight:800;font-size:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 6px 14px -8px rgba(255,107,74,.9)}
+.mpick-h b{font-size:1.15rem}
+.mpick-h span:last-child{color:var(--muted);font-size:15px}
+.mtabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mtype{position:relative;display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:16px 16px 16px 16px;min-height:88px;border-radius:18px;border:1.5px solid var(--line-2);
+  background:var(--glass-bg);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--glass-hi),var(--shadow-sm);cursor:pointer;color:var(--ink);font:inherit;
+  transition:transform .18s,border-color .18s,box-shadow .18s,background .18s;overflow:hidden}
+.mtype:hover{transform:translateY(-3px);border-color:var(--brand-fg);box-shadow:var(--glass-hi),var(--shadow)}
+.mtype:active{transform:translateY(-1px)}
+.mt-ic{flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--surface);border:1px solid var(--line);font-size:23px;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 4px 10px -6px rgba(16,24,40,.3)}
+.mt-txt{flex:1}
+.mt-txt b{display:block;font-size:15.5px;line-height:1.25}
+.mt-txt small{display:block;font-size:13px;color:var(--muted);line-height:1.35;margin-top:3px}
+.mt-go{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:2px solid var(--line-2);color:transparent;background:var(--surface);transition:background .18s,border-color .18s,color .18s}
+.mt-go .icon{width:14px;height:14px;stroke-width:3}
+.mtype:hover .mt-go{border-color:var(--brand-fg)}
+.mtype[aria-selected=true]{border-color:var(--primary-h);background:linear-gradient(140deg,rgba(43,122,168,.20),rgba(255,255,255,.72));box-shadow:0 0 0 4px var(--brand-soft),var(--glass-hi),var(--shadow);transform:none}
+:root[data-theme=dark] .mtype[aria-selected=true]{background:linear-gradient(140deg,rgba(43,122,168,.38),rgba(16,26,42,.7))}
+.mtype[aria-selected=true] .mt-go{background:var(--primary-h);border-color:var(--primary-h);color:#fff}
+.mtype[aria-selected=true] .mt-txt b{color:var(--ink)}
+/* Lernspaziergang: zwei Schritte */
+.phases{display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1.2fr);gap:0;align-items:stretch}
+.phase-no{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;color:var(--brand-fg);background:var(--brand-soft);border:1px solid var(--brand-line);padding:5px 12px;border-radius:99px;margin-bottom:12px}
+.phase h3{font-size:1.25rem;margin:0 0 8px}
+.phase-arrow{display:grid;place-items:center}
+.phase-arrow .icon{width:40px;height:40px;padding:9px;border-radius:50%;transform:rotate(90deg);color:#1b1b1b;background:linear-gradient(180deg,#ff9274,#ff6b4a);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 18px -10px rgba(255,107,74,.9)}
+.phases .sus{grid-template-columns:minmax(0,1fr);align-content:start;gap:16px}
+.phases .sus>.phase-no{justify-self:start;margin:0}
+.phases .sus .sus-txt .tag{margin-bottom:2px}
+.phases .sus h3{font-size:1.25rem}
+.inset{padding:22px 24px;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--line)}
+.inset h3{margin-bottom:4px}
+.kipanel>.pic{margin:0;align-self:center}
+#live th.rec{background:var(--ok-soft)}
+.rec-tag{margin-left:10px;vertical-align:middle}
+
 /* ---------- Bildschirmbreiten ---------- */
 @media (max-width:1599px){html:not(.beamer) .nav-links a .icon{display:none}}
 @media (max-width:1300px){.brand>span:last-child{display:none}}
@@ -559,7 +668,6 @@ html.beamer .sec{padding:96px 0}
   .tablewrap.stack td.pos,.tablewrap.stack td.neg{padding:8px 10px;border-radius:10px;margin:4px 0}
   .tabs{width:100%}
   .tabs [role=tab]{flex:1 1 auto;justify-content:center}
-  .mtabs [role=tab]{flex:1 1 calc(50% - 4px)}
 }
 @media (max-width:420px){
   .nav-in{gap:8px}
@@ -574,6 +682,27 @@ html.beamer .sec{padding:96px 0}
   .sec{padding:32px 0;break-inside:avoid}
   [role=tabpanel][hidden]{display:block!important}
   .card,.tile{box-shadow:none}
+}
+
+@media (max-width:1100px){.mtabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){
+  .sec-head{grid-template-columns:auto minmax(0,1fr)}
+  .exwrap{grid-column:2;grid-row:auto;justify-self:start;margin-top:14px;max-width:none}
+  .exwrap .explain{justify-content:flex-start}
+  .phases{grid-template-columns:minmax(0,1fr)}
+  .phase-arrow{padding:10px 0}
+  .phase-arrow .icon{transform:rotate(180deg)}
+}
+@media (max-width:760px){
+  .sec-head{grid-template-columns:minmax(0,1fr)}
+  .sec-head>.eyebrow,.sec-head>h2,.sec-head>.lead,.exwrap{grid-column:1}
+  .sec-ic{-webkit-box-reflect:below 0 linear-gradient(transparent,transparent)}
+  .tabhead .ki-hint{display:none}
+}
+@media (max-width:560px){
+  .mtabs{grid-template-columns:minmax(0,1fr);gap:8px}
+  .mtype{min-height:64px;padding:12px 14px}
+  .mt-ic{width:40px;height:40px;font-size:19px}
 }
 </style>
 </head>
@@ -628,8 +757,8 @@ html.beamer .sec{padding:96px 0}
       <a href="#plugins"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg>Plugins</a>
       <a href="#skills"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>Skills &amp; Projekte</a>
       <a href="#kahoot"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg>Kahoot</a>
-      <a href="#lernspaziergang"><svg class="icon" aria-hidden="true"><use href="#i-headphones"/></svg>Lernspaziergang</a>
       <a href="#webanwendung"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg>Webanwendung</a>
+      <a href="#lernspaziergang"><svg class="icon" aria-hidden="true"><use href="#i-headphones"/></svg>Lernspaziergang</a>
       <a href="#mails"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>E-Mails</a>
       <a href="#vergleich"><svg class="icon" aria-hidden="true"><use href="#i-compare"/></svg>KI-Vergleich</a>
       <a href="#nrw"><svg class="icon" aria-hidden="true"><use href="#i-building"/></svg>NRW</a>
@@ -667,20 +796,21 @@ html.beamer .sec{padding:96px 0}
 
     <div class="tile c-5 r-2 plan-tile" id="fahrplan">
       <div class="plan-top">
-        <div class="ring" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="27"/><circle class="fg" id="ringfg" cx="32" cy="32" r="27" stroke-dasharray="169.65" stroke-dashoffset="169.65"/></svg><b id="ringtxt">0/8</b></div>
-        <div><h2>Dein Fahrplan durch die Fortbildung</h2><p>Hake ab, was du geschafft hast. Der Stand bleibt in diesem Browser gespeichert.</p></div>
+        <div class="ring" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="27"/><circle class="fg" id="ringfg" cx="32" cy="32" r="27" stroke-dasharray="169.65" stroke-dashoffset="169.65"/></svg><b id="ringtxt">0/9</b></div>
+        <div><h2>Überblick für mich selbst</h2><p>Hake ab, was du schon kannst bzw. angewendet hast.</p></div>
       </div>
       <ul class="plan" id="plan">
-        <li><label><input type="checkbox" data-id="material"><span>Kann-Liste und Unterrichtsmaterial bereitgelegt</span></label><a href="#top" aria-label="Zum Abschnitt Start"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-        <li><label><input type="checkbox" data-id="plugin"><span>Ein Office-Plugin installiert</span></label><a href="#plugins" aria-label="Zum Abschnitt Office-Plugins"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-        <li><label><input type="checkbox" data-id="skill"><span>Einen Skill hochgeladen oder einen Masterprompt ausprobiert</span></label><a href="#skills" aria-label="Zum Abschnitt Skills und Projekte"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-        <li><label><input type="checkbox" data-id="kahoot"><span>Ein Kahoot aus eigenem Material erstellt</span></label><a href="#kahoot" aria-label="Zum Abschnitt Kahoot"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-        <li><label><input type="checkbox" data-id="walk"><span>Eine Lernspaziergang-Datei erstellt und getestet</span></label><a href="#lernspaziergang" aria-label="Zum Abschnitt Lernspaziergang"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-        <li><label><input type="checkbox" data-id="app"><span>Eine Lern-App aus einer Lernsituation gebaut</span></label><a href="#webanwendung" aria-label="Zum Abschnitt Webanwendung"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-        <li><label><input type="checkbox" data-id="mail"><span>Eine HTML-Mail im JDBK-Design gebaut</span></label><a href="#mails" aria-label="Zum Abschnitt E-Mails"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-        <li><label><input type="checkbox" data-id="ablage"><span>Material in die gemeinsame Ablage gelegt</span></label><a href="#ablage" aria-label="Zum Abschnitt Ablage"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="prompts"><span>Ich verwende Prompts wiederkehrend, z. B. zur regelmäßigen Erstellung oder Anpassung von Kann-Listen.</span></label><a href="#prompts" aria-label="Zum Abschnitt Prompt-Bibliothek"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="word"><span>Ich habe das Plugin für Word installiert.</span></label><a href="#plugins" aria-label="Zum Abschnitt Office-Plugins"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="skillwas"><span>Ich weiß, was ein Skill ist.</span></label><a href="#skills" aria-label="Zum Abschnitt Skills und Projekte"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="skillnutzen"><span>Ich nutze Skills.</span></label><a href="#skills" aria-label="Zum Abschnitt Skills und Projekte"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="kahootschnell"><span>Ich weiß, wie ich schnell ein Kahoot erstelle und verfügbar mache.</span></label><a href="#kahoot" aria-label="Zum Abschnitt Kahoot"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="kahootplugin"><span>Ich habe das Plugin für Kahoot installiert.</span></label><a href="#kahoot" aria-label="Zum Abschnitt Kahoot"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="kiformate"><span>Ich habe interaktive KI-Formate mit oder von meinen Schüler*innen im Unterricht anwenden lassen.</span></label><a href="#lernspaziergang" aria-label="Zum Abschnitt Lernspaziergang"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="webapps"><span>Ich habe Webanwendungen für meine Schüler*innen erstellt.</span></label><a href="#webanwendung" aria-label="Zum Abschnitt Webanwendung"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        <li><label><input type="checkbox" data-id="htmlmail"><span>Ich kann eine HTML-Mail erstellen und versenden.</span></label><a href="#mails" aria-label="Zum Abschnitt E-Mails"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
       </ul>
-      <div class="plan-foot"><span class="note" id="plannote">Noch nichts abgehakt.</span><button class="linkbtn" type="button" id="planreset">Zurücksetzen</button></div>
+      <div class="plan-foot"><span class="note" id="plannote">Noch nichts abgehakt. Gespeichert wird nur in diesem Browser.</span><button class="linkbtn" type="button" id="planreset">Zurücksetzen</button></div>
     </div>
 
     <div class="tile c-7 facts-tile">
@@ -709,12 +839,11 @@ html.beamer .sec{padding:96px 0}
   <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg></div><div class="eyebrow">Grundlagen · 01</div><h2 id="h-plugins">Office-Plugins</h2><p class="lead">Die KI arbeitet direkt in Word, Excel und PowerPoint. Kein Kopieren mehr zwischen Fenstern.</p></div>
   <div class="grid">
     <article class="card c-8">
-      <div class="tabs" role="tablist" aria-label="KI wählen: Office-Plugins" data-ki>
+      <div class="tabhead"><span class="tablabel">Deine KI:</span><div class="tabs" role="tablist" aria-label="KI wählen: Office-Plugins" data-ki>
         <button type="button" role="tab" id="pt-claude" aria-controls="pp-claude" aria-selected="true" tabindex="0" data-k="claude">Claude</button>
         <button type="button" role="tab" id="pt-chatgpt" aria-controls="pp-chatgpt" aria-selected="false" tabindex="-1" data-k="chatgpt">ChatGPT</button>
         <button type="button" role="tab" id="pt-gemini" aria-controls="pp-gemini" aria-selected="false" tabindex="-1" data-k="gemini">Gemini</button>
-      </div>
-      <p class="ki-hint"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Deine Wahl gilt für alle KI-Reiter auf dieser Seite.</p>
+      </div><span class="ki-hint"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Gilt für alle KI-Reiter der Seite</span></div>
       <div role="tabpanel" id="pp-claude" aria-labelledby="pt-claude" tabindex="0" class="kipanel">
         <div class="kp-a"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span><h3>Claude for Microsoft 365</h3><span class="tag">Bezahltes Abo</span>
           <p class="say good"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Merkt sich den Zusammenhang über alle drei Programme, eigene Skills gelten auch hier. In Word erscheinen Änderungen als Nachverfolgung.</span></p></div>
@@ -786,78 +915,51 @@ html.beamer .sec{padding:96px 0}
 <!-- ============ Kahoot ============ -->
 <section id="kahoot" class="sec" aria-labelledby="h-kahoot"><div class="wrap">
   <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg></div><div class="eyebrow">Werkzeug · 03</div><h2 id="h-kahoot">Kahoot aus dem eigenen Material</h2><p class="lead">Aus Arbeitsblatt, Lernsituation oder Kann-Liste wird ein spielbares Quiz. So geht es mit jeder der drei KIs.</p></div>
-  <div class="grid">
-    <div class="c-5"><img class="pic wide" src="kahoot.jpg" width="1000" height="667" alt="Kahoot-Illustration: Menschen spielen ein Quiz auf Tablets und Handys" loading="lazy"></div>
-    <article class="card c-7">
-      <div class="tabs" role="tablist" aria-label="KI wählen: Kahoot" data-ki>
-        <button type="button" role="tab" id="kt-claude" aria-controls="kp-claude" aria-selected="true" tabindex="0" data-k="claude">Claude</button>
-        <button type="button" role="tab" id="kt-chatgpt" aria-controls="kp-chatgpt" aria-selected="false" tabindex="-1" data-k="chatgpt">ChatGPT</button>
-        <button type="button" role="tab" id="kt-gemini" aria-controls="kp-gemini" aria-selected="false" tabindex="-1" data-k="gemini">Gemini</button>
-      </div>
-      <div role="tabpanel" id="kp-claude" aria-labelledby="kt-claude" tabindex="0">
+  <article class="card">
+    <div class="tabhead"><span class="tablabel">Deine KI:</span><div class="tabs" role="tablist" aria-label="KI wählen: Kahoot" data-ki>
+      <button type="button" role="tab" id="kt-claude" aria-controls="kp-claude" aria-selected="true" tabindex="0" data-k="claude">Claude</button>
+      <button type="button" role="tab" id="kt-chatgpt" aria-controls="kp-chatgpt" aria-selected="false" tabindex="-1" data-k="chatgpt">ChatGPT</button>
+      <button type="button" role="tab" id="kt-gemini" aria-controls="kp-gemini" aria-selected="false" tabindex="-1" data-k="gemini">Gemini</button>
+    </div><span class="ki-hint"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Gilt für alle KI-Reiter der Seite</span></div>
+    <div role="tabpanel" id="kp-claude" aria-labelledby="kt-claude" tabindex="0" class="kipanel">
+      <div>
         <div class="card-head"><h3>Kahoot-Verbindung</h3><span class="tag ok">Direkt ins Kahoot-Konto</span></div>
         <ol class="steps"><li>In Claude unter <b>Einstellungen → Konnektoren</b> „Kahoot“ verbinden</li><li>Material anhängen: „Erstelle ein Kahoot mit 15 Fragen dazu“</li><li>Claude legt das Quiz in deinem Kahoot-Konto an</li></ol>
         <div class="pbox inline"><p class="pbox-t">Erstelle ein Kahoot mit 15 Fragen dazu</p><button class="copy" type="button" data-copy><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Kopieren</span></button></div>
-        <p class="note" style="margin-top:14px">Ohne Verbindung: Der Skill „Kahoot-Vorlage“ (unten) erstellt eine Excel-Datei zum Importieren.</p>
+        <p class="note" style="margin-top:14px">Ohne Verbindung: Der Skill „Kahoot-Vorlage“ (im Reiter Gemini) erstellt eine Excel-Datei zum Importieren.</p>
       </div>
-      <div role="tabpanel" id="kp-chatgpt" aria-labelledby="kt-chatgpt" tabindex="0" hidden>
+      <img class="pic wide" src="kahoot.jpg" width="1000" height="667" alt="Kahoot-Illustration: Menschen spielen ein Quiz auf Tablets und Handys" loading="lazy">
+    </div>
+    <div role="tabpanel" id="kp-chatgpt" aria-labelledby="kt-chatgpt" tabindex="0" class="kipanel" hidden>
+      <div>
         <div class="card-head"><h3>App „Kahoot Creator“</h3><span class="tag ok">Direkt ins Kahoot-Konto</span></div>
         <ol class="steps"><li>Neuen Chat starten, auf <b>„+“ → „Mehr“ → „Kahoot Creator“</b> klicken</li><li>Material anhängen, z. B. „Mach daraus 10 Fragen“</li><li>Entwurf über den Button im Kahoot-Konto öffnen und fertigstellen</li></ol>
         <div class="pbox inline"><p class="pbox-t">Mach daraus 10 Fragen</p><button class="copy" type="button" data-copy><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Kopieren</span></button></div>
         <p class="note" style="margin-top:14px">Bis zu 20 Fragen pro Anfrage, Entwurf im Chat weiter bearbeitbar.</p>
       </div>
-      <div role="tabpanel" id="kp-gemini" aria-labelledby="kt-gemini" tabindex="0" hidden>
-        <div class="card-head"><h3>Über die Excel-Vorlage</h3><span class="tag">Keine Kahoot-Anbindung</span></div>
-        <ol class="steps"><li>Masterprompt „Kahoot-Vorlage“ (unten) und Material in Gemini hochladen</li><li>Gemini erstellt die Fragen als Excel-Datei (.xlsx)</li><li>In Kahoot: <b>Hinzufügen → Importieren → Tabelle importieren</b></li></ol>
-        <p class="note" style="margin-top:14px">Importiert werden nur Quizfragen. Wahr/Falsch kommt als Quizfrage mit zwei Antworten an.</p>
+      <img class="pic wide" src="kahoot.jpg" width="1000" height="667" alt="Kahoot-Illustration: Menschen spielen ein Quiz auf Tablets und Handys" loading="lazy">
+    </div>
+    <div role="tabpanel" id="kp-gemini" aria-labelledby="kt-gemini" tabindex="0" hidden>
+      <div class="kipanel">
+        <div>
+          <div class="card-head"><h3>Über die Excel-Vorlage</h3><span class="tag">Keine Kahoot-Anbindung</span></div>
+          <ol class="steps"><li>Masterprompt „Kahoot-Vorlage“ (hier im Reiter) und Material in Gemini hochladen</li><li>Gemini erstellt die Fragen als Excel-Datei (.xlsx)</li><li>In Kahoot: <b>Hinzufügen → Importieren → Tabelle importieren</b></li></ol>
+          <p class="note" style="margin-top:14px">Importiert werden nur Quizfragen. Wahr/Falsch kommt als Quizfrage mit zwei Antworten an.</p>
+        </div>
+        <div id="kahootcards" class="stackcol"></div>
       </div>
-    </article>
-  </div>
-  <div class="grid mt">
-    <div id="kahootcards" class="stackcol c-6"></div>
-    <article class="card c-6"><h3>So kommt die Excel-Datei in Kahoot</h3>
-      <ol class="steps"><li>In Kahoot auf <b>Erstellen</b> klicken</li><li>Links auf <b>Hinzufügen</b> → <b>Importieren</b></li><li><b>Tabelle importieren</b> wählen und die Datei „… (Import).xlsx“ hochladen</li><li>Fragen prüfen, ggf. Bilder ergänzen, speichern</li></ol>
-      <p class="note" style="margin-top:16px">Die Lösungsdatei mit Belegen bleibt bei dir und wird nicht importiert. Der Masterprompt funktioniert in jeder KI. Je nach Kahoot-Tarif hat Kahoot auch einen eigenen KI-Generator, z. B. aus einer PDF.</p></article>
-  </div>
-</div></section>
-
-<!-- ============ Lernspaziergang ============ -->
-<section id="lernspaziergang" class="sec" aria-labelledby="h-walk"><div class="wrap">
-  <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-headphones"/></svg></div><div class="eyebrow"><span class="tag acc">Praxisteil 1</span>Anwenden · 04</div><h2 id="h-walk">Anwenden: Lernspaziergang</h2><p class="lead">Aus Kann-Liste und Material entsteht eine Textdatei. Damit lernen die Schüler*innen im Sprachmodus jeder KI. Die KI fragt, statt zu erzählen. Zwei Varianten, je als Skill und als Masterprompt.</p></div>
-  <div class="grid" id="walkcards"></div>
-  <article class="card sus mt">
-    <a class="sus-shot" href="anleitung-lernspaziergang-vorschau.jpg" target="_blank" rel="noopener" title="Vorschau groß öffnen"><img src="anleitung-lernspaziergang-vorschau.jpg" width="1200" height="675" loading="lazy" alt="Vorschau der Folie „So startest du den Lernspaziergang“: sechs Schritte von Speichern bis Sprechen, darunter Hinweise zu Pause und Datenschutz"></a>
-    <div class="sus-txt">
-      <span class="tag acc">Für den Unterricht</span>
-      <h3>Folie für Schüler*innen: So startest du den Lernspaziergang</h3>
-      <p>Sechs Schritte zum Zeigen am Prowise: Datei speichern, KI öffnen, temporären Chat nutzen, Datei laden, abschicken, sprechen. Dazu Hinweise zu Pausen und Datenschutz.</p>
-      <p class="note">In den Notizen stehen Zeitbedarf, ein Tipp zum Vormachen und Impulsfragen. Die Screenshots zeigen Gemini als Beispiel.</p>
-      <div class="tags"><span class="tag">PowerPoint · 1 Folie</span><span class="tag">mit Notizen</span></div>
-      <a class="btn btn-accent" style="margin-top:20px" href="anleitung-lernspaziergang-sus.pptx" download><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Folie herunterladen (PPTX)</a>
+      <div class="inset mt">
+        <h3>So kommt die Excel-Datei in Kahoot</h3>
+        <ol class="steps"><li>In Kahoot auf <b>Erstellen</b> klicken</li><li>Links auf <b>Hinzufügen</b> → <b>Importieren</b></li><li><b>Tabelle importieren</b> wählen und die Datei „… (Import).xlsx“ hochladen</li><li>Fragen prüfen, ggf. Bilder ergänzen, speichern</li></ol>
+        <p class="note" style="margin-top:16px">Die Lösungsdatei mit Belegen bleibt bei dir und wird nicht importiert. Der Masterprompt funktioniert in jeder KI. Je nach Kahoot-Tarif hat Kahoot auch einen eigenen KI-Generator, z. B. aus einer PDF.</p>
+      </div>
     </div>
   </article>
-
-  <h3 class="sub">Live-Sprachmodus im Vergleich</h3>
-  <p class="legend"><span><i style="background:var(--ok-soft);border:1px solid var(--ok)"></i>Stärke</span><span><i style="background:var(--err-soft);border:1px solid var(--err)"></i>Schwäche</span></p>
-  <div class="tablewrap stack"><table id="live"><caption class="sr">Live-Sprachmodus von Claude, ChatGPT und Gemini im Vergleich</caption><thead><tr><th scope="col"></th><th scope="col"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span></th><th scope="col"><span class="logo"><img src="logo-chatgpt.png" width="311" height="96" alt="ChatGPT"></span></th><th scope="col"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span></th></tr></thead><tbody></tbody></table></div>
-  <div class="fazit"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Für den Lernspaziergang:</b> Jede App mit Sprachmodus funktioniert.</span></div>
-
-  <div class="grid mt" style="margin-top:clamp(40px,5vw,64px)">
-    <article class="card c-6">
-      <h3>Warum das funktioniert</h3>
-      <ul class="checks"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bei der Sache:</b> Die KI bleibt beim Material und der Kann-Liste</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Echtes Lernen:</b> Fragen statt Antworten zum Abschreiben</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Niedrige Hürde:</b> Sprechen statt Schreiben, gut bei Schreibschwierigkeiten oder Deutsch als Zweitsprache</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bewegung:</b> Lernen beim Gehen, z. B. im Blücherpark</span></li></ul>
-    </article>
-    <article class="card c-6">
-      <h3>Grenzen</h3>
-      <ul class="checks minus"><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Die KI kann Fehler machen</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Funktioniert nur, wenn Schüler*innen aktiv mitmachen</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Gratis-Versionen: Sprachmodus begrenzt, besser 10–15 Minuten pro Runde planen</span></li></ul>
-      <div class="callout" style="margin-top:18px;padding:16px 18px"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><div><h3>Vorher testen</h3><p>Dieselbe TXT-Datei in ChatGPT, Gemini und Claude ausprobieren: Bleibt die KI in der Tutor-Rolle und stellt sie Fragen?</p></div></div>
-    </article>
-  </div>
 </div></section>
 
 <!-- ============ Webanwendung ============ -->
 <section id="webanwendung" class="sec" aria-labelledby="h-web"><div class="wrap">
-  <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg></div><div class="eyebrow"><span class="tag acc">Praxisteil 2</span>Anwenden · 05</div><h2 id="h-web">Anwenden: Webanwendung erstellen</h2><p class="lead">Aus Lernsituation, Übungsblättern und Kann-Liste entsteht eine interaktive Lern-App als eine einzige HTML-Datei. Die Schüler*innen öffnen sie im Browser, am iPad oder am Prowise-Display.</p></div>
+  <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg></div><div class="eyebrow"><span class="tag acc">Praxisteil 1</span>Anwenden · 04</div><h2 id="h-web">Anwenden: Webanwendung erstellen</h2><p class="lead">Aus Lernsituation, Übungsblättern und Kann-Liste entsteht eine interaktive Lern-App als eine einzige HTML-Datei. Die Schüler*innen öffnen sie im Browser, am iPad oder am Prowise-Display.</p></div>
   <div class="grid">
     <div id="webcards" class="stackcol c-5"></div>
     <article class="card c-7"><h3>Was in der App steckt</h3>
@@ -884,10 +986,55 @@ html.beamer .sec{padding:96px 0}
   </div>
 </div></section>
 
+<!-- ============ Lernspaziergang ============ -->
+<section id="lernspaziergang" class="sec" aria-labelledby="h-walk"><div class="wrap">
+  <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-headphones"/></svg></div><div class="eyebrow"><span class="tag acc">Praxisteil 2</span>Anwenden · 05</div><h2 id="h-walk">Anwenden: Lernspaziergang</h2><p class="lead">Aus Kann-Liste und Material entsteht eine Textdatei. Damit lernen die Schüler*innen im Sprachmodus jeder KI. Die KI fragt, statt zu erzählen. Zwei Varianten, je als Skill und als Masterprompt.</p></div>
+  <div class="grid" id="walkcards"></div>
+  <h3 class="sub">So läuft der Lernspaziergang ab</h3>
+  <p class="subp">Zwei Schritte: Erst erstellst du mit der KI eine TXT-Datei, dann starten die Schüler*innen damit ihren Lernspaziergang.</p>
+  <div class="phases">
+    <article class="card phase">
+      <span class="phase-no">Schritt 1 · Lehrkraft</span>
+      <h3>TXT-Datei für die Klasse erstellen</h3>
+      <ol class="steps"><li>Skill in Claude nutzen oder den <b>Masterprompt</b> (oben) in deine KI ziehen</li><li><b>Material hochladen:</b> Kann-Liste und Unterrichtsmaterial, bei der Szenario-Variante auch die Lernsituation</li><li><b>Optional</b> die Aufgabe genauer beschreiben, z. B. Klasse oder Schwerpunkt. Das muss aber nicht sein.</li><li>Die KI erstellt eine <b>TXT-Datei</b>: Das ist der Lernspaziergang für deine Klasse.</li><li>TXT-Datei an die Klasse geben, in der Regel <b>über Teams</b></li></ol>
+    </article>
+    <div class="phase-arrow" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></div>
+    <article class="card sus phase">
+    <span class="phase-no">Schritt 2 · Schüler*innen</span>
+    <a class="sus-shot" href="anleitung-lernspaziergang-vorschau.jpg" target="_blank" rel="noopener" title="Vorschau groß öffnen"><img src="anleitung-lernspaziergang-vorschau.jpg" width="1200" height="675" loading="lazy" alt="Vorschau der Folie „So startest du den Lernspaziergang“: sechs Schritte von Speichern bis Sprechen, darunter Hinweise zu Pause und Datenschutz"></a>
+    <div class="sus-txt">
+      <span class="tag acc">Für den Unterricht</span>
+      <h3>Folie für Schüler*innen: So startest du den Lernspaziergang</h3>
+      <p>Sechs Schritte zum Zeigen am Prowise: Datei speichern, KI öffnen, temporären Chat nutzen, Datei laden, abschicken, sprechen. Dazu Hinweise zu Pausen und Datenschutz.</p>
+      <p class="note">In den Notizen stehen Zeitbedarf, ein Tipp zum Vormachen und Impulsfragen. Die Screenshots zeigen Gemini als Beispiel.</p>
+      <div class="tags"><span class="tag">PowerPoint · 1 Folie</span><span class="tag">mit Notizen</span></div>
+      <a class="btn btn-accent" style="margin-top:20px" href="anleitung-lernspaziergang-sus.pptx" download><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Folie herunterladen (PPTX)</a>
+    </div>
+  </article>
+  </div>
+
+  <h3 class="sub">Live-Sprachmodus im Vergleich</h3>
+  <p class="legend"><span><i style="background:var(--ok-soft);border:1px solid var(--ok)"></i>Stärke</span><span><i style="background:var(--err-soft);border:1px solid var(--err)"></i>Schwäche</span></p>
+  <div class="tablewrap stack"><table id="live"><caption class="sr">Live-Sprachmodus von Claude, ChatGPT und Gemini im Vergleich</caption><thead><tr><th scope="col"></th><th scope="col"><span class="logo"><img src="logo-claude.png" width="402" height="96" alt="Claude"></span></th><th scope="col"><span class="logo"><img src="logo-chatgpt.png" width="311" height="96" alt="ChatGPT"></span></th><th scope="col" class="rec"><span class="logo"><img src="logo-gemini.png" width="224" height="61" alt="Gemini"></span><span class="tag ok rec-tag"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Empfehlung</span></th></tr></thead><tbody></tbody></table></div>
+  <div class="fazit"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Empfehlung: Gemini Live.</b> Auch kostenlos lange Sprechzeit, das Limit erneuert sich alle 5 Stunden. Nach meiner Erfahrung funktioniert Gemini Live für den Lernspaziergang am besten. Bei Claude und ChatGPT ist der Sprachmodus kostenlos nur kurz nutzbar.</span></div>
+
+  <div class="grid mt" style="margin-top:clamp(40px,5vw,64px)">
+    <article class="card c-6">
+      <h3>Warum das funktioniert</h3>
+      <ul class="checks"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bei der Sache:</b> Die KI bleibt beim Material und der Kann-Liste</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Echtes Lernen:</b> Fragen statt Antworten zum Abschreiben</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Niedrige Hürde:</b> Sprechen statt Schreiben, gut bei Schreibschwierigkeiten oder Deutsch als Zweitsprache</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Bewegung:</b> Lernen beim Gehen, z. B. im Blücherpark</span></li></ul>
+    </article>
+    <article class="card c-6">
+      <h3>Grenzen</h3>
+      <ul class="checks minus"><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Die KI kann Fehler machen</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Funktioniert nur, wenn Schüler*innen aktiv mitmachen</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><span>Gratis-Versionen: Sprachmodus begrenzt, besser 10–15 Minuten pro Runde planen</span></li></ul>
+      <div class="callout" style="margin-top:18px;padding:16px 18px"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><div><h3>Vorher testen</h3><p>Dieselbe TXT-Datei in ChatGPT, Gemini und Claude ausprobieren: Bleibt die KI in der Tutor-Rolle und stellt sie Fragen?</p></div></div>
+    </article>
+  </div>
+</div></section>
+
 <!-- ============ HTML-E-Mails ============ -->
 <section id="mails" class="sec" aria-labelledby="h-mails"><div class="wrap">
   <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></div><div class="eyebrow">Werkzeug · 06</div><h2 id="h-mails">HTML-E-Mails, die schön aussehen</h2><p class="lead">Ein Prompt für alle Rundmails: Die KI sortiert deinen Inhalt in feste Bausteine. So sieht jede Mail nach JDBK aus und lässt sich in Sekunden überfliegen. Wähle einen Mail-Typ.</p></div>
-  <div class="tabs mtabs" role="tablist" aria-label="Mail-Typen" id="mtabs"><button type="button" role="tab" id="mt-einladung" aria-controls="mp-einladung" aria-selected="true" tabindex="0">Einladung</button><button type="button" role="tab" id="mt-erinnerung" aria-controls="mp-erinnerung" aria-selected="false" tabindex="-1">Erinnerung mit Frist</button><button type="button" role="tab" id="mt-rundmail" aria-controls="mp-rundmail" aria-selected="false" tabindex="-1">Rundmail mit mehreren Themen</button><button type="button" role="tab" id="mt-anleitung" aria-controls="mp-anleitung" aria-selected="false" tabindex="-1">Anleitung</button><button type="button" role="tab" id="mt-abfrage" aria-controls="mp-abfrage" aria-selected="false" tabindex="-1">Abfrage / Umfrage</button><button type="button" role="tab" id="mt-konferenz" aria-controls="mp-konferenz" aria-selected="false" tabindex="-1">Konferenz, pädagogische Tage</button></div>
+  <div class="mpick"><p class="mpick-h"><span class="mpick-no" aria-hidden="true">1</span><b>Mail-Typ wählen</b><span>Tippe auf eine Karte. Darunter erscheinen Bausteine, Eingabe und die fertige Beispielmail.</span></p><div class="mtabs" role="tablist" aria-label="Mail-Typen" id="mtabs"><button type="button" role="tab" class="mtype" id="mt-einladung" aria-controls="mp-einladung" aria-selected="true" tabindex="0"><span class="mt-ic" aria-hidden="true">📅</span><span class="mt-txt"><b>Einladung</b><small>Termin, Ort, Mitbringen, Zu- und Absage</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-erinnerung" aria-controls="mp-erinnerung" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">⏰</span><span class="mt-txt"><b>Erinnerung mit Frist</b><small>Die Frist steht ganz oben im gelben Kasten</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-rundmail" aria-controls="mp-rundmail" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">📣</span><span class="mt-txt"><b>Rundmail mit mehreren Themen</b><small>Überblick oben, je Thema ein eigener Kasten</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-anleitung" aria-controls="mp-anleitung" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">🧭</span><span class="mt-txt"><b>Anleitung</b><small>Nummerierte Schritte und Ansprechperson</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-abfrage" aria-controls="mp-abfrage" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">✅</span><span class="mt-txt"><b>Abfrage / Umfrage</b><small>Zwei Buttons: dabei oder nicht dabei</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-konferenz" aria-controls="mp-konferenz" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">📚</span><span class="mt-txt"><b>Konferenz, pädagogische Tage</b><small>Programm mit Uhrzeiten und Mitbringliste</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button></div></div>
   <div class="mpanel" role="tabpanel" id="mp-einladung" aria-labelledby="mt-einladung" tabindex="0">
     <article class="card minfo"><h3>Einladung</h3><p>Du lädst zu einem Termin ein: Wann, wo und was mitbringen steht sofort oben.</p>
       <p class="mlabel">Bausteine in diesem Beispiel</p><ol class="mbs"><li>Hinweis-Box</li><li>Faktenleiste</li><li>Info-Karte</li><li>Checkliste</li><li>Ja/Nein-Rückmeldung</li></ol><p class="note" style="margin-top:10px">Frist und Zusage standen in der Eingabe, deshalb kamen Hinweis-Box und Ja/Nein-Rückmeldung dazu.</p>
@@ -1047,7 +1194,7 @@ html.beamer .sec{padding:96px 0}
     <tr><td>KI-Chat</td><td data-l="Was liegt dort?">Arbeitsweg: Wünsche hin, fertige Dateien zurück</td><td data-l="Wer hat Zugriff?">Ersteller und KI</td></tr>
   </tbody></table></div>
   <div class="grid mt">
-    <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Schrift und Datenschutz dieser Seite</summary><div class="acc-body"><p>Die Schrift Inter (SIL Open Font License) liegt mit im Repository. Die Seite lädt keine Schriften, Skripte oder Zähler von fremden Servern. Nur die Ablage spricht mit dem Google-Apps-Script. Fahrplan, Farbmodus, deine KI-Wahl und deinen Namen für die Ablage speichert nur dein Browser.</p></div></details>
+    <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Schrift und Datenschutz dieser Seite</summary><div class="acc-body"><p>Die Schrift Inter (SIL Open Font License) liegt mit im Repository. Die Seite lädt keine Schriften, Skripte oder Zähler von fremden Servern. Nur die Ablage spricht mit dem Google-Apps-Script. Dein Überblick, der Farbmodus, deine KI-Wahl und dein Name für die Ablage werden nur in deinem Browser gespeichert.</p></div></details>
     <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-screen"/></svg>Tastenkürzel und Beamer-Ansicht</summary><div class="acc-body"><p><span class="kbd">/</span> Suche öffnen · <span class="kbd">B</span> Beamer-Ansicht an oder aus. In der Beamer-Ansicht ist die Schrift größer und du springst mit <span class="kbd">→</span> und <span class="kbd">←</span> von Bereich zu Bereich, mit <span class="kbd">Esc</span> zurück.</p></div></details>
   </div>
 </div></section>
@@ -1074,13 +1221,13 @@ const calm=matchMedia("(prefers-reduced-motion: reduce)");
 const toast=$("toast");let tt;
 const say=(t,icon="check")=>{toast.innerHTML=ic(icon)+esc(t);toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),2200)};
 
-/* Ablauf */
-const agenda=[["Ankommen & Überblick",5,"#top","#3d6a8c"],["Office-Plugins",10,"#plugins","#1d5f8c"],["Skills & Projekte",10,"#skills","#2b7aa8"],["Anwenden",15,"#lernspaziergang","#ff6b4a"],["Austausch",5,"#vergleich","#4f6b82"]];
+/* Ablauf (Block „Anwenden“ springt zu Praxisteil 1) */
+const agenda=[["Ankommen & Überblick",5,"#top","#3d6a8c"],["Office-Plugins",10,"#plugins","#1d5f8c"],["Skills & Projekte",10,"#skills","#2b7aa8"],["Anwenden",15,"#webanwendung","#ff6b4a"],["Austausch",5,"#vergleich","#4f6b82"]];
 /* Vergleichstabelle */
 const heads=["Thema","Claude","ChatGPT","Gemini"];
 const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","-Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","-Nur bezahltes Abo","+Auch kostenlos, mit Grenzen","-Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills, auch kostenlos","-Eigene GPTs, enden am 11.12.2026","Gems, auch kostenlos"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","+Voice, am natürlichsten, unterbrechbar","+Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","-Google-Konto, in Deutschland ab 16"],["Besonderheit","+Zusammenhang über alle Office-Programme","+Weit verbreitet, viele kennen es","+Gemini Notebook mit genauen Quellen"]];
-/* Live-Sprachmodus */
-const live=[["Name","Sprachmodus","Voice „Live“","Gemini Live"],["Stärke","+Wartet, denkt nach, stellt Rückfragen","+Sehr natürlich, man kann unterbrechen","+Kamera und Bildschirm teilen, kostenlos"],["Schwäche","-Nur abwechselnd sprechen; kostenlos nur kleines Modell","-Kostenlos nur begrenzte Zeit pro Tag","-Kamera nur bei eingeschaltetem Display"]];
+/* Live-Sprachmodus (Stand 23.11.2026, Empfehlung Gemini Live) */
+const live=[["Name","Sprachmodus","Voice „Live“","Gemini Live"],["Kostenlos","-Nur kurz, zählt zum Nutzungslimit","-Nur kurz, begrenzte Zeit pro Tag","+Lange, Limit erneuert sich alle 5 Stunden"],["Stärke","+Wartet, denkt nach, stellt Rückfragen","+Sehr natürlich, man kann unterbrechen","+Kamera und Bildschirm teilen, kostenlos"],["Schwäche","-Nur abwechselnd sprechen; kostenlos nur kleines Modell","-Kostenlos nur kleines Modell","-Kamera nur bei eingeschaltetem Display"]];
 /* Skills und Masterprompts */
 const SK=[
  {id:"powerpoint-jdbk",grp:"skills",t:"PowerPoint im JDBK-Design",d:"Präsentationen mit Logo, Schulblau, großer Schrift für Prowise, Arbeitsaufträgen, ausgeblendeten Lösungen und Lehrernotizen.",p:["Claude: Code-Ausführung an"]},
@@ -1125,17 +1272,17 @@ function liveTick(){
 }
 liveTick();setInterval(liveTick,30000);
 
-/* ---------- Fahrplan (Checkliste, gespeichert im Browser) ---------- */
+/* ---------- Überblick für mich selbst (Checkliste, gespeichert im Browser) ---------- */
 {
-const KEY="kiw-plan-v1",boxes=[...document.querySelectorAll("#plan input")],fg=$("ringfg"),C=2*Math.PI*27;
+const KEY="kiw-plan-v2",boxes=[...document.querySelectorAll("#plan input")],fg=$("ringfg"),C=2*Math.PI*27;
 let done=new Set();try{done=new Set(JSON.parse(store.get(KEY,"[]")))}catch(e){}
 const draw=()=>{const n=boxes.filter(b=>b.checked).length,all=boxes.length;fg.style.strokeDashoffset=String(C*(1-n/all));
   $("ringtxt").textContent=n+"/"+all;
-  $("plannote").textContent=n===0?"Noch nichts abgehakt.":n===all?"Alles geschafft – stark!":`${n} von ${all} Schritten erledigt.`};
+  $("plannote").textContent=n===0?"Noch nichts abgehakt. Gespeichert wird nur in diesem Browser.":n===all?"Alles abgehakt – stark!":`${n} von ${all} Punkten abgehakt.`};
 boxes.forEach(b=>{b.checked=done.has(b.dataset.id);b.addEventListener("change",()=>{
   b.checked?done.add(b.dataset.id):done.delete(b.dataset.id);store.set(KEY,JSON.stringify([...done]));draw();
-  if(b.checked&&done.size===boxes.length)say("Fahrplan komplett – danke fürs Mitmachen!")})});
-$("planreset").addEventListener("click",()=>{done.clear();boxes.forEach(b=>b.checked=false);store.del(KEY);draw();say("Fahrplan zurückgesetzt","refresh")});
+  if(b.checked&&done.size===boxes.length)say("Alles abgehakt – stark!")})});
+$("planreset").addEventListener("click",()=>{done.clear();boxes.forEach(b=>b.checked=false);store.del(KEY);draw();say("Überblick zurückgesetzt","refresh")});
 fg.style.strokeDasharray=String(C);draw();
 }
 
