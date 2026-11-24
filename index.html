@@ -645,6 +645,43 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
 .poll-empty{grid-column:1/-1;color:var(--muted);font-size:15px}
 @media (max-width:760px){.poll{grid-template-columns:minmax(0,1fr)}}
 
+/* ---------- Wer macht was? (Eintragliste der Praxisteile) ---------- */
+.bcol{display:flex;flex-direction:column}
+.bhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.bcount{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.blist{list-style:none;display:grid;align-content:start;min-height:92px;margin:4px 0 18px}
+.blist li{display:flex;align-items:center;gap:10px;min-height:42px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:16px;line-height:1.4}
+.blist li:last-child{border-bottom:0}
+.blist li::before{content:"–";flex:none;width:12px;color:var(--muted);font-weight:700}
+.blist .bt{flex:1;min-width:0;overflow-wrap:anywhere}
+.blist li.mine::before{color:var(--accent)}
+.blist li.mine .bt{font-weight:600}
+.blist li.bnew{animation:bnew 1.6s ease-out}
+@keyframes bnew{from{background:var(--accent-soft)}to{background:transparent}}
+.blist .bempty{color:var(--muted);font-size:15px;border:0}
+.blist .bempty::before{content:none}
+.bx{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;border:1px solid transparent;background:none;color:var(--muted);cursor:pointer;transition:color .15s,background .15s,border-color .15s}
+.bx:hover,.bx:focus-visible{color:var(--err);background:var(--err-soft);border-color:var(--err-line)}
+.bx .icon{width:16px;height:16px}
+.bx:disabled{opacity:.5;cursor:progress}
+.badd{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.badd input{flex:1 1 190px;min-width:0;min-height:44px;padding:9px 13px;font:500 16px var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:12px}
+.badd input::placeholder{color:var(--muted);opacity:.85}
+.badd input:focus{outline:none;border-color:var(--brand-fg);box-shadow:0 0 0 4px var(--brand-soft)}
+.badd .btn{min-height:44px;flex:1 0 auto;width:auto}
+.badd .btn:disabled{opacity:.6;cursor:progress}
+.bto{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:14px;font-weight:600;color:var(--brand-fg);text-decoration:none}
+.bto:hover{text-decoration:underline;text-underline-offset:3px}
+.bto .icon{width:15px;height:15px}
+.bnote{display:flex;gap:8px;align-items:flex-start;margin-top:18px}
+.bnote>.icon{flex:none;width:17px;height:17px;margin-top:2px}
+.btip{margin-top:18px;max-width:880px}
+.btip>.icon{color:var(--brand-fg)}
+.sec h2[tabindex]:focus{outline:none}
+#bstate.err{color:var(--err);font-weight:600}
+html.beamer .blist li{font-size:21px}
+@media (max-width:520px){.badd{flex-wrap:wrap}.badd .btn{width:100%}}
+
 /* ---------- Bildschirmbreiten ---------- */
 @media (max-width:1599px){html:not(.beamer) .nav-links a .icon{display:none}}
 @media (max-width:1300px){.brand>span:last-child{display:none}}
@@ -981,6 +1018,48 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
   </article>
 </div></section>
 
+<!-- ============ Praxis: Wer macht was? ============ -->
+<section id="praxis" class="sec" aria-labelledby="h-praxis"><div class="wrap">
+  <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg></div><div class="eyebrow"><span class="tag acc">Praxisanwendung</span>Anwenden · 04–06</div><h2 id="h-praxis">Praxisanwendung: Wer macht was?</h2><p class="lead">Hier startet die Praxisanwendung mit drei Praxisteilen. Trag dich mit deinem Namen oder Kürzel bei dem Praxisteil ein, den du ausprobierst. So sehen alle auf einen Blick, wer woran arbeitet und wen man fragen kann. Nach dem Eintragen geht es direkt zur Anleitung.</p></div>
+  <div class="grid" id="board">
+    <article class="card c-4 bcol" data-task="webanwendung">
+      <div class="bhead"><span class="tag acc">Praxisteil 1</span><span class="bcount" data-count></span></div>
+      <h3>Webanwendung erstellen</h3>
+      <ul class="blist" data-list data-nosearch aria-live="polite"><li class="bempty">Liste wird geladen …</li></ul>
+      <form class="badd" data-form autocomplete="off">
+        <label class="sr" for="b-webanwendung">Eintrag für Praxisteil 1: dein Name oder Kürzel</label>
+        <input id="b-webanwendung" type="text" maxlength="40" enterkeyhint="send" placeholder="Name oder Kürzel, z. B. MUTA">
+        <button class="btn btn-accent btn-sm" type="submit"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Eintragen</button>
+      </form>
+      <a class="bto" href="#webanwendung">Zur Anleitung<svg class="icon" aria-hidden="true" style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></a>
+    </article>
+    <article class="card c-4 bcol" data-task="lernspaziergang">
+      <div class="bhead"><span class="tag acc">Praxisteil 2</span><span class="bcount" data-count></span></div>
+      <h3>Lernspaziergang</h3>
+      <ul class="blist" data-list data-nosearch aria-live="polite"><li class="bempty">Liste wird geladen …</li></ul>
+      <form class="badd" data-form autocomplete="off">
+        <label class="sr" for="b-lernspaziergang">Eintrag für Praxisteil 2: dein Name oder Kürzel</label>
+        <input id="b-lernspaziergang" type="text" maxlength="40" enterkeyhint="send" placeholder="Name oder Kürzel, z. B. MUTA">
+        <button class="btn btn-accent btn-sm" type="submit"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Eintragen</button>
+      </form>
+      <a class="bto" href="#lernspaziergang">Zur Anleitung<svg class="icon" aria-hidden="true" style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></a>
+    </article>
+    <article class="card c-4 bcol" data-task="mails">
+      <div class="bhead"><span class="tag acc">Praxisteil 3</span><span class="bcount" data-count></span></div>
+      <h3>HTML-E-Mail erstellen</h3>
+      <ul class="blist" data-list data-nosearch aria-live="polite"><li class="bempty">Liste wird geladen …</li></ul>
+      <form class="badd" data-form autocomplete="off">
+        <label class="sr" for="b-mails">Eintrag für Praxisteil 3: dein Name oder Kürzel</label>
+        <input id="b-mails" type="text" maxlength="40" enterkeyhint="send" placeholder="Name oder Kürzel, z. B. MUTA">
+        <button class="btn btn-accent btn-sm" type="submit"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Eintragen</button>
+      </form>
+      <a class="bto" href="#mails">Zur Anleitung<svg class="icon" aria-hidden="true" style="transform:rotate(180deg)"><use href="#i-arrow"/></svg></a>
+    </article>
+  </div>
+  <p class="note bnote"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Bitte nur den Namen oder das Kürzel eintragen, z. B. MUTA. Die Liste sehen alle, die diese Seite öffnen. Eigene Einträge löschst du mit dem ×. <span id="bstate"></span></span></p>
+  <div class="callout info btip"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><h3>Tipp für den Unterricht</h3><p>Mit Schüler*innen bleibt so eine Liste datenschutzkonform, wenn sie nur ihre Initialen eintragen: Anfangsbuchstabe des Vornamens, Punkt, Anfangsbuchstabe des Nachnamens, Punkt, z. B. <b>R. M.</b></p></div></div>
+</div></section>
+
 <!-- ============ Webanwendung ============ -->
 <section id="webanwendung" class="sec" aria-labelledby="h-web"><div class="wrap">
   <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg></div><div class="eyebrow"><span class="tag acc">Praxisteil 1</span>Anwenden · 04</div><h2 id="h-web">Anwenden: Webanwendung erstellen</h2><p class="lead">Aus Lernsituation, Übungsblättern und Kann-Liste entsteht eine interaktive Lern-App als eine einzige HTML-Datei. Die Schüler*innen öffnen sie im Browser, am iPad oder am Prowise-Display.</p></div>
@@ -1057,7 +1136,7 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
 
 <!-- ============ HTML-E-Mails ============ -->
 <section id="mails" class="sec" aria-labelledby="h-mails"><div class="wrap">
-  <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></div><div class="eyebrow">Werkzeug · 06</div><h2 id="h-mails">HTML-E-Mails, die schön aussehen</h2><p class="lead">Ein Prompt für alle Rundmails: Die KI sortiert deinen Inhalt in feste Bausteine. So sieht jede Mail nach JDBK aus und lässt sich in Sekunden überfliegen. Wähle einen Mail-Typ.</p></div>
+  <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></div><div class="eyebrow"><span class="tag acc">Praxisteil 3</span>Anwenden · 06</div><h2 id="h-mails">Anwenden: HTML-E-Mail erstellen</h2><p class="lead">Ein Prompt für alle Rundmails: Die KI sortiert deinen Inhalt in feste Bausteine. So sieht jede Mail nach JDBK aus und lässt sich in Sekunden überfliegen. Wähle einen Mail-Typ.</p></div>
   <div class="mpick"><p class="mpick-h"><span class="mpick-no" aria-hidden="true">1</span><b>Mail-Typ wählen</b><span>Tippe auf eine Karte. Darunter erscheinen Bausteine, Eingabe und die fertige Beispielmail.</span></p><div class="mtabs" role="tablist" aria-label="Mail-Typen" id="mtabs"><button type="button" role="tab" class="mtype" id="mt-einladung" aria-controls="mp-einladung" aria-selected="true" tabindex="0"><span class="mt-ic" aria-hidden="true">📅</span><span class="mt-txt"><b>Einladung</b><small>Termin, Ort, Mitbringen, Zu- und Absage</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-erinnerung" aria-controls="mp-erinnerung" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">⏰</span><span class="mt-txt"><b>Erinnerung mit Frist</b><small>Die Frist steht ganz oben im gelben Kasten</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-rundmail" aria-controls="mp-rundmail" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">📣</span><span class="mt-txt"><b>Rundmail mit mehreren Themen</b><small>Überblick oben, je Thema ein eigener Kasten</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-anleitung" aria-controls="mp-anleitung" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">🧭</span><span class="mt-txt"><b>Anleitung</b><small>Nummerierte Schritte und Ansprechperson</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-abfrage" aria-controls="mp-abfrage" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">✅</span><span class="mt-txt"><b>Abfrage / Umfrage</b><small>Zwei Buttons: dabei oder nicht dabei</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button><button type="button" role="tab" class="mtype" id="mt-konferenz" aria-controls="mp-konferenz" aria-selected="false" tabindex="-1"><span class="mt-ic" aria-hidden="true">📚</span><span class="mt-txt"><b>Konferenz, pädagogische Tage</b><small>Programm mit Uhrzeiten und Mitbringliste</small></span><span class="mt-go" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></button></div></div>
   <div class="mpanel" role="tabpanel" id="mp-einladung" aria-labelledby="mt-einladung" tabindex="0">
     <article class="card minfo"><h3>Einladung</h3><p>Du lädst zu einem Termin ein: Wann, wo und was mitbringen steht sofort oben.</p>
@@ -1218,7 +1297,7 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
     <tr><td>KI-Chat</td><td data-l="Was liegt dort?">Arbeitsweg: Wünsche hin, fertige Dateien zurück</td><td data-l="Wer hat Zugriff?">Ersteller und KI</td></tr>
   </tbody></table></div>
   <div class="grid mt">
-    <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Schrift und Datenschutz dieser Seite</summary><div class="acc-body"><p>Die Schrift Inter (SIL Open Font License) liegt mit im Repository. Die Seite lädt keine Schriften, Skripte oder Zähler von fremden Servern. Nur die Ablage spricht mit dem Google-Apps-Script. Der Farbmodus, deine KI-Wahl und dein Name für die Ablage werden nur in deinem Browser gespeichert. Die Häkchen im Überblick zählt die Seite anonym mit einer zufälligen Kennung, ohne Namen, für die Grafik „So weit ist das Kollegium“.</p></div></details>
+    <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>Schrift und Datenschutz dieser Seite</summary><div class="acc-body"><p>Die Schrift Inter (SIL Open Font License) liegt mit im Repository. Die Seite lädt keine Schriften, Skripte oder Zähler von fremden Servern. Nur die Ablage spricht mit dem Google-Apps-Script. Der Farbmodus, deine KI-Wahl und dein Name für die Ablage werden nur in deinem Browser gespeichert. Die Häkchen im Überblick zählt die Seite anonym mit einer zufälligen Kennung, ohne Namen, für die Grafik „So weit ist das Kollegium“. Was du bei „Wer macht was?“ einträgst, sehen alle, die die Seite öffnen.</p></div></details>
     <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-screen"/></svg>Tastenkürzel und Beamer-Ansicht</summary><div class="acc-body"><p><span class="kbd">/</span> Suche öffnen · <span class="kbd">B</span> Beamer-Ansicht an oder aus. In der Beamer-Ansicht ist die Schrift größer und du springst mit <span class="kbd">→</span> und <span class="kbd">←</span> von Bereich zu Bereich, mit <span class="kbd">Esc</span> zurück.</p></div></details>
   </div>
 </div></section>
@@ -1245,8 +1324,8 @@ const calm=matchMedia("(prefers-reduced-motion: reduce)");
 const toast=$("toast");let tt;
 const say=(t,icon="check")=>{toast.innerHTML=ic(icon)+esc(t);toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),2200)};
 
-/* Ablauf (Block „Anwenden“ springt zu Praxisteil 1) */
-const agenda=[["Ankommen & Überblick",5,"#top","#3d6a8c"],["Office-Plugins",10,"#plugins","#1d5f8c"],["Skills & Projekte",10,"#skills","#2b7aa8"],["Anwenden",15,"#webanwendung","#ff6b4a"],["Austausch",5,"#vergleich","#4f6b82"]];
+/* Ablauf (Block „Anwenden“ springt zur Eintragliste „Wer macht was?“) */
+const agenda=[["Ankommen & Überblick",5,"#top","#3d6a8c"],["Office-Plugins",10,"#plugins","#1d5f8c"],["Skills & Projekte",10,"#skills","#2b7aa8"],["Anwenden",15,"#praxis","#ff6b4a"],["Austausch",5,"#vergleich","#4f6b82"]];
 /* Vergleichstabelle */
 const heads=["Thema","Claude","ChatGPT","Gemini"];
 const rows=[["Office-Plugin","Ja, „Claude for Microsoft 365“ für Word, Excel, PowerPoint","Ja, ein Add-in für Word, Excel, PowerPoint","-Nein, Gemini steckt in Google Docs, Tabellen, Präsentationen"],["Kosten Plugin","-Nur bezahltes Abo","+Auch kostenlos, mit Grenzen","-Google AI Pro oder Workspace"],["Gespeicherte Anleitungen","Skills, auch kostenlos","-Eigene GPTs, enden am 11.12.2026","Gems, auch kostenlos"],["Arbeitsbereiche","Projekte","Projekte","Notebooks"],["Sprachmodus","Sprachmodus, Modell wählbar","+Voice, am natürlichsten, unterbrechbar","+Gemini Live, mit Kamera und Bildschirm"],["Konto für Schüler*innen","Claude-Konto","ChatGPT-Konto","-Google-Konto, in Deutschland ab 16"],["Besonderheit","+Zusammenhang über alle Office-Programme","+Weit verbreitet, viele kennen es","+Gemini Notebook mit genauen Quellen"]];
@@ -1337,6 +1416,47 @@ if(done.size&&!store.get("kiw-poll-sent",""))pollSend();else pollLoad();
 /* Ab 14:20 Uhr erscheinen die Balken von selbst und aktualisieren sich jede Minute – ohne Neuladen */
 setInterval(()=>{if(nowFn()>=REVEAL&&!document.hidden)pollLoad()},60000);
 {const ms=REVEAL-nowFn();if(ms>0&&ms<864e5)setTimeout(pollLoad,ms+1500)}
+}
+
+/* ---------- Wer macht was? Eintragliste der Praxisteile ----------
+   Einträge liegen im Google-Skript und sind für alle sichtbar. Jeder Browser hat eine zufällige
+   Kennung (dieselbe wie bei der Umfrage); nur damit lassen sich die eigenen Einträge wieder löschen. */
+{
+const cols=[...document.querySelectorAll("#board [data-task]")],bstate=$("bstate"),bsec=$("praxis");
+let bid=store.get("kiw-uid","");
+if(!/^[a-z0-9]{12,40}$/.test(bid)){bid=[...crypto.getRandomValues(new Uint8Array(12))].map(x=>(x%36).toString(36)).join("")+Date.now().toString(36);store.set("kiw-uid",bid)}
+let bSig="",bBusy=0,bAt=0,bSeen=null,bView=false;
+function bDraw(r){
+  if(!r||!r.ok||!Array.isArray(r.entries)){
+    bstate.textContent="Die Liste ist gerade nicht erreichbar.";bstate.classList.add("err");
+    cols.forEach(c=>{const l=c.querySelector("[data-list]");if(l.querySelector(".bempty"))l.innerHTML='<li class="bempty">Bitte später noch einmal vorbeischauen.</li>'});return}
+  bstate.classList.remove("err");bstate.textContent="Die Liste aktualisiert sich von selbst.";
+  const sig=JSON.stringify(r.entries);if(sig===bSig)return;bSig=sig;
+  const keyOf=e=>e.t+"|"+e.d+"|"+e.x,now=new Set(r.entries.map(keyOf)),old=bSeen;bSeen=now;
+  cols.forEach(c=>{const k=c.dataset.task,es=r.entries.filter(e=>e.t===k),l=c.querySelector("[data-list]");
+    c.querySelector("[data-count]").textContent=es.length===0?"":es.length===1?"1 Person":es.length+" Personen";
+    l.innerHTML=es.length?es.map(e=>`<li class="${e.mine?"mine":""}${old&&!old.has(keyOf(e))?" bnew":""}"><span class="bt">${esc(e.x)}</span>${e.mine&&e.e?`<button class="bx" type="button" data-del="${esc(e.e)}" title="Eintrag löschen" aria-label="Eigenen Eintrag „${esc(e.x)}“ löschen">${ic("x")}</button>`:""}</li>`).join("")
+      :'<li class="bempty">Noch niemand eingetragen.</li>'});
+}
+function bLoad(force){if(bBusy||(!force&&Date.now()-bAt<5000))return;bAt=Date.now();
+  fetch(SCRIPT_URL+"?action=board&id="+encodeURIComponent(bid)).then(r=>r.ok?r.json():null).then(r=>{if(!bBusy)bDraw(r)}).catch(()=>{if(!bBusy)bDraw(null)})}
+function bPost(body){bBusy++;
+  return fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(Object.assign({id:bid},body))})
+    .then(r=>r.ok?r.json():null).catch(()=>null).finally(()=>{bBusy--;bAt=Date.now()})}
+cols.forEach(c=>{
+  const f=c.querySelector("[data-form]"),inp=f.querySelector("input"),btn=f.querySelector("button");
+  f.addEventListener("submit",ev=>{ev.preventDefault();const x=inp.value.replace(/\s+/g," ").trim();if(!x){inp.focus();return}
+    btn.disabled=true;bPost({action:"board",task:c.dataset.task,text:x}).then(r=>{btn.disabled=false;
+      if(r&&r.ok){inp.value="";bDraw(r);say("Eingetragen – weiter zur Anleitung");
+        const t=$(c.dataset.task);if(t)setTimeout(()=>{t.scrollIntoView({behavior:calm.matches?"auto":"smooth"});const hd=t.querySelector("h2");if(hd){hd.tabIndex=-1;hd.focus({preventScroll:true})}},calm.matches?0:450)}else say(r&&r.error?r.error:"Eintragen hat nicht geklappt. Bitte noch einmal versuchen.","alert")})});
+  c.querySelector("[data-list]").addEventListener("click",ev=>{const b=ev.target.closest("[data-del]");if(!b)return;b.disabled=true;
+    bPost({action:"unboard",entry:b.dataset.del}).then(r=>{if(r&&r.ok){bDraw(r);say("Eintrag gelöscht")}else{b.disabled=false;say(r&&r.error?r.error:"Löschen hat nicht geklappt.","alert")}})});
+});
+/* Laden, sobald der Abschnitt in die Nähe kommt; solange er sichtbar ist, alle 20 Sekunden neu */
+if("IntersectionObserver" in window)new IntersectionObserver(es=>{bView=es[es.length-1].isIntersecting;if(bView)bLoad()},{rootMargin:"300px 0px"}).observe(bsec);
+else{bView=true;bLoad(true)}
+setInterval(()=>{if(bView&&!document.hidden)bLoad()},20000);
+document.addEventListener("visibilitychange",()=>{if(bView&&!document.hidden)bLoad()});
 }
 
 /* ---------- Vergleichstabellen ---------- */
@@ -1561,7 +1681,7 @@ $("clearq").addEventListener("click",()=>{q.value="";runSearch();q.focus()});
 const tabLinks=[...document.querySelectorAll("#tabs a")];
 const tabBar=$("tabs"),navEl=$("nav"),footEl=document.querySelector("footer"),ind=$("navind"),prog=$("progress");
 const tabFor=new Map(tabLinks.map(a=>[decodeURIComponent(a.hash.slice(1)),a]));
-const spySecs=sections.filter(s=>tabFor.has(s.id));
+const spySecs=sections.filter(s=>tabFor.has(s.id)||s.id==="praxis");
 let spyActive;
 function moveInd(){const a=spyActive&&tabFor.get(spyActive);if(!a){ind.style.opacity="0";return}
   ind.style.width=a.offsetWidth+"px";ind.style.transform=`translateX(${a.offsetLeft}px)`;ind.style.opacity="1"}
@@ -1574,7 +1694,7 @@ function spyReveal(a){
 function spySetActive(id){
   if(id===spyActive)return;spyActive=id;
   tabLinks.forEach(a=>{if(id&&tabFor.get(id)===a)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current")});
-  moveInd();if(id)spyReveal(tabFor.get(id));bUpdate();
+  moveInd();if(id&&tabFor.get(id))spyReveal(tabFor.get(id));bUpdate();
 }
 const spyLine=()=>{const n=navEl.offsetHeight;return Math.round(n+(innerHeight-n)*0.3)};
 function spyPick(){
@@ -1613,7 +1733,7 @@ const bBtn=$("beamerbtn");
 const bTargets=()=>[$("top"),...sections.filter(s=>!s.classList.contains("hidden"))];
 function bIndex(){const ts=bTargets();if(!spyActive)return 0;const i=ts.findIndex(t=>t.id===spyActive);return i<0?0:i}
 function bUpdate(){if(!root.classList.contains("beamer"))return;const ts=bTargets(),i=bIndex();
-  const name=i===0?"Start":(tabFor.get(ts[i].id)?.textContent.trim()||"");$("bpos").textContent=`${i+1} / ${ts.length} · ${name}`}
+  const name=i===0?"Start":(tabFor.get(ts[i].id)?.textContent.trim()||ts[i].querySelector("h2")?.textContent.trim()||"");$("bpos").textContent=`${i+1} / ${ts.length} · ${name}`}
 function bGo(d){const ts=bTargets();const i=Math.max(0,Math.min(ts.length-1,bIndex()+d));const t=ts[i];
   const y=i===0?0:t.getBoundingClientRect().top+scrollY-navEl.offsetHeight+1;window.scrollTo({top:y,behavior:calm.matches?"auto":"smooth"});
   setTimeout(()=>{spySetActive(i===0?null:t.id);bUpdate()},calm.matches?0:450)}
