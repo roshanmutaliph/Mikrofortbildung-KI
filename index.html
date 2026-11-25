@@ -682,6 +682,75 @@ body::before{content:"";position:fixed;inset:-12vmax;z-index:-1;pointer-events:n
 html.beamer .blist li{font-size:21px}
 @media (max-width:520px){.badd{flex-wrap:wrap}.badd .btn{width:100%}}
 
+/* ---------- Hintergrund: Fake News und KI ---------- */
+:root{--c-total:#2b7aa8;--c-active:#e5532f}
+[data-theme=dark]{--c-total:#4a9ad3;--c-active:#f0603c}
+.wstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.wstat{display:flex;flex-direction:column;padding:18px 20px;border-radius:var(--r-sm);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+.wstat .wl{font-size:13px;font-weight:600;color:var(--muted)}
+.wstat .wv{font-size:clamp(1.6rem,2.6vw,2.1rem);font-weight:650;letter-spacing:-.02em;line-height:1.15;color:var(--ink);margin:6px 0 4px}
+.wstat .ws{font-size:13px;line-height:1.4;color:var(--muted)}
+@media (max-width:860px){.wstats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.wchart-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:10px 28px;margin-bottom:16px}
+.wchart-h h3{margin:0}
+.wchart-h p{margin:3px 0 0;font-size:14px;color:var(--muted)}
+.wc-legend{display:flex;flex-wrap:wrap;gap:6px 20px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--ink-2)}
+.wc-legend li{display:flex;align-items:center;gap:8px}
+.wc-key{display:inline-block;flex:none;width:16px;height:0;border-top:2px solid currentColor;border-radius:2px}
+.wc-key.wc-total{color:var(--c-total)}.wc-key.wc-active{color:var(--c-active)}
+.wc-wrap{position:relative}
+.wc-plot{border-radius:10px;outline:none;touch-action:pan-y;min-height:240px}
+.wc-plot:focus-visible{box-shadow:0 0 0 3px var(--focus)}
+.wc-svg{display:block;overflow:visible}
+.wc-grid{stroke:var(--line);stroke-width:1}
+.wc-base{stroke:var(--line-2);stroke-width:1}
+.wc-tick{fill:var(--muted);font:500 12px var(--sans);font-variant-numeric:tabular-nums}
+.wc-line{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.wc-line.wc-total{stroke:var(--c-total)}.wc-line.wc-active{stroke:var(--c-active)}
+.wc-area{stroke:none;opacity:.1}.wc-area.wc-total{fill:var(--c-total)}.wc-area.wc-active{fill:var(--c-active)}
+.wc-dot{stroke:var(--surface);stroke-width:2}.wc-dot.wc-total{fill:var(--c-total)}.wc-dot.wc-active{fill:var(--c-active)}
+.wc-cross{stroke:var(--muted);stroke-width:1;opacity:0;transition:opacity .15s}.wc-cross.on{opacity:.7}
+.wc-end{fill:var(--ink);font:650 13px var(--sans)}
+.wc-tip{position:absolute;top:6px;left:0;z-index:3;min-width:190px;padding:10px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line-2);box-shadow:var(--shadow);font-size:13px;color:var(--ink-2);pointer-events:none}
+.wc-tdate{margin-bottom:6px;font-weight:650;color:var(--ink)}
+.wc-trow{display:flex;align-items:center;gap:8px;margin:3px 0}
+.wc-trow b{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
+.wc-tshare{margin-top:6px;padding-top:6px;border-top:1px solid var(--line)}
+.wc-tshare b{color:var(--ink)}
+.wc-src{margin:14px 0}
+.wc-table .tablewrap td a,.refs a{color:var(--link);overflow-wrap:anywhere}
+.wc-table td:nth-child(2),.wc-table td:nth-child(3),.wc-table td:nth-child(4){white-space:nowrap}
+.ftext h3{margin:26px 0 8px}.ftext h3:first-child{margin-top:0}
+.ftext p{margin:0 0 12px;line-height:1.65}
+.ftext p:last-child{margin-bottom:0}
+.cite{font-size:.72em;font-weight:650;line-height:0;vertical-align:super;padding:0 1px;color:var(--link);text-decoration:none;white-space:nowrap}
+.cite:hover{text-decoration:underline}
+.ftips-box{align-self:start}
+.ftips{list-style:none;display:grid;gap:12px;margin:10px 0 0;padding:0;font-size:15px;line-height:1.5}
+.ftips b{color:var(--ink)}
+.refs{display:grid;gap:10px;margin:0;padding-left:1.7em;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.refs li{padding:2px 6px;margin-left:-6px;border-radius:6px;scroll-margin-top:calc(var(--nav-h) + 24px)}
+.refs li:target{background:var(--brand-soft)}
+@media (max-width:980px){.ftips-box{grid-column:span 12}}
+.fk-h{margin:clamp(28px,3vw,40px) 0 14px;font-size:1.25rem}
+.fk{display:flex;flex-direction:column;gap:10px}
+.fk-top{display:flex;align-items:center;gap:12px}
+.fk-top h4{margin:0;font-size:1.05rem;line-height:1.3;color:var(--ink)}
+.fk-ic{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:var(--brand-soft);border:1px solid var(--brand-line);color:var(--brand-fg)}
+.fk-ic .icon{width:19px;height:19px}
+.fk-tag{margin-left:auto;flex:none;font-size:12px;font-weight:650;padding:3px 9px;border-radius:99px;color:var(--warn);background:var(--warn-soft);border:1px solid var(--warn-line)}
+.fk p{margin:0;line-height:1.6}
+.fk-note{margin-top:10px}
+.fk-part{margin-top:clamp(40px,5vw,64px);padding-top:clamp(28px,3.5vw,44px);border-top:1px solid var(--line)}
+.fk-h2{margin:0 0 10px;font-size:clamp(1.35rem,2.2vw,1.7rem);letter-spacing:-.01em;line-height:1.25}
+.fk-intro{max-width:780px;margin:0 0 18px;font-size:1.05rem;line-height:1.6;color:var(--ink-2)}
+.fk-cat{align-self:flex-start;font-size:12px;font-weight:650;letter-spacing:.02em;padding:3px 10px;border-radius:99px;color:var(--brand-fg);background:var(--brand-soft);border:1px solid var(--brand-line)}
+.fk h4{margin:0;font-size:1.08rem;line-height:1.3;color:var(--ink)}
+.fk-groom{margin-top:clamp(16px,2vw,24px)}
+.fk-groom h4{margin:0 0 6px;font-size:1.08rem;color:var(--ink)}
+.fk-groom p{margin:0;line-height:1.65}
+.fk-groom b{color:var(--ink)}
+
 /* ---------- Bildschirmbreiten ---------- */
 @media (max-width:1599px){html:not(.beamer) .nav-links a .icon{display:none}}
 @media (max-width:1300px){.brand>span:last-child{display:none}}
@@ -1301,6 +1370,90 @@ html.beamer .blist li{font-size:21px}
     <details class="acc card c-6"><summary><svg class="icon" aria-hidden="true"><use href="#i-screen"/></svg>Tastenkürzel und Beamer-Ansicht</summary><div class="acc-body"><p><span class="kbd">/</span> Suche öffnen · <span class="kbd">B</span> Beamer-Ansicht an oder aus. In der Beamer-Ansicht ist die Schrift größer und du springst mit <span class="kbd">→</span> und <span class="kbd">←</span> von Bereich zu Bereich, mit <span class="kbd">Esc</span> zurück.</p></div></details>
   </div>
 </div></section>
+
+<!-- ============ Hintergrund: Fake News und KI ============ -->
+<section id="fakenews" class="sec" aria-labelledby="h-fake"><div class="wrap">
+  <div class="sec-head"><div class="sec-ic"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg></div><div class="eyebrow"><span class="tag acc">Zum Weiterdenken</span>Hintergrund · 12</div><h2 id="h-fake">Fake News und KI: Wenn Masse wie Wahrheit aussieht</h2><p class="lead">Das Netz wächst rasant, und ein wachsender Teil davon wird von KI geschrieben – manchmal mit falschen Inhalten. Für alle, die mit KI recherchieren, wird das Prüfen von Quellen dadurch wichtiger, nicht unwichtiger.</p></div>
+
+  <div class="wstats">
+    <div class="wstat"><span class="wl">Websites weltweit</span><span class="wv">1,49 Mrd.</span><span class="ws">Juli 2026 <a class="cite" href="#ref-1" aria-label="Quelle 1">[1]</a></span></div>
+    <div class="wstat"><span class="wl">davon aktiv</span><span class="wv">217 Mio.</span><span class="ws">etwa jede siebte <a class="cite" href="#ref-1" aria-label="Quelle 1">[1]</a></span></div>
+    <div class="wstat"><span class="wl">KI-Content-Farmen</span><span class="wv">3.006</span><span class="ws">erfasst bis März 2026 <a class="cite" href="#ref-4" aria-label="Quelle 4">[4]</a></span></div>
+    <div class="wstat"><span class="wl">Chatbot-Fehlerquote</span><span class="wv">35 %</span><span class="ws">Falschbehauptungen im NewsGuard-Test, Aug. 2025 <a class="cite" href="#ref-7" aria-label="Quelle 7">[7]</a></span></div>
+  </div>
+
+  <article class="card mt wchart" id="webchart">
+    <div class="wchart-h">
+      <div><h3 id="wc-title">Websites weltweit, 2000 bis 2026</h3><p id="wc-desc">in Millionen · alle erfassten Websites und davon aktive Websites</p></div>
+      <ul class="wc-legend" aria-label="Legende"><li><i class="wc-key wc-total" aria-hidden="true"></i>Alle erfassten Websites</li><li><i class="wc-key wc-active" aria-hidden="true"></i>davon aktiv</li></ul>
+    </div>
+    <div class="wc-wrap">
+      <div class="wc-plot" tabindex="0" role="group" aria-label="Liniengrafik Websites weltweit. Mit den Pfeiltasten von Erhebung zu Erhebung wechseln. Alle Werte stehen auch in der Tabelle unter der Grafik."></div>
+      <div class="wc-tip" hidden aria-hidden="true"><div class="wc-tdate"></div><div class="wc-trow"><i class="wc-key wc-total"></i><b data-v="total"></b><span>alle erfassten</span></div><div class="wc-trow"><i class="wc-key wc-active"></i><b data-v="active"></b><span>davon aktiv</span></div><div class="wc-tshare">Anteil aktiv: <b data-v="share"></b></div></div>
+      <p class="sr" aria-live="polite" id="wc-live"></p>
+    </div>
+    <p class="note wc-src">Quelle: Netcraft Web Server Survey <a class="cite" href="#ref-1" aria-label="Quelle 1">[1]</a>, jeweils Januar (2000: Juni; 2026 zusätzlich Juli). Als aktiv zählt eine Website, wenn sie eigene Inhalte hat und nicht nur eine Platzhalter- oder abgelaufene Seite ist <a class="cite" href="#ref-2" aria-label="Quelle 2">[2]</a>.</p>
+    <details class="acc wc-table"><summary><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>Alle Werte und Einzelquellen der Grafik</summary><div class="acc-body">
+      <div class="tablewrap stack"><table><caption class="sr">Websites weltweit laut Netcraft</caption><thead><tr><th scope="col">Erhebung</th><th scope="col">Alle Websites</th><th scope="col">Davon aktiv</th><th scope="col">Anteil aktiv</th><th scope="col">Quelle</th></tr></thead><tbody><tr><td>Juni 2000</td><td data-l="Alle Websites">17,0 Mio.</td><td data-l="Davon aktiv">7,5 Mio.</td><td data-l="Anteil aktiv">44,1 %</td><td data-l="Quelle"><a href="https://www.netcraft.com/blog/july-2000-web-server-survey" target="_blank" rel="noopener">Netcraft, Juli 2000</a> (beide Werte genannt)</td></tr><tr><td>Jan. 2004</td><td data-l="Alle Websites">46,1 Mio.</td><td data-l="Davon aktiv">21,4 Mio.</td><td data-l="Anteil aktiv">46,3 %</td><td data-l="Quelle"><a href="https://www.netcraft.com/blog/january-2004-web-server-survey" target="_blank" rel="noopener">Netcraft, Jan. 2004</a>; Gesamtzahl laut <a href="https://www.internetnews.com/research/january-2004-netcraft-survey-highlights" target="_blank" rel="noopener">internetnews.com</a></td></tr><tr><td>Jan. 2010</td><td data-l="Alle Websites">206,7 Mio.</td><td data-l="Davon aktiv">83,5 Mio.</td><td data-l="Anteil aktiv">40,4 %</td><td data-l="Quelle"><a href="https://www.netcraft.com/blog/january-2010-web-server-survey" target="_blank" rel="noopener">Netcraft, Jan. 2010</a>; Gesamtzahl laut <a href="https://www.datacenterknowledge.com/investing/netcraft-survey-dips-by-27-million-sites" target="_blank" rel="noopener">Data Center Knowledge</a></td></tr><tr><td>Jan. 2015</td><td data-l="Alle Websites">876,8 Mio.</td><td data-l="Davon aktiv">177,1 Mio.</td><td data-l="Anteil aktiv">20,2 %</td><td data-l="Quelle"><a href="https://www.netcraft.com/blog/january-2015-web-server-survey" target="_blank" rel="noopener">Netcraft, Jan. 2015</a></td></tr><tr><td>Jan. 2020</td><td data-l="Alle Websites">1,30 Mrd.</td><td data-l="Davon aktiv">188,7 Mio.</td><td data-l="Anteil aktiv">14,6 %</td><td data-l="Quelle"><a href="https://www.netcraft.com/blog/january-2020-web-server-survey" target="_blank" rel="noopener">Netcraft, Jan. 2020</a> (rund 189 Mio. aktiv genannt)</td></tr><tr><td>Jan. 2025</td><td data-l="Alle Websites">1,16 Mrd.</td><td data-l="Davon aktiv">195,0 Mio.</td><td data-l="Anteil aktiv">16,8 %</td><td data-l="Quelle"><a href="https://www.netcraft.com/blog/january-2025-web-server-survey" target="_blank" rel="noopener">Netcraft, Jan. 2025</a></td></tr><tr><td>Jan. 2026</td><td data-l="Alle Websites">1,38 Mrd.</td><td data-l="Davon aktiv">207,5 Mio.</td><td data-l="Anteil aktiv">15,1 %</td><td data-l="Quelle"><a href="https://www.netcraft.com/blog/january-2026-web-server-survey" target="_blank" rel="noopener">Netcraft, Jan. 2026</a></td></tr><tr><td>Juli 2026</td><td data-l="Alle Websites">1,49 Mrd.</td><td data-l="Davon aktiv">216,7 Mio.</td><td data-l="Anteil aktiv">14,5 %</td><td data-l="Quelle"><a href="https://www.netcraft.com/blog/july-2026-web-server-survey" target="_blank" rel="noopener">Netcraft, Juli 2026</a></td></tr></tbody></table></div>
+      <p class="note" style="margin-top:12px">Die Zahl der aktiven Websites nennt Netcraft für Juni 2000 und Januar 2020 direkt. Für die übrigen Erhebungen ist sie aus Netcrafts Angaben zu aktiven Websites je Webserver berechnet (Anzahl geteilt durch Marktanteil, z. B. Juli 2026: 50.838.387 Websites mit Cloudflare = 23,46 % → rund 216,7 Mio.).</p>
+    </div></details>
+  </article>
+
+  <h3 class="fk-h mt">Auf einen Blick: Wo die Gefahr liegt</h3>
+  <div class="grid fk-grid">
+    <article class="card c-6 fk"><div class="fk-top"><span class="fk-ic"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span><h4>Riskant, wo gute Quellen fehlen</h4><span class="fk-tag" title="Bewertung, kein Studienergebnis">Einschätzung</span></div><p>Bei aktuellen Ereignissen <a class="cite" href="#ref-7" aria-label="Quelle 7">[7]</a>, Nischenthemen und Themen, auf die Propaganda gezielt angesetzt wird <a class="cite" href="#ref-5" aria-label="Quelle 5">[5]</a>, gibt es oft wenige verlässliche Quellen. Bei Grundlagenwissen wie „Wie funktioniert die Fotosynthese?“ ist das Risiko gering.</p></article>
+    <article class="card c-6 fk"><div class="fk-top"><span class="fk-ic"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg></span><h4>Inhalte kosten fast nichts mehr</h4></div><p>Etwa die Hälfte der neuen Artikel im Netz ist KI-generiert <a class="cite" href="#ref-3" aria-label="Quelle 3">[3]</a>. NewsGuard zählt über 3.000 KI-Content-Farmen <a class="cite" href="#ref-4" aria-label="Quelle 4">[4]</a>, vermutlich sind es mehr, weil die Erkennung nicht perfekt ist <a class="cite" href="#ref-14" aria-label="Quelle 14">[14]</a>.</p></article>
+    <article class="card c-6 fk"><div class="fk-top"><span class="fk-ic"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span><h4>Masse verdünnt das Gift nicht</h4></div><p>In einer Studie reichten 250 manipulierte Dokumente, um Sprachmodelle jeder getesteten Größe zu beeinflussen, egal wie viele saubere Daten sie sonst hatten. Getestet wurde nur eine harmlose Fehlfunktion <a class="cite" href="#ref-9" aria-label="Quelle 9">[9]</a>.</p></article>
+    <article class="card c-6 fk"><div class="fk-top"><span class="fk-ic"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></span><h4>Die Quelle verschwindet</h4><span class="fk-tag" title="Bewertung, kein Studienergebnis">Einschätzung</span></div><p>Ein Chatbot liefert eine flüssige, sichere Antwort statt einer Linkliste. Ob die Information von einer Behörde, einer Zeitung oder einer dubiosen Seite stammt, ist nicht mehr zu sehen.</p></article>
+  </div>
+  <p class="note fk-note">Mit „Einschätzung“ markierte Punkte sind Bewertungen, keine Studienergebnisse.</p>
+
+  <div class="grid mt">
+    <article class="card c-8 ftext">
+      <h3>Das Netz in Zahlen</h3>
+      <p>Im Juni 2000 zählte das britische Unternehmen Netcraft gut 17 Millionen Websites, im Juli 2026 knapp 1,5 Milliarden – rund 88-mal so viele <a class="cite" href="#ref-1" aria-label="Quelle 1">[1]</a>. Nur ein kleiner Teil davon ist aktiv: etwa 217 Millionen Websites, also ungefähr jede siebte <a class="cite" href="#ref-1" aria-label="Quelle 1">[1]</a>. Der Rest sind zum Beispiel Platzhalter, abgelaufene Seiten oder Domains, auf denen nie eine richtige Website entstanden ist <a class="cite" href="#ref-2" aria-label="Quelle 2">[2]</a>.</p>
+      <h3>KI schreibt mit</h3>
+      <p>Ein großer Teil der neuen Texte im Netz stammt inzwischen von KI. Eine Auswertung der Agentur Graphite kommt zu dem Ergebnis, dass inzwischen etwa die Hälfte der neu veröffentlichten englischsprachigen Artikel überwiegend KI-generiert ist; in ihrer Stichprobe für das erste Quartal 2026 waren es 49,9 Prozent <a class="cite" href="#ref-3" aria-label="Quelle 3">[3]</a>. Die Werte beruhen auf KI-Detektoren und sind deshalb Näherungswerte <a class="cite" href="#ref-3" aria-label="Quelle 3">[3]</a>.</p>
+      <h3>KI-Seiten, die Falschmeldungen verbreiten</h3>
+      <p>Problematisch wird es, wenn KI-Texte ohne menschliche Kontrolle veröffentlicht werden. Die Medienanalysefirma NewsGuard hat bis März 2026 3.006 sogenannte KI-Content-Farmen erfasst: Nachrichten- und Informationsseiten, deren Inhalte zu einem großen Teil von KI erzeugt werden. Ihre Zahl hat sich innerhalb eines Jahres mehr als verdoppelt, jeden Monat kommen 300 bis 500 hinzu <a class="cite" href="#ref-4" aria-label="Quelle 4">[4]</a>.</p>
+      <p>Manche Akteure fluten das Netz gezielt. Das prorussische Netzwerk „Pravda“ veröffentlichte 2024 rund 3,6 Millionen Artikel auf etwa 150 Domains. In einem Test von NewsGuard gaben zehn führende Chatbots die Falschbehauptungen des Netzwerks in rund einem Drittel der Antworten wieder; sieben nannten Pravda-Artikel sogar als Quelle <a class="cite" href="#ref-5" aria-label="Quelle 5">[5]</a>. Fachleute sprechen von „LLM-Grooming“: Die Texte zielen weniger auf menschliche Leser als auf KI-Systeme, die das Netz auswerten <a class="cite" href="#ref-5" aria-label="Quelle 5">[5]</a>. Andere Forschende halten das Drittel für zu hoch gegriffen, weil die Testfragen gezielt auf diese Falschbehauptungen zugeschnitten waren <a class="cite" href="#ref-6" aria-label="Quelle 6">[6]</a>.</p>
+      <h3>Warum KI Wahr und Falsch schwer unterscheiden kann</h3>
+      <p>Sprachmodelle lernen aus großen Mengen öffentlicher Texte, und viele Chatbots durchsuchen heute zusätzlich live das Netz. In NewsGuards monatlichem Test wiederholten die zehn führenden KI-Werkzeuge im August 2025 in 35 Prozent der Fälle falsche Behauptungen zu Nachrichtenthemen – fast doppelt so oft wie ein Jahr zuvor (18 Prozent). Gleichzeitig lehnten sie keine Frage mehr ab, sondern griffen auf ein zunehmend „verschmutztes“ Informationsangebot im Netz zurück <a class="cite" href="#ref-7" aria-label="Quelle 7">[7]</a>.</p>
+      <p>NewsGuard beobachtet außerdem, dass Chatbots die Häufigkeit einer Behauptung offenbar als Zeichen für Übereinstimmung und Verlässlichkeit werten <a class="cite" href="#ref-8" aria-label="Quelle 8">[8]</a>. Genau darin liegt die Gefahr: Steht dieselbe Falschmeldung auf vielen Seiten, kann sie für eine KI wie eine gut belegte Tatsache aussehen.</p>
+      <p>Auch beim Training genügt wenig. In einer Studie von Anthropic, dem britischen AI Security Institute und dem Alan Turing Institute reichten 250 manipulierte Dokumente, um Sprachmodellen unterschiedlicher Größe ein verstecktes Fehlverhalten anzutrainieren – unabhängig davon, wie viele saubere Daten sie sonst gesehen hatten. Getestet wurde allerdings nur ein harmloses Fehlverhalten (das Modell gibt Unsinn aus) bei Modellen bis 13 Milliarden Parametern <a class="cite" href="#ref-9" aria-label="Quelle 9">[9]</a>.</p>
+    </article>
+    <aside class="callout info c-4 ftips-box"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div>
+      <h3>Was heißt das für den Unterricht?</h3>
+      <ul class="ftips">
+        <li><b>KI-Antworten sind ein Startpunkt, kein Beleg.</b> Quellen nennen lassen und selbst öffnen.</li>
+        <li><b>Seitlich lesen.</b> Eine unbekannte Seite kurz verlassen und in neuen Tabs prüfen, wer dahintersteht. So arbeiten Profis in der Faktenprüfung – schneller und treffsicherer als Studierende und Historiker in einer Stanford-Studie <a class="cite" href="#ref-10" aria-label="Quelle 10">[10]</a>.</li>
+        <li><b>Zwei-Quellen-Prinzip.</b> Eine Information mit mindestens zwei voneinander unabhängigen Quellen prüfen <a class="cite" href="#ref-11" aria-label="Quelle 11">[11]</a>.</li>
+        <li><b>Häufig heißt nicht wahr.</b> Gehören viele Treffer zum selben Netzwerk oder schreiben voneinander ab, zählen sie nur als eine Quelle.</li>
+        <li><b>Material:</b> klicksafe „Ethik macht klick“ <a class="cite" href="#ref-12" aria-label="Quelle 12">[12]</a> und „Recherchiere richtig“ der Landesanstalt für Medien NRW <a class="cite" href="#ref-13" aria-label="Quelle 13">[13]</a>.</li>
+      </ul>
+    </div></aside>
+  </div>
+
+
+  <div class="fk-part" id="botseiten">
+    <h3 class="fk-h2">Automatisierte Desinformation: Wenn Bots ganze Nachrichtenseiten bauen</h3>
+    <p class="fk-intro">Hinter vielen Falschmeldungen im Netz stecken heute nicht nur einzelne Trolle, sondern auch staatlich gesteuerte Kampagnen und kommerzielle Netzwerke. Sie kombinieren KI und Bots, um massenhaft Fake-Webseiten zu erzeugen. Für den Schulalltag sind vor allem drei Mechanismen wichtig:</p>
+    <div class="grid">
+      <article class="card c-4 fk"><span class="fk-cat">Politische Kampagnen</span><h4>Geklonte Medienportale</h4><p>Bei der russischen Kampagne „Doppelgänger“ wurden Websites von Spiegel, Süddeutscher Zeitung, FAZ oder Tagesspiegel unter leicht veränderten Adressen nachgebaut, etwa „faz.ltd“. Dahinter stehen laut US-Justizministerium russische Firmen wie die Social Design Agency <a class="cite" href="#ref-18" aria-label="Quelle 18">[18]</a>. Die gefälschten Artikel entstehen laut Auswärtigem Amt auch mit generativer KI und werden über Hunderttausende Fake-Accounts verbreitet <a class="cite" href="#ref-17" aria-label="Quelle 17">[17]</a>.</p></article>
+      <article class="card c-4 fk"><span class="fk-cat">Verdeckte Interessen</span><h4>Schein-Lokalzeitungen („Pink Slime“)</h4><p>Netzwerke betreiben Hunderte Seiten, die wie unabhängige Lokalzeitungen wirken, aber verdeckt von Parteigruppen oder fremden Regierungen gesteuert werden. In den USA gab es im Juni 2024 schon 1.265 solcher Seiten, mehr als echte Tageszeitungen (1.213) <a class="cite" href="#ref-19" aria-label="Quelle 19">[19]</a>. Sie nutzen das Vertrauen in den Lokaljournalismus, um politische Botschaften einzuschleusen.</p></article>
+      <article class="card c-4 fk"><span class="fk-cat">Klick-Geschäft</span><h4>KI-Content-Farmen</h4><p>Profitorientierte Betreiber lassen KI Dutzende bis Hunderte Artikel am Tag schreiben, darunter erfundene Todesmeldungen von Prominenten und erfundene Ereignisse <a class="cite" href="#ref-21" aria-label="Quelle 21">[21]</a> oder gefährliche Gesundheitstipps <a class="cite" href="#ref-22" aria-label="Quelle 22">[22]</a>. Geld bringt automatisch geschaltete Werbung (Programmatic Advertising): 2023 fand NewsGuard dort Anzeigen von 141 bekannten Marken <a class="cite" href="#ref-20" aria-label="Quelle 20">[20]</a>.</p></article>
+    </div>
+    <div class="callout info fk-groom"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div>
+      <h4>LLM-Grooming: Warum das auch für KI-Chats im Unterricht wichtig ist</h4>
+      <p>Manche Netzwerke wollen nicht mehr nur Menschen täuschen, sondern gezielt KI-Chatbots mit Falschinformationen füttern <a class="cite" href="#ref-5" aria-label="Quelle 5">[5]</a>. Dabei hilft ihnen ein Ungleichgewicht: Viele seriöse Medien sperren KI-Crawler aus, Fake-Seiten fast nie. Bis Mai 2025 stieg der Anteil seriöser Nachrichtenseiten, die mindestens einen KI-Crawler aussperren, auf rund 60 Prozent; bei Desinformationsseiten waren es nur gut 9 Prozent <a class="cite" href="#ref-16" aria-label="Quelle 16">[16]</a>. Bei aktuellen Themen müssen Chatbots deshalb häufiger auf frei zugängliche, oft minderwertige Quellen zurückgreifen <a class="cite" href="#ref-15" aria-label="Quelle 15">[15]</a>. <b>Quellenkritik bleibt im Umgang mit KI also unverzichtbar.</b></p>
+    </div></div>
+  </div>
+
+  <details class="acc mt frefs" open><summary><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>Quellen</summary><div class="acc-body">
+    <ol class="refs"><li id="ref-1">Netcraft: Web Server Survey, monatliche Erhebung. Verwendet: Juni 2000, Januar 2004, 2010, 2015, 2020, 2025, 2026 und Juli 2026 (Einzelnachweise in der Tabelle zur Grafik). <a href="https://www.netcraft.com/resources/web-server-survey" target="_blank" rel="noopener">netcraft.com</a></li><li id="ref-2">Hostinger (2026): How many websites are there? Key statistics and growth trends. <a href="https://www.hostinger.com/uk/tutorials/how-many-websites-are-there" target="_blank" rel="noopener">hostinger.com</a></li><li id="ref-3">Search Engine Land (2026): Nearly half of online articles are now AI-generated: Study (zur Studie von Graphite). <a href="https://searchengineland.com/nearly-half-online-articles-ai-generated-study-478233" target="_blank" rel="noopener">searchengineland.com</a></li><li id="ref-4">NewsGuard (Stand 17.03.2026): Tracking AI-enabled Misinformation – AI Content Farm sites. <a href="https://www.newsguardtech.com/special-reports/ai-tracking-center/" target="_blank" rel="noopener">newsguardtech.com</a></li><li id="ref-5">NewsGuard (März 2025): Bericht über das Moskauer „Pravda“-Netzwerk und westliche KI-Chatbots. <a href="https://www.newsguardtech.com/special-reports/moscow-based-global-news-network-infected-western-artificial-intelligence-russian-propaganda/" target="_blank" rel="noopener">newsguardtech.com</a></li><li id="ref-6">Al Jazeera (08.07.2025): Is Russia really ‘grooming’ Western AI? (Meinungsbeitrag von Forschenden). <a href="https://www.aljazeera.com/amp/opinions/2025/7/8/is-russia-really-grooming-western" target="_blank" rel="noopener">aljazeera.com</a></li><li id="ref-7">NewsGuard (04.09.2025): AI False Claims Monitor, August 2025 – AI False Information Rate Nearly Doubles in One Year. <a href="https://www.newsguardtech.com/ai-monitor/august-2025-ai-false-claim-monitor/" target="_blank" rel="noopener">newsguardtech.com</a></li><li id="ref-8">NewsGuard (20.08.2025): AI False Claim Monitor, Juli 2025. <a href="https://www.newsguardtech.com/?p=31163" target="_blank" rel="noopener">newsguardtech.com</a></li><li id="ref-9">Anthropic, UK AI Security Institute, Alan Turing Institute (09.10.2025): A small number of samples can poison LLMs of any size. <a href="https://www.anthropic.com/research/small-samples-poison" target="_blank" rel="noopener">anthropic.com</a></li><li id="ref-10">Stanford University (2017): Studie von Sam Wineburg und Sarah McGrew zum Vorgehen von Faktenprüfern („Lateral Reading“). <a href="https://news.stanford.edu/stories/2017/10/fact-checkers-outperform-historians-evaluating-online-information" target="_blank" rel="noopener">news.stanford.edu</a></li><li id="ref-11">Bundeszentrale für politische Bildung (2024): Themenblätter im Unterricht Nr. 138 „Quelle: Künstliche Intelligenz?“ (PDF). <a href="https://www.bpb.de/system/files/dokument_pdf/bpb_TB_138_Quelle_KI_BF.pdf" target="_blank" rel="noopener">bpb.de</a></li><li id="ref-12">klicksafe (2025): Ethik macht klick – Meinungsbildung in der digitalen Welt. Desinformation, Fake News, Verschwörungserzählungen (PDF). <a href="https://www.klicksafe.de/fileadmin/cms/download/Material/meinungsbildung-in-der-digitalen-welt_material-fuer-die-paedagogische-praxis_klicksafe.pdf" target="_blank" rel="noopener">klicksafe.de</a></li><li id="ref-13">Landesanstalt für Medien NRW: Recherchiere richtig – Gib Fake News keine Chance. Unterrichtskonzept (PDF). <a href="https://www.medienanstalt-nrw.de/fileadmin/user_upload/materials_and_ordering_system/download/L263_Recherchiere_richtig_Unterrichtskonzept.pdf" target="_blank" rel="noopener">medienanstalt-nrw.de</a></li><li id="ref-14">The Decoder (2026): AI spam websites flood the web with false information, and the number is growing fast (zu NewsGuards Zählung der KI-Content-Farmen). <a href="https://the-decoder.com/ai-spam-websites-flood-the-web-with-false-information-and-the-number-is-growing-fast/" target="_blank" rel="noopener">the-decoder.com</a></li><li id="ref-15">NewsGuard (16.09.2024): AI Chatbots Are Blocked by 67% of Top News Sites, Relying Instead on Low-Quality Sources. <a href="https://www.newsguardtech.com/?p=27869" target="_blank" rel="noopener">newsguardtech.com</a></li><li id="ref-16">Steinacker-Olsztyn, Gosain, Dao (2025): Is Misinformation More Open? A Study of robots.txt Gatekeeping on the Web (Preprint). <a href="https://arxiv.org/abs/2510.10315" target="_blank" rel="noopener">arxiv.org</a></li><li id="ref-17">Bundeszentrale für politische Bildung, Russland-Analysen Nr. 456: Dokumentation zur Kampagne „Doppelgänger“ in Deutschland (Auszug aus dem Technischen Bericht des Auswärtigen Amts vom 05.06.2024). <a href="https://www.bpb.de/themen/europa/russland-analysen/nr-456/555773/dokumentation-lesetipps-russische-desinformationskampagne-doppelgaenger-in-deutschland/" target="_blank" rel="noopener">bpb.de</a></li><li id="ref-18">CORRECTIV (05.09.2024): Doppelgänger: USA beschlagnahmen Propaganda-Webseiten, die Deutschland im Visier hatten. <a href="https://correctiv.org/faktencheck/russische-desinformation/2024/09/05/doppelgaenger-usa-beschlagnahmen-propaganda-webseiten-die-deutschland-im-visier-hatten" target="_blank" rel="noopener">correctiv.org</a></li><li id="ref-19">NewsGuard (11.06.2024): Fake Local News Sites Now Outnumber Real Local Newspaper Sites in U.S. <a href="https://www.newsguardtech.com/?p=26671" target="_blank" rel="noopener">newsguardtech.com</a></li><li id="ref-20">NewsGuard (26.06.2023): Funding the Next Generation of Content Farms – 141 Marken finanzieren KI-Nachrichtenseiten über Programmatic Advertising. <a href="https://www.newsguardtech.com/misinformation-monitor/june-2023/" target="_blank" rel="noopener">newsguardtech.com</a></li><li id="ref-21">MediaPost (2023): AI-Generated News Sites More Than Double In Two Weeks (zu einem NewsGuard-Bericht). <a href="https://www.mediapost.com/publications/article/385557/ai-generated-news-sites-more-than-double-in-two-we.html" target="_blank" rel="noopener">mediapost.com</a></li><li id="ref-22">MIT Technology Review (26.06.2023): Junk websites filled with AI-generated text are pulling in money from programmatic ads. <a href="https://www.technologyreview.com/2023/06/26/1075504/junk-websites-filled-with-ai-generated-text-are-pulling-in-money-from-programmatic-ads/" target="_blank" rel="noopener">technologyreview.com</a></li></ol>
+    <p class="note" style="margin-top:14px">Alle Links abgerufen im November 2026.</p>
+  </div></details>
+</div></section>
 </main>
 
 <footer><div class="wrap"><span>Mikrofortbildung „KI in der Schule“ · Joseph-DuMont-Berufskolleg Köln</span><span class="keys"><span><span class="kbd">/</span> Suche</span><span><span class="kbd">B</span> Beamer</span><span>Stand November 2026</span></span></div></footer>
@@ -1457,6 +1610,70 @@ if("IntersectionObserver" in window)new IntersectionObserver(es=>{bView=es[es.le
 else{bView=true;bLoad(true)}
 setInterval(()=>{if(bView&&!document.hidden)bLoad()},20000);
 document.addEventListener("visibilitychange",()=>{if(bView&&!document.hidden)bLoad()});
+}
+
+/* ---------- Grafik „Websites weltweit“ (Netcraft) ----------
+   Daten: [Jahr als Dezimalzahl, Beschriftung, alle Websites in Mio., davon aktiv in Mio.] */
+{
+const box=$("webchart");
+if(box){
+const D=[[2000.4167, "Juni 2000", 17.0, 7.5], [2004, "Jan. 2004", 46.07, 21.35], [2010, "Jan. 2010", 206.74, 83.46], [2015, "Jan. 2015", 876.81, 177.14], [2020, "Jan. 2020", 1295.97, 188.74], [2025, "Jan. 2025", 1161.45, 194.97], [2026, "Jan. 2026", 1376.95, 207.51], [2026.5, "Juli 2026", 1494.92, 216.7]];
+const S=[{k:"total",i:2},{k:"active",i:3}];
+const plot=box.querySelector(".wc-plot"),tip=box.querySelector(".wc-tip"),live=$("wc-live"),NS="http://www.w3.org/2000/svg";
+const de=(v,d)=>v.toLocaleString("de-DE",{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmt=v=>v>=1000?de(v/1000,2)+" Mrd.":de(v,1)+" Mio.";
+let W=0,H=0,sx=null,sy=null,ch=null,svg=null,idx=-1;
+function el(n,a,p){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+function draw(){
+  const w=plot.clientWidth;if(!w)return;W=w;
+  const narrow=W<560;H=Math.round(Math.max(240,Math.min(400,W*.46)));
+  const M={l:narrow?44:54,r:narrow?78:98,t:12,b:34},x0=2000,x1=2026.7,ymax=1500;
+  sx=v=>M.l+(v-x0)/(x1-x0)*(W-M.l-M.r);sy=v=>M.t+(1-v/ymax)*(H-M.t-M.b);
+  plot.textContent="";
+  svg=el("svg",{class:"wc-svg",width:W,height:H,viewBox:`0 0 ${W} ${H}`,"aria-hidden":"true"},plot);
+  (narrow?[0,500,1000,1500]:[0,250,500,750,1000,1250,1500]).forEach(v=>{
+    el("line",{x1:M.l,x2:W-M.r,y1:sy(v),y2:sy(v),class:v?"wc-grid":"wc-base"},svg);
+    el("text",{x:M.l-8,y:sy(v)+4,"text-anchor":"end",class:"wc-tick"},svg).textContent=v.toLocaleString("de-DE")});
+  (narrow?[2000,2010,2020]:[2000,2005,2010,2015,2020,2025]).forEach(v=>{
+    el("text",{x:sx(v),y:H-M.b+22,"text-anchor":"middle",class:"wc-tick"},svg).textContent=String(v)});
+  S.forEach(s=>{
+    const p=D.map(d=>[sx(d[0]).toFixed(1),sy(d[s.i]).toFixed(1)]),line="M"+p.map(q=>q.join(",")).join("L");
+    el("path",{d:line+`L${p[p.length-1][0]},${sy(0)}L${p[0][0]},${sy(0)}Z`,class:"wc-area wc-"+s.k},svg);
+    el("path",{d:line,class:"wc-line wc-"+s.k},svg)});
+  ch=el("line",{y1:M.t,y2:H-M.b,class:"wc-cross"},svg);
+  S.forEach(s=>D.forEach((d,j)=>el("circle",{cx:sx(d[0]),cy:sy(d[s.i]),r:4,class:"wc-dot wc-"+s.k,"data-j":j},svg)));
+  const L=D[D.length-1];
+  S.forEach(s=>{el("text",{x:sx(L[0])+10,y:sy(L[s.i])+4,class:"wc-end"},svg).textContent=fmt(L[s.i])});
+  if(idx>=0)show(idx,false);
+}
+function nearest(px){let b=0,bd=1e9;D.forEach((d,j)=>{const q=Math.abs(sx(d[0])-px);if(q<bd){bd=q;b=j}});return b}
+function show(j,say){
+  if(!svg)return;idx=j;const d=D[j],X=sx(d[0]),share=de(d[3]/d[2]*100,1)+" %";
+  ch.setAttribute("x1",X);ch.setAttribute("x2",X);ch.classList.add("on");
+  svg.querySelectorAll(".wc-dot").forEach(c=>c.setAttribute("r",+c.dataset.j===j?6:4));
+  tip.querySelector(".wc-tdate").textContent=d[1];
+  tip.querySelector('[data-v="total"]').textContent=fmt(d[2]);
+  tip.querySelector('[data-v="active"]').textContent=fmt(d[3]);
+  tip.querySelector('[data-v="share"]').textContent=share;
+  tip.hidden=false;const tw=tip.offsetWidth;
+  tip.style.left=(X+14+tw>W?Math.max(0,X-14-tw):X+14)+"px";
+  if(say)live.textContent=`${d[1]}: ${fmt(d[2])} Websites, davon ${fmt(d[3])} aktiv (${share}).`;
+}
+function hide(){idx=-1;tip.hidden=true;if(ch)ch.classList.remove("on");if(svg)svg.querySelectorAll(".wc-dot").forEach(c=>c.setAttribute("r",4))}
+plot.addEventListener("pointermove",e=>{if(!sx)return;show(nearest(e.clientX-plot.getBoundingClientRect().left),false)});
+plot.addEventListener("pointerleave",()=>{if(document.activeElement!==plot)hide()});
+plot.addEventListener("focus",()=>show(idx<0?D.length-1:idx,true));
+plot.addEventListener("blur",hide);
+plot.addEventListener("keydown",e=>{
+  const k=e.key,n=D.length;let j=idx<0?n-1:idx;
+  if(k==="ArrowRight"||k==="ArrowLeft"){j=Math.max(0,Math.min(n-1,j+(k==="ArrowRight"?1:-1)))}
+  else if(k==="Home")j=0;else if(k==="End")j=n-1;else return;
+  e.preventDefault();e.stopPropagation();show(j,true)});
+let raf=0;
+if("ResizeObserver" in window)new ResizeObserver(()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(draw)}).observe(plot);
+else addEventListener("resize",draw);
+draw();
+}
 }
 
 /* ---------- Vergleichstabellen ---------- */
@@ -1681,7 +1898,7 @@ $("clearq").addEventListener("click",()=>{q.value="";runSearch();q.focus()});
 const tabLinks=[...document.querySelectorAll("#tabs a")];
 const tabBar=$("tabs"),navEl=$("nav"),footEl=document.querySelector("footer"),ind=$("navind"),prog=$("progress");
 const tabFor=new Map(tabLinks.map(a=>[decodeURIComponent(a.hash.slice(1)),a]));
-const spySecs=sections.filter(s=>tabFor.has(s.id)||s.id==="praxis");
+const spySecs=sections.filter(s=>tabFor.has(s.id)||s.id==="praxis"||s.id==="fakenews");
 let spyActive;
 function moveInd(){const a=spyActive&&tabFor.get(spyActive);if(!a){ind.style.opacity="0";return}
   ind.style.width=a.offsetWidth+"px";ind.style.transform=`translateX(${a.offsetLeft}px)`;ind.style.opacity="1"}
